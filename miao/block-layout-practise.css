@@ -43,6 +43,10 @@ main {
   margin-top: -220px;
 }
 
+.box div:hover {
+  background-color: red;
+}
+
 ul {
   list-style: none;
   padding-left: 0px;
