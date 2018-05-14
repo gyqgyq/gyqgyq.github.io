@@ -35,11 +35,7 @@ main {
   margin-left: 420px;
 }
 
-.box div:nth-child(5) {
-  margin-top: -220px;
-}
-
-.box div:nth-child(9) {
+.box div:nth-child(4n + 5) {
   margin-top: -220px;
 }
 
