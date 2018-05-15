@@ -1,0 +1,69 @@
+
+span {
+  height: 50%;
+  width: 50%;
+  background-color: #af7766;
+  display: inline-block;
+}
+p{
+  background-color: #a6cc5f;
+  height: 50vw;
+  width: 50vw;
+  margin-left: 25%;
+}
+
+/*定位*/
+p.a {
+  position: relative;
+}
+span.a {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+}
+
+/*margin*/
+span.b {
+  margin-top: 25%;
+  margin-left: 25%;
+}
+
+/*挤到中间*/
+span.cc {
+  height: 25%;
+  margin: 0px;
+  display: block; /*为了避免inline-block间隙，也可以去掉两个元素的空格*/
+  visibility: hidden;
+}
+span.ccc {
+  width: 25%;
+  vertical-align: top; /*因为.c内有文字，文字基线会与此元素margin-box下面对齐*/
+  visibility: hidden;
+}
+
+/*浮动*/
+span.dd {
+  display: block;
+  height: 25%;
+  width: 100%;
+  visibility: hidden;
+}
+span.ddd{
+  width: 25%;
+  float: left;
+  visibility: hidden;
+}
+span.d {
+  float: left;
+}
+
+
+span.e {
+  width: 50%;
+  xdisplay: inline;
+  text-align: justify;
+}
+span.ee {
+  display: inline;
+  width: 100%;
+}

@@ -1,4 +1,5 @@
 
+
 main {
   width: 600px;
   margin-left: auto;
@@ -9,10 +10,11 @@ main {
   color: white;
   background-color: black;
   margin-top: 0px;
-  padding-left: calc((100% - 600px) / 2);
+  padding-left: calc(50% - 300px);
+  margin-bottom: 0px;
 }
 
-.box div {
+/*.box div {
   line-height: 34px;
   height: 40px;
   width: 180px;
@@ -20,24 +22,21 @@ main {
   border: 3px solid;
   background-color: pink;
   box-sizing: border-box;
-}
+}*/
 
-.box div:nth-child(-n + 4) {
+/*.box div:nth-child(-n + 4) {
   margin-left: 0px;
-  
-
 }
 .box div:nth-child(n + 5):nth-child(-n + 8) {
   margin-left: 210px;
-
 }
 .box div:nth-child(n + 9) {
   margin-left: 420px;
 }
-
 .box div:nth-child(4n + 5) {
   margin-top: -220px;
-}
+}*/
+
 
 .box div:hover {
   background-color: red;
@@ -63,4 +62,23 @@ li {
 footer {
   background-color: violet;
   width: 100%;
+}
+
+
+.box div {
+  line-height: 34px;
+  height: 40px;
+  width: 180px;
+  margin: 0px 30px 15px 0px;
+  border: 3px solid;
+  background-color: pink;
+  box-sizing: border-box;
+  display: inline-block;
+  
+}
+.box {
+  width:630px;
+}
+.box div:nth-child(n+10){
+  margin-bottom: 0px;
 }
