@@ -5,56 +5,56 @@
   <title>input-beauty</title>
   <style>
     * {
-      font-size: 30px;
+      font-size: 16px;
     }
-    /*----------checkbox------------*/
+    /*----------text------------*/
     .text {
-      display: inline-block;
-      vertical-align: 1px;
-      padding:0 0 2px 2px;
+      padding: 0 0 1px 4px;
     }
     
-    .ftext {
-      padding: 0px 4px 1px 4px;
-      background-color: #5dd;
-      border-right: none;
-      display: inline-block;
-      vertical-align: 1px;  
-
+    .inputtext {
+      background-color: #5dd; 
+      display: inline-block; 
+    }
+    .spantext {
+      padding-left: 4px;
     }
     /*----------checkbox------------*/
-    .fcheckbox {
+    .inputcheckbox {
       display: inline-block;
-      background-color: #5dd;     
-      border-right: none;
-      width: 1.25em;
+      background-color: #5dd;   
+      position: relative;  
+      line-height: 23px
     }
     
-     
     .checkbox {
-      display: inline-block;
-      vertical-align: middle;
-      margin-top: -2px;
-      margin-left: 13px;
+      position: absolute;
+      margin: auto; 
+      top: 6px;
+      left: 6px;
     } 
 
-    .bcheckbox {
+    .spancheckbox {
       display: inline-block;
-      border: 0.5px solid #aaa;
-      padding: 0 4px 0 4px;
+      padding-left: 24px;
+      padding-right: 4px;
+
     }
   </style>
 </head>
 <body>
   <div>
-    <div class="ftext">
-      <span>我我我</span>
-    </div><input type="text" class="text" value="我我我">
+    <div class="inputtext">
+      <span class="spantext">我我我</span>
+      <input type="text" class="text" value="我我我">
+    </div>
     
     <br><br>
-    <div class="fcheckbox">
+
+    <div class="inputcheckbox">
       <input type="checkbox" class="checkbox">
-    </div><span class="bcheckbox">我我我</span>
+      <span class="spancheckbox">我我我</span>
+    </div>
     
     
   </div>
