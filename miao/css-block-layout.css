@@ -1,17 +1,26 @@
 
-
+xbody {
+  margin: 0px;
+}
 main {
   width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.title {
-  color: white;
+header {
   background-color: black;
-  margin-top: 0px;
-  padding-left: calc(50% - 300px);
-  margin-bottom: 0px;
+  color: white;
+  
+}
+.title {
+  background-color: black;
+  margin: 0 auto;
+  width: 600px;
+  /*设置空栏颜色*/
+  /*padding-left: calc(50% - 300px);*/
+
+  
 }
 
 /*.box div {

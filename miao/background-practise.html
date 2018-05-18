@@ -6,43 +6,82 @@
   <style>
     body {
       margin: 0px;
-      background-image: url(11.jpg);
+      background-image: url(./image/11.jpg);
       background-position: top left;
       background-repeat: no-repeat;
       background-attachment: fixed;
       xmin-width: 600px;
     }
+    
+    .hidden-hover {
+      display: hidden;
+      position: fixed;
+      top: 0;
+      height:50px;
+      width: 80%;
+      z-index: 10;
+      right: 0;
+      left: 0;
+      margin: auto;
+    }
+    .hidden-hover:hover ~ div {
+      display: block
+    }
 
-    .a, .b, .c, .d, .view, .word, .trade {
+    .hidden-content {
+      display: none;
+      position: fixed;
+      height: 50px;
+      width: 80%;
+      right: 0;
+      left: 0;
+      margin: auto;
+      background-color: #fff9;
+      transition: display .5s linear;
+    }
+
+    .title-car {
+      display: inline-block;
+      position: sticky;
+      top: 0;
+      background-color: #fff5;
+      border: 2px solid #fff7;
+      border-left: none;
+      border-top: none;
+      xwidth: 60px;
+      padding: 0 4px;
+    }
+
+    .car, .cars, .word, .trade {
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
     }
-    .a {
+    .car-a {
       height: 100vh;
-      background-image: url(car1.png);
+      background-image: url(./image/car1.png);
       background-color: #072a4440;
 
     }
-    .b {
+    .car-b {
       height: 100vh;
-      background-image: url(car3.png);
+      background-image: url(./image/car3.png);
       background-color: #990c1e40;
     }
-    .c {
+    .car-c {
       height: 100vh;
-      background-image: url(car2.png);
+      background-image: url(./image/car2.png);
       background-color: #57606840;
       
     }
-    .d {
+    .car-d {
       height: 100vh;
-      background-image: url(car4.png);
+      background-image: url(./image/car4.png);
       background-color: #8c4f0040;
     }
 
-    .view {
-      background-image: url(22.jpg);
+    .cars {
+      background-image: url(./image/22.jpg);
       background-position: top left;
       border-bottom: 2px solid black;
     }
@@ -51,7 +90,7 @@
       width: 60%;
       margin: 40px auto;
       border: 2px solid #963;
-      background-image: url(22.jpg);
+      background-image: url(./image/22.jpg);
       background-position: top left;
       padding: 20px;
     }
@@ -65,7 +104,7 @@
     }
 
     .trade {
-      background-image: url(porsche-svg.svg);
+      background-image: url(./image/porsche-svg.svg);
     }
 
     h2{
@@ -82,7 +121,7 @@
     .footer {
       height: 20px;
       width: 54px;
-      background-image: url(nav_logo242_hr.png);
+      background-image: url(./image/nav_logo242_hr.png);
       background-repeat: no-repeat;
       background-position: 00px -157px;
       transform: rotate(180deg);
@@ -99,7 +138,7 @@
     .jiantou {
       height: 56px;
       width: 56px;
-      background-image: url(nav_logo242_hr.png);
+      background-image: url(./image/nav_logo242_hr.png);
       background-repeat: no-repeat;
       background-position: -276px -82px;
       margin-left: 48%;
@@ -109,7 +148,7 @@
     .humen {
       height: 26px;
       width: 25px;
-      background-image: url(nav_logo242_hr.png);
+      background-image: url(./image/nav_logo242_hr.png);
       background-repeat: no-repeat;
       background-position: -32px -655px;
       margin-left: 70%;
@@ -124,12 +163,29 @@
   </style>
 </head>
 <body>
+  <header>
+    <div class="hidden-hover"></div>
+    <div class="hidden-content">foo bar baz</div>
+  </header>
 
-  <div class="view">
-    <div id="top" class="a"></div>
-    <div class="b"></div>
-    <div class="c"></div>
-    <div class="d"></div>
+  <div class="cars">
+
+    <div class="car car-a" id="top">
+      <div class="title-car">#072a44</div>
+    </div>
+
+    <div class="car car-b">
+      <div class="title-car">#990c1e</div>
+    </div>
+
+    <div class="car car-c">
+      <div class="title-car">#576068</div>
+    </div>
+
+    <div class="car car-d">
+      <div class="title-car">#8c4f00</div>
+    </div>
+
   </div>
 
   <div class="word">
