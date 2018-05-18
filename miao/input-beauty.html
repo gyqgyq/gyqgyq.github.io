@@ -4,59 +4,26 @@
   <meta charset="UTF-8">
   <title>input-beauty</title>
   <style>
-    * {
-      font-size: 16px;
-    }
-    /*----------text------------*/
-    .text {
-      padding: 0 0 1px 4px;
-    }
-    
-    .inputtext {
-      background-color: #5dd; 
-      display: inline-block; 
-    }
-    .spantext {
-      padding-left: 4px;
-    }
-    /*----------checkbox------------*/
-    .inputcheckbox {
-      display: inline-block;
-      background-color: #5dd;   
-      position: relative;  
-      line-height: 23px
-    }
-    
-    .checkbox {
-      position: absolute;
-      margin: auto; 
-      top: 6px;
-      left: 6px;
-    } 
 
-    .spancheckbox {
-      display: inline-block;
-      padding-left: 24px;
-      padding-right: 4px;
+    .input-text input {
+      font-size: inherit;
+      font-family: inherit;
+      margin: -5px auto;
+      padding: 2px;
+      border: 1px solid black;
+      border-radius: 3px;
 
     }
+    .input-text {
+
+      xbackground-color: #aaa;
+    }
+    
   </style>
 </head>
 <body>
-  <div>
-    <div class="inputtext">
-      <span class="spantext">我我我</span>
-      <input type="text" class="text" value="我我我">
-    </div>
-    
-    <br><br>
-
-    <div class="inputcheckbox">
-      <input type="checkbox" class="checkbox">
-      <span class="spancheckbox">我我我</span>
-    </div>
-    
-    
+  <div class="input-text">Lorem ipsum dolor
+    <input type="text" value="lorem">
   </div>
   
 </body>

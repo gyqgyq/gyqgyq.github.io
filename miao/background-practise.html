@@ -12,7 +12,7 @@
       background-attachment: fixed;
       xmin-width: 600px;
     }
-    
+
     .hidden-hover {
       display: hidden;
       position: fixed;
@@ -23,21 +23,34 @@
       right: 0;
       left: 0;
       margin: auto;
+      
+        
     }
+
     .hidden-hover:hover ~ div {
-      display: block
+      xdisplay: block;
+      margin-top: 0px;
+      background-color: #ffff;
+      box-shadow: 0 0 3px  black;
+      transition: margin-top .5s ease,
+        background-color .5s linear,
+        box-shadow .5 linear;
     }
 
     .hidden-content {
-      display: none;
+      xdisplay: none;
       position: fixed;
       height: 50px;
       width: 80%;
       right: 0;
       left: 0;
       margin: auto;
+      margin-top: -50px;
       background-color: #fff9;
-      transition: display .5s linear;
+      box-shadow: 0 0 0px black;
+      transition: margin-top .2s linear,
+        background-color .2s linear,
+        box-shadow .2s linear;
     }
 
     .title-car {
@@ -45,7 +58,7 @@
       position: sticky;
       top: 0;
       background-color: #fff5;
-      border: 2px solid #fff7;
+      border: 2px solid #fff9;
       border-left: none;
       border-top: none;
       xwidth: 60px;
@@ -83,9 +96,9 @@
     .cars {
       background-image: url(./image/22.jpg);
       background-position: top left;
-      border-bottom: 2px solid black;
+      border-bottom: 2px solid #963;
     }
-
+    /*-------------------article-----------------*/
     .word {
       width: 60%;
       margin: 40px auto;
@@ -93,6 +106,7 @@
       background-image: url(./image/22.jpg);
       background-position: top left;
       padding: 20px;
+      border-radius: 3px;
     }
 
     .trade, h2 {
@@ -110,7 +124,7 @@
     h2{
       line-height: 50px;
     }
-    
+    /*------------------footer--------------------*/
     footer {
       padding-top: 30px;
       height: 100px;
@@ -131,8 +145,8 @@
     
     a {
       position: absolute;
-      left: 85%;
-      top: 10%;
+      left: 83%;
+      top: 33%;
     }
 
     .jiantou {
@@ -141,8 +155,8 @@
       background-image: url(./image/nav_logo242_hr.png);
       background-repeat: no-repeat;
       background-position: -276px -82px;
-      margin-left: 48%;
-      margin-top: -40px;
+      margin-left: 52%;
+      margin-top: -22px;
     }
     
     .humen {
@@ -151,8 +165,8 @@
       background-image: url(./image/nav_logo242_hr.png);
       background-repeat: no-repeat;
       background-position: -32px -655px;
-      margin-left: 70%;
-      margin-top: -40px;
+      margin-left: 74%;
+      margin-top: -26px;
       transition: background-position 0.7s;
     }
 
@@ -160,6 +174,60 @@
       background-position: -2px -655px;
     }
 
+    .bottom-line {
+      border-bottom: 1px solid #aaa;
+      width: 51%;
+      height: 1px;
+      position: absolute;
+      top: 55%;
+      right: 0;
+    }
+    /*------------------------heartbox------------------------*/
+    .heartbox input {
+      display: none;
+    }
+    
+    input + label {
+      display: inline-block;
+      background-image: url(./image/web_heart_animation_edge.png);
+      width: 100px;
+      height: 100px;
+      background-position: 0px center;
+      position: absolute;
+      left: 60%;
+      top: 0%;
+    }
+    input:checked + label {
+      background-position: -2800px center;
+      transition: background-position 1s steps(28);
+    }
+    .heart {
+      display: none;
+      position: absolute;
+      height: 35px;
+      margin: auto;
+      top: -30px;
+      left: 0;
+      right: 0;
+      background-color: black;
+      color: white;
+      line-height: 35px;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .like {
+      width: 55px;
+    }
+    .no-like {
+      width: 88px;
+    }
+
+    input:checked + label:hover .no-like {
+      display: block;
+    }
+    label:hover .like{
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -168,41 +236,57 @@
     <div class="hidden-content">foo bar baz</div>
   </header>
 
-  <div class="cars">
+  <main>
+    <div class="cars">
 
-    <div class="car car-a" id="top">
-      <div class="title-car">#072a44</div>
+      <div class="car car-a" id="top">
+        <div class="title-car">#072a44</div>
+      </div>
+
+      <div class="car car-b">
+        <div class="title-car">#990c1e</div>
+      </div>
+
+      <div class="car car-c">
+        <div class="title-car">#576068</div>
+      </div>
+
+      <div class="car car-d">
+        <div class="title-car">#8c4f00</div>
+      </div>
+      
     </div>
+  </main>
 
-    <div class="car car-b">
-      <div class="title-car">#990c1e</div>
+  <article>
+    <div class="word">
+      <h2>Lorem ipsum dolor sit</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi voluptatem delectus animi nostrum voluptatum dolor ipsa totam quaerat itaque, veritatis libero corporis. Harum a aperiam unde, ipsam voluptatibus. Rerum tempore dolore in tenetur, cumque deleniti magnam ad omnis ullam possimus mollitia hic, est excepturi fugiat necessitatibus quae maiores quod facilis explicabo nobis ducimus eveniet eaque. Nulla perferendis eum tempora quae porro architecto numquam dolore, dignissimos, dolorem eaque aspernatur enim quam consequuntur illum magnam voluptatibus officia provident? Nam sed maiores nulla voluptatem. Hic fugit veniam ullam, reprehenderit aliquid, architecto debitis blanditiis corporis eius quisquam laudantium esse earum aspernatur, facere inventore. Numquam!</p>
+      <div class="trade"></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo hic ullam magni debitis voluptatum animi aperiam delectus perferendis velit. Voluptate expedita illo aliquid est nesciunt assumenda, maxime laudantium autem ab sed qui beatae excepturi cum voluptas accusamus culpa recusandae consequatur ex. Officia, et. Consequuntur possimus eveniet, ipsam adipisci doloremque aperiam et porro reiciendis! Provident rem ad ratione, dignissimos animi minima error tempora vero ipsam nostrum iste magni, quis sint quae suscipit ipsum consequatur quia saepe ducimus. Qui accusamus, nihil esse veniam. Animi earum et voluptatibus porro sapiente, qui repellendus dolorem itaque non nihil eligendi perspiciatis a id, ad, distinctio nemo!</p>
+      <div class="trade"></div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos molestiae quaerat obcaecati consequuntur soluta ex earum sapiente, cum necessitatibus animi iste eveniet fuga error modi quidem quos beatae, ad maxime cumque asperiores sint ratione tempore at eligendi. Tenetur magnam quos dolore quo blanditiis enim id. Repellat, qui dolor tempore et! Totam eius aliquam, id vel voluptate fuga nesciunt! Laborum fugiat corporis nemo repudiandae, unde vel fugit provident libero mollitia quae id tempora, modi laudantium sapiente nihil, quas temporibus illum est iusto similique atque repellat aperiam cupiditate! Dolore minima, minus ratione perferendis aspernatur doloremque reprehenderit asperiores laudantium autem excepturi consectetur officia!</p>
     </div>
-
-    <div class="car car-c">
-      <div class="title-car">#576068</div>
-    </div>
-
-    <div class="car car-d">
-      <div class="title-car">#8c4f00</div>
-    </div>
-
-  </div>
-
-  <div class="word">
-    <h2>Lorem ipsum dolor sit</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi voluptatem delectus animi nostrum voluptatum dolor ipsa totam quaerat itaque, veritatis libero corporis. Harum a aperiam unde, ipsam voluptatibus. Rerum tempore dolore in tenetur, cumque deleniti magnam ad omnis ullam possimus mollitia hic, est excepturi fugiat necessitatibus quae maiores quod facilis explicabo nobis ducimus eveniet eaque. Nulla perferendis eum tempora quae porro architecto numquam dolore, dignissimos, dolorem eaque aspernatur enim quam consequuntur illum magnam voluptatibus officia provident? Nam sed maiores nulla voluptatem. Hic fugit veniam ullam, reprehenderit aliquid, architecto debitis blanditiis corporis eius quisquam laudantium esse earum aspernatur, facere inventore. Numquam!</p>
-    <div class="trade"></div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo hic ullam magni debitis voluptatum animi aperiam delectus perferendis velit. Voluptate expedita illo aliquid est nesciunt assumenda, maxime laudantium autem ab sed qui beatae excepturi cum voluptas accusamus culpa recusandae consequatur ex. Officia, et. Consequuntur possimus eveniet, ipsam adipisci doloremque aperiam et porro reiciendis! Provident rem ad ratione, dignissimos animi minima error tempora vero ipsam nostrum iste magni, quis sint quae suscipit ipsum consequatur quia saepe ducimus. Qui accusamus, nihil esse veniam. Animi earum et voluptatibus porro sapiente, qui repellendus dolorem itaque non nihil eligendi perspiciatis a id, ad, distinctio nemo!</p>
-    <div class="trade"></div>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos molestiae quaerat obcaecati consequuntur soluta ex earum sapiente, cum necessitatibus animi iste eveniet fuga error modi quidem quos beatae, ad maxime cumque asperiores sint ratione tempore at eligendi. Tenetur magnam quos dolore quo blanditiis enim id. Repellat, qui dolor tempore et! Totam eius aliquam, id vel voluptate fuga nesciunt! Laborum fugiat corporis nemo repudiandae, unde vel fugit provident libero mollitia quae id tempora, modi laudantium sapiente nihil, quas temporibus illum est iusto similique atque repellat aperiam cupiditate! Dolore minima, minus ratione perferendis aspernatur doloremque reprehenderit asperiores laudantium autem excepturi consectetur officia!</p>
-  </div>
+  </article>
+  
 
   <footer>
+    <div class="heartbox">
+      <input type="checkbox" id="gender">
+      <label for="gender">
+        <div class="heart like">喜欢</div>
+        <div class="heart no-like">撤销喜欢</div>
+      </label>
+    </div>
+
     <a href="#top" id="a">
       <div class="footer" title="back to top"></div>
     </a>
+
     <div class="jiantou" title="往左看"></div>
     <div class="humen" title="不是我"></div>
+
+    <div class="bottom-line"></div>
   </footer>
 </body>
 </html>
