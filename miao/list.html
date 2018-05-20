@@ -70,7 +70,9 @@
     .a-3-1-ul,
     .a-4-2-ul,
     .a-4-1-ul,
-    .a-1-1-3-ul {
+    .a-1-1-3-ul,
+    .a-1-1-3-7-ul,
+    .a-1-1-3-7-2-ul {
       position: absolute;
       width: 100px;
       left: 100px;
@@ -89,7 +91,9 @@
     .a-4:hover > ul,
     .a-4-1:hover > ul,
     .a-4-2:hover > ul, 
-    .a-1-1-3:hover > ul {
+    .a-1-1-3:hover > ul,
+    .a-1-1-3-7:hover > ul,
+    .a-1-1-3-7-2:hover > ul {
       display: block;
     }
     
@@ -140,7 +144,18 @@
                 <li class="a-1-1-3-4">004</li>
                 <li class="a-1-1-3-5">005</li>
                 <li class="a-1-1-3-6">006</li>
-                <li class="a-1-1-3-7">007</li>
+                <li class="a-1-1-3-7 triangle">007
+                  <ul class="a-1-1-3-7-ul">
+                    <li class="a-1-1-3-7-1">foo</li>
+                    <li class="a-1-1-3-7-2 triangle">bar
+                      <ul class="a-1-1-3-7-2-ul">
+                        <li class="a-1-1-3-7-2-1">foo</li>
+                        <li class="a-1-1-3-7-2-2">bar</li>
+                        <li class="a-1-1-3-7-2-3">baz</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
               </ul>
             </li>
           </ul>
@@ -150,6 +165,7 @@
             <li class="a-1-2-1">foo</li>
             <li class="a-1-2-2">bar</li>
             <li class="a-1-2-3">baz</li>
+            <li class="a-1-2-4">quz</li>
           </ul>
         </li>
       </ul>
@@ -166,9 +182,12 @@
         </li>
         <li class="a-2-2 triangle">bar
           <ul class="a-2-2-ul">
-            <li class="a-2-2-1">foo</li>
-            <li class="a-2-2-2">bar</li>
-            <li class="a-2-2-3">baz</li>
+            <li class="a-2-2-1">001</li>
+            <li class="a-2-2-2">002</li>
+            <li class="a-2-2-3">003</li>
+            <li class="a-2-2-4">004</li>
+            <li class="a-2-2-5">005</li>
+            <li class="a-2-2-6">006</li>
           </ul>
         </li>
       </ul>
