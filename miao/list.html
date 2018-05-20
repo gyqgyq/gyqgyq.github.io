@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <style>
-    * {
-      background-color: rgba(0,0,0,0.1);
-    }
     .fix-fs {
       font-size: 0;
     }
@@ -26,6 +23,7 @@
       position: relative;
     }
     li {
+      text-align: center;
       line-height: 45px;
       box-sizing: border-box;
       xborder: 1px solid;
@@ -34,13 +32,24 @@
       display: inline-block;
       width: 100px;
       position: relative;
+      background-color: #434343;
+      color: #ccc;
     }
     li:hover {
-      background-color: #e4af71;
+      background-color: #ef980f;
+      color: #fefefe;
     }
-    .a-ul {
-      xmargin-left: 100px;
+
+    .a-ul > li {
+      background-color: #23292d;
     }
+    
+    .a-ul:hover > li {
+      background-color: #23292d;
+    }
+
+
+
     /*----------------向下出现---------------------*/
     .a-1-ul,
     .a-2-ul,
@@ -60,7 +69,8 @@
     .a-3-2-ul,
     .a-3-1-ul,
     .a-4-2-ul,
-    .a-4-1-ul {
+    .a-4-1-ul,
+    .a-1-1-3-ul {
       position: absolute;
       width: 100px;
       left: 100px;
@@ -78,13 +88,15 @@
     .a-3-2:hover > ul,
     .a-4:hover > ul,
     .a-4-1:hover > ul,
-    .a-4-2:hover > ul {
+    .a-4-2:hover > ul, 
+    .a-1-1-3:hover > ul {
       display: block;
     }
     
     .triangle:hover::before {
       transform: rotate(90deg);
       transition: transform .2s linear;
+      color: #fefefe;
     }
 
 
@@ -94,7 +106,8 @@
       content: '';
       width: 0px;
       height: 0px;
-      border-left: 3px solid black;
+      color: #ccc;
+      border-left: 3px solid;
       border-right: 3px solid transparent;
       border-top: 3px solid transparent;
       border-bottom: 3px solid transparent;
@@ -102,10 +115,12 @@
       margin: auto;
       top: 0;
       bottom: 0;
-      right: 15px;
+      right: 7px;
       transform: rotate(0deg);
       transform-origin: 1.5px 3px;
     }
+
+    
 
   </style>
 </head>
@@ -117,7 +132,17 @@
           <ul class="a-1-1-ul">
             <li class="a-1-1-1">foo</li>
             <li class="a-1-1-2">bar</li>
-            <li class="a-1-1-3">baz</li>
+            <li class="a-1-1-3 triangle">baz
+              <ul class="a-1-1-3-ul">
+                <li class="a-1-1-3-1">001</li>
+                <li class="a-1-1-3-2">002</li>
+                <li class="a-1-1-3-3">003</li>
+                <li class="a-1-1-3-4">004</li>
+                <li class="a-1-1-3-5">005</li>
+                <li class="a-1-1-3-6">006</li>
+                <li class="a-1-1-3-7">007</li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li class="a-1-2 triangle">bar
