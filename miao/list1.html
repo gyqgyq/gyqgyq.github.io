@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+      border: 1px solid;
+
+    }
+    li {
+      background-color: #aaa;
+      
+      position: relative;
+      margin: 0;
+      padding: 0;
+      width: 150px;
+    }
+    li:hover {
+      background-color: orange;
+    }
+
+    .a > li {
+      display: inline-block;
+    }
+    
+    ul ul  li{
+      display: none;
+    }
+    li:hover > ul > li {
+      display: block;
+    }
+
+    ul ul {
+      position: absolute;
+      
+    }
+    ul ul ul {
+      left: 100%;
+      top: 0;
+    }
+
+    ul ul ul:before {
+      content: '>';
+      position: absolute;
+      left: -14px;
+    }
+
+
+
+  </style>
+</head>
+<body>
+  
+  <ul class="a">
+    <li>001
+      <ul>
+        <li>00asfas1</li>
+        <li>0dasf02</li>
+        <li>00safas3
+          <ul>
+            <li>001</li>
+            <li>0asdass02</li>
+            <li>003</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>0das02</li>
+    <li>0asdas03
+      <ul>
+        <li>0asd01</li>
+        <li>00dasd2</li>
+        <li>00asdas3</li>
+      </ul>
+    </li>
+  </ul>
+
+</body>
+</html>

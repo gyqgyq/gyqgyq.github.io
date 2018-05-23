@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    
+    div {
+      width: 300px;
+      height: 300px;
+      border: 1px solid #666;
+      position: relative;
+      
+    }
+
+    div.position span {
+      line-height: 1.5em;
+      height: 3em;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    
+    .vertical span {
+    }
+    .vertical {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="position">
+    <span>~定位居中~定位居中~定位居中~定位居中~定位居中~定位居中</span>
+  </div>
+
+  <div class="vertical">
+    <span>~表格居中~表格居中~表格居中~表格居中~表格居中~表格居中</span>
+  </div>
+
+</body>
+</html>

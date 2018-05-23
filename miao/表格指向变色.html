@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    
+    table {
+
+      width:300px;
+      height: 300px;
+      box-sizing: border-box;
+      border-collapse: collapse;
+      font-size: 20px;
+    }
+    td {
+      padding: 0;
+      box-sizing: border-box;
+      border: 5px solid blue;
+      text-align: center;
+      vertical-align: middle;
+      position: relative;
+    }
+    
+    .a td:hover:before {
+      content: '';
+      width: calc(100% + 10px);
+      height: calc(100% + 10px);
+      box-sizing: border-box;
+      border:5px solid red;
+      display: inline-block;
+      position: absolute;
+      left: -5px;
+      top: -5px;
+    }
+    /*------------------------------*/
+    .b table {
+      position: relative;
+      z-index: -100;
+    }
+    .b td:hover span{
+      height: 100%;
+      width: 100%;
+      left: -5px;
+      top: -5px;
+      position: absolute;
+      border:5px solid red;
+      
+    }
+    /*-------------------------------*/
+    .zong {
+
+      height: 300px;
+      width: 300px;
+      font-size:0px;
+    }
+    .zong div {
+      font-size:16px;
+      box-sizing: border-box;
+      display: inline-block;
+      height: 100px;
+      width: 100px;
+      border: 5px solid blue;
+      line-height: 0;
+      position: relative;
+      line-height: 90px;
+      text-align: center;
+    }
+    .zong div:hover {
+      border: 5px solid red;
+      z-index: 100;
+    }
+    .zong div:nth-child(3n + 2) {
+      margin-left: -5px;
+    }
+    .zong div:nth-child(3n + 3) {
+      margin-left: -5px;
+    }
+    .zong div:nth-child(n + 4):nth-child(-n + 6) {
+      margin-top: -5px;
+    }
+    .zong div:nth-child(n + 7):nth-child(-n + 9) {
+      margin-top: -5px;
+    }
+    
+  </style>
+</head>
+<body>
+  <table class="a">
+    <tbody>
+      
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+      </tr>
+    </tbody>
+  </table>
+  <span>伪元素</span>
+  <hr>
+  <table class="b">
+    <tbody>
+      <tr>
+        <td>1<span></span></td>
+        <td>2<span></span></td>
+        <td>3<span></span></td>
+      </tr>
+      <tr>
+        <td>4<span></span></td>
+        <td>5<span></span></td>
+        <td>6<span></span></td>
+      </tr>
+      <tr>
+        <td>7<span></span></td>
+        <td>8<span></span></td>
+        <td>9<span></span></td>
+      </tr>
+    </tbody>
+  </table>
+  <span>定位</span>
+  <hr>
+  <div class="zong">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+  <span>inline-block</span>
+  <hr>
+</body>
+</html>
