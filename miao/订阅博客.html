@@ -6,7 +6,7 @@
   <title>1</title>
   <style>
     
-    div.a {
+    /*div.a {
       width: 300px;
       height: 300px;
       display: table-cell;
@@ -47,15 +47,56 @@
         background-color .5s linear,
         font-size 4s linear;
     }
+*/
+    .s1 {
+      background-color: #aaa;
+      display: inline-block;
+      padding-top: 60px;
+      transition: all 1s linear;
+      width: 200px;
+      line-height: 40px;
+    }
+    .s1:hover {
+      padding-top: 10px;
+      font-size: 46px;
+      line-height: 90px;
+    }
 
+    .s2 {
+      display: inline-block;
+      position: relative;
+      width: 200px;
+      height: 100px;
+      background-color: #aaa;
+    }
+    .s2::before {
+      content: '订阅博客';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transition: all 1s linear;
+    }
+    .s2:hover::before {
+      font-size: 46px;
+    }
+    .s3 {
+      display: table-cell;
+      vertical-align: bottom;
+      width: 200px;
+      height: 100px;
+      background-color: #aaa;
+      transition: 1s linear;
+    }
+    .s3:hover {
+      font-size: 46px;
+    }
   </style>
 </head>
 <body>
-  <div class="a">
-    订阅博客
-  </div>
-  <div class="b">
-    订阅博客
-  </div>
+  <a href="" class="s1">订阅博客</a>
+  <hr>
+  <a href="" class="s2"></a>
+  <hr>
+  <a href="" class="s3">订阅博客</a>
 </body>
 </html>

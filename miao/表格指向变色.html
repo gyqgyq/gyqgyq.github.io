@@ -6,7 +6,6 @@
   <style>
     
     table {
-
       width:300px;
       height: 300px;
       box-sizing: border-box;
@@ -16,12 +15,13 @@
     td {
       padding: 0;
       box-sizing: border-box;
-      border: 5px solid blue;
       text-align: center;
       vertical-align: middle;
       position: relative;
     }
-    
+    .a td {
+      border: 5px solid blue;
+    }
     .a td:hover:before {
       content: '';
       width: calc(100% + 10px);
@@ -46,6 +46,9 @@
       position: absolute;
       border:5px solid red;
       
+    }
+    .b td {
+      border: 5px solid blue;
     }
     /*-------------------------------*/
     .zong {
@@ -82,13 +85,82 @@
     .zong div:nth-child(n + 7):nth-child(-n + 9) {
       margin-top: -5px;
     }
+    /*-------------------------------*/
+    .ul-1 {
+      width: 300px;
+      height: 300px;
+      list-style: none;
+      padding: 0 5px 5px 0;
+    }
+    .ul-1 li {
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      border: 5px solid blue;
+      float: left;
+      margin-right: -5px;
+      margin-bottom: -5px;
+      text-align: center;
+      line-height: 90px;
+      position: relative;
+    }
+    .ul-1 li:hover {
+      border-color: red;
+      z-index: 100;
+    }
+    /*-------------------------------*/
+    .ul-2 {
+      width: 300px;
+      height: 300px;
+      list-style: none;
+      padding: 0 5px 5px 0;
+    }
+    li {
+      /*如果不加这条，li是块级元素，会忽略浮动的a元素，但是如果加上边框
+      就会影响a元素布局*/
+      display: inline; 
+    }
+    .ul-2 a {
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      border: 5px solid blue;
+      float: left;
+      margin-right: -5px;
+      margin-bottom: -5px;
+      text-align: center;
+      line-height: 90px;
+      position: relative;
+    }
+    .ul-2 a:hover {
+      border-color: red;
+      z-index: 100;
+    }
     
+
+    .ridge td {
+      border: 5px ridge blue;
+    }
+    .ridge td:hover {
+      border: 5px solid red;
+    }
+
+    .rowcol col {
+      border: 5px solid blue;
+    }
+    .rowcol tr {
+      border: 5px solid blue;
+    }
+    .rowcol td:hover {
+      border: 5px solid red;
+    }
+
+
   </style>
 </head>
 <body>
   <table class="a">
     <tbody>
-      
       <tr>
         <td>1</td>
         <td>2</td>
@@ -142,5 +214,90 @@
   </div>
   <span>inline-block</span>
   <hr>
+  <ul class="ul-1">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+  </ul>
+  <span>浮动</span>
+  <hr>
+  <ul class="ul-2">
+    <li><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li><a href="">4</a></li>
+    <li><a href="">5</a></li>
+    <li><a href="">6</a></li>
+    <li><a href="">7</a></li>
+    <li><a href="">8</a></li>
+    <li><a href="">9</a></li>
+  </ul>
+  <span>兼容ie6浮动</span>
+  
+  <hr>
+  <table class="ridge">
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+      </tr>
+    </tbody>
+  </table>
+  <span>ridge</span>
+  <hr>
+
+  <table class="rowcol">
+    <col>
+    <col>
+    <col>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+      </tr>
+    </tbody>
+  </table>
+  <span>row ang col border</span>
+  <hr>
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

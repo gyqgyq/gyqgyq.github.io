@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0px;
+      min-width: 700px
+    }
+    div {
+      overflow: auto
+    }
+    .a1, .a2, .a3 {
+      width: 200px;
+      min-height: 29vh;
+    }
+    .a1 {
+      background-color: #ccc;
+      float: left;
+    }
+    .a2 {
+      float: right;
+      background-color: #666;
+    }
+    .a3 {
+      float: right;
+      background-color: #999;
+    }
+    .a4 {
+      float: right;
+      height: calc(29vh - 86px);
+      background-color: #ddf0ed;
+      display: flow-root;
+      width: calc(100% - 600px);
+    }
+    .a5 {
+      float: left;
+      background-color: #333;
+      width: calc(100% - 600px);
+      height: 86px;
+    }
+    /*-----------------------*/
+    .b {
+      height: 29vh;
+      width: 100%;
+      position: relative;
+    }
+    .b1, .b2, .b3 {
+      width: 200px;
+      height: 29vh;
+    }
+    .b1 {
+      background-color: #ccc;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .b2 {
+      background-color: #666;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .b3 {
+      background-color: #999;
+      position: absolute;
+      right: 200px;
+      top: 0;
+    }
+    .b4 {
+      overflow: auto;
+      height: calc(29vh - 86px);
+      width: calc(100% - 600px);
+      background-color: #ddf0ed;
+      position: absolute;
+      top: 86px;
+      right: 400px;
+    }
+    .b5 {
+      position: absolute;
+      top: 0;
+      left: 200px;
+      background-color: #333;
+      width: calc(100% - 600px);
+      height: 86px;
+
+    }
+    /*--------------------------------*/
+    .c {
+      font-size: 0;
+    }
+    .c1, .c2, .c3, .c4 {
+      display: inline-block;
+      height: 29vh;
+      font-size: 16px;
+    }
+    .c1, .c2, .c3 {
+      width: 200px;
+    }
+    .c4 {
+      float: right;
+      width: calc(100% - 200px);
+      background-color: #ddf0ed;
+      height: calc(29vh - 86px);
+      display: inline-block;
+    }
+    .c1 {
+      float: left;
+      background-color: #ccc;
+    }
+    .c2 {
+      background-color: #999;
+    }
+    .c3 {
+      background-color: #666;
+    }
+    .c5 {
+      float: right;
+      background-color: #333;
+      width: calc(100% - 200px);
+      height: 86px;
+      display: inline-block;
+    }
+    div::before {
+      content: attr(class);
+      color: red;
+    }
+    .c0 {
+      display: inline-block;
+      height: 29vh;
+      width: calc(100% - 400px);
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="a1"></div>
+  <div class="a5"></div>
+  <div class="a2"></div>
+  <div class="a3"></div>
+  <div class="a4">
+    浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动浮动
+  </div>
+  <hr>
+  <div class="b">
+    <div class="b1"></div>
+    <div class="b2"></div>
+    <div class="b3"></div>
+    <div class="b4">
+      定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位定位
+    </div>
+    <div class="b5"></div>
+  </div>
+ 
+  <hr>
+  <div class="c">
+    <div class="c0">
+      <div class="c1"></div>
+      <div class="c5"></div>
+      <div class="c4">
+        行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素行内块元素
+      </div>
+    </div>
+    <div class="c2"></div>
+    <div class="c3"></div>
+    
+    
+    
+    
+  </div> 
+  
+</body>
+</html>

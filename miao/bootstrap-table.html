@@ -5,7 +5,7 @@
   <title>bootstrap</title>
   <style>
     
-    .table {
+    /*.table {
       width: 600px;
       text-align: left;
       line-height: 3em;
@@ -23,7 +23,7 @@
     
     /*------------------------------*/
 
-    table.table-dark {
+    /*table.table-dark {
       background-color: #212529;
       color: #fff;
     }
@@ -32,43 +32,43 @@
     }
     table.table-dark > thead th{
       border-bottom: 2px solid #32383e;
-    }
+    }*/
 
     /*------------------------------*/
   
-    thead.thead-dark th{
+   /* thead.thead-dark th{
       background-color: #212529;
       color: #fff;
     }
     thead.thead-dark tr th{
       border-color: #32383e;
-    }
+    }*/
 
     /*-------------------------------*/
 
-    thead.thead-light th{
+    /*thead.thead-light th{
       background-color: #e9ecef;
       color: #495057;
     }
     thead.thead-light tr th{
       border-color: #dee2e6;
-    }
+    }*/
 
     /*-------------------------------*/
-
+/*
     table.table-striped tbody tr:nth-child(2n+1)  {
       background-color: #f1f1f1;
     }
-
+*/
     /*-------------------------------*/
 
-    .table-bordered td, .table-bordered th{
+   /* .table-bordered td, .table-bordered th{
       border: 1px solid #dee2e6;
     }
-
+*/
     /*-------------------------------*/
 
-    table.table-hover tbody tr:hover {
+   /* table.table-hover tbody tr:hover {
       background-color: #ececec;
     }
     table.table-hover tbody td:before {
@@ -90,17 +90,77 @@
     table.table-hover {
       overflow: hidden;
     }
-    
+    */
     
 
     
     /*-------------------------------*/
-    .table-responsive {
+   /* .table-responsive {
       overflow: auto;
     }
     .table-responsive table{
       overflow: auto;
       width:2000px;
+    }*/
+    .table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 100%;
+    }
+    .table thead {
+      border-bottom: 2px solid #dee2e6; 
+    }
+    .table tr {
+      border-top: 1px solid #dee2e6;
+    }
+    .table tr * {
+      padding: 15px 30px;
+    }
+    .table th {
+      text-align: left;
+    }
+
+    .table-dark {
+      background-color: #212529;
+      color: #fff;
+    }
+    .table-dark tr {
+      border-color: #d33;
+    }
+    .table-dark thead {
+      border-color: #d33;
+    }
+    .table-striped tbody tr:nth-of-type(odd){
+      background-color: #f1f1f1;
+    }
+    .table-dark.table-striped tbody tr:nth-of-type(odd){
+      background-color: #555;
+    }
+    
+    .table-bordered tr * {
+      border: 1px solid #32383e;
+    }
+    .table-dark.table-bordered tr * {
+      border: 1px solid #d33;
+    }
+    .table-hover tr:hover {
+      background-color: #aaa;
+    }
+    .table-hover td {
+      position: relative;
+    }
+    .table-hover td:hover::before {
+      content: '';
+      width: 100%;
+      top: -9999px;
+      height: 99999px;
+      background-color: #aaa;
+      position: absolute;
+      z-index: -100;
+      margin-left: -30px;
+    }
+    .table-hover {
+      overflow: hidden;
     }
 
 
@@ -108,49 +168,8 @@
   </style>
 </head>
 <body>
-
-
-
-
-  <table class="table">
-    <caption>table</caption>
-    <thead >
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr>
-  <div>table-hover</div>
-  <table class="table table-hover">
-    <col>
-    <col>
-    <col>
-    <col>
+  <table class="table table-hover table-bordered">
+    <!-- <caption>table</caption> -->
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -181,154 +200,6 @@
     </tbody>
   </table>
 
-  <hr>
 
-  <table class="table table-bordered">
-    <caption>table-bordered</caption>
-    <thead >
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr>
-
-  
-  <table class="table table-striped">
-    <caption>table-striped</caption>
-    <thead >
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <hr>
-
-  <div class="table-responsive">
-    <caption>table-responsive</caption>
-    <table class="table">
-      <thead >
-        </colgroup>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>Mark</td>
-        </tr>
-      </tbody>
-    </table>
-</div>
 </body>
 </html>

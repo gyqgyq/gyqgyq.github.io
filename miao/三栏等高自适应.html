@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    
+    body {
+      margin: 0;
+    }
+    footer {
+      background-color: #999;
+      text-align: center;
+    }
+    section {
+      overflow: hidden;
+    }
+    div {
+      float: left;
+      font-size: 30px;
+      position: relative;
+    }
+    div:before {
+      content: '';
+      width: 100%;
+      position:absolute;
+      height:9999px;
+      z-index: -100;
+    }
+    .s1, .s1:before {
+      background-color: #9ee;
+    }
+    .s2, .s2:before {
+      background-color: #e9e;
+    }
+    .s3, .s3:before {
+      background-color: #ee9;
+    }
+    .s1 {
+      width: 30%;
+    }
+    .s2 {
+      width: 50%;
+    }
+    .s3 {
+      width: 20%;
+    }
+    
+  </style>
+</head>
+<body>
+    
+  <section>
+    <div class="s1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde officiis libero nihil vdde fugit quidem omnis obcaecati!</div>
+    <div class="s2">a</div>
+    <div class="s3">aa</div>
+  </section>
+
+
+
+
+  <footer>
+    foo bar baz
+  </footer>
+</body>
+</html>
