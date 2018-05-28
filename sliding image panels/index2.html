@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    
+    body {
+      margin: 0;
+      background-image: url(bg.jpg);
+    }
+    
+    section {
+      position: relative;
+    }
+    ul.img {
+      list-style: none;
+      padding-left: 0;
+      width: 601px;
+      height: 401px;
+      margin: 0px auto;
+      background-color: #fff;
+      border: 20px solid #fff;
+      box-shadow: 1px 1px 2px #ccc; 
+    }
+    .img li {
+      width: 149px;
+      height: 401px;
+      margin-right: 1px;
+      background-color: #ddd;
+      float: left;
+      position: relative;
+      overflow: hidden;
+
+    }
+    .s1 {
+      margin-left: 1px;
+    }
+    /*------------------------header--------------------------*/
+    header {
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+      font-size: 35px;
+      font-weight: 400;
+      color: #1a5978e6;
+      text-shadow: 1px 1px 1px #0000001a;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: -3px;
+    }
+    h1 > span {
+      color: #7cbcd6;
+    }
+    .link {
+      padding-left: 0;
+      list-style: none;
+      height: 60px;
+      width: 280px;
+      margin: 20px auto 0 auto;
+    }
+    .link li {
+      display: inline;
+    }
+    .link a {
+      display: block;
+      width: 60px;
+      height: 60px;
+      margin: 5px;
+      background-color: #68abc280;
+      border-radius: 999px;
+      float: left;
+      box-shadow: 1px 1px 1px #0000001a;
+      text-shadow: 1px 1px 1px #0000001a;
+      color: #fff;
+      font-size: 11px;
+      line-height: 60px;
+      text-align: center;
+      font-style: italic;
+      text-decoration: none;
+      font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+    }
+    .link a:hover {
+      background-color: #4fa2c4;
+    }
+    ul.link li:nth-child(2) a {
+      background-color: #ffffffe6;
+      color: #68abc2;
+    }
+
+    /*------------------------按钮--------------------------*/
+    .img li:before {
+      content: '';
+      height: 401px;
+      width: 1px;
+      position: absolute;
+      right: -1px;
+      background-image: -webkit-linear-gradient(top, #ffffff00 0%,#ffffff 100%);
+    }
+    input {
+      display: none;
+    }
+    label {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 350px;
+      font-size: 24px;
+      cursor: pointer;
+      text-align: center;
+      z-index: 200;
+      color: #fff;
+    }
+    label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 34px;
+      height: 34px;
+      box-shadow: 0 0 0 4px #ffffff4d;
+      background-color: #82c3d9e6;
+      color: #fff;
+      border-radius: 9999px;
+      z-index: -100;
+    }
+    input:checked + * + * + * +  li > label {
+      color: #82c3d9;
+
+    }
+    input:checked + * + * + * + li > label:before {
+      background-color: #fff;
+      box-shadow: 0 0 0 4px #82c3d94d;
+    }
+
+    /*------------------------图片--------------------------*/
+    [class*="-1"] {
+      background-position: 0 0;
+    }
+    [class*="-2"] {
+      background-position: -150px 0;
+    }
+    [class*="-3"] {
+      background-position: -300px 0;
+    }
+    [class*="-4"] {
+      background-position: -450px 0;
+    }
+
+
+    [class^="s1-"] {
+      background-image: url(1.jpg);
+    }
+    [class^="s2-"] {
+      background-image: url(2.jpg);
+    }
+    [class^="s3-"] {
+      background-image: url(3.jpg);
+    }
+    [class^="s4-"] {
+      background-image: url(4.jpg);
+    }
+    .img li > div {
+      background-repeat: no-repeat;
+      position: absolute;
+      width: 149px;
+      height: 401px;
+      left: -149px;
+      transition: left .6s ease;
+    }
+
+    #s1:checked ~ li [class*="s1-"], 
+    #s2:checked ~ li [class*="s2-"],
+    #s3:checked ~ li [class*="s3-"],
+    #s4:checked ~ li [class*="s4-"] {
+      left: 0;
+      margin-left: 0px;
+      z-index: 200;
+
+    }
+    #s1:checked ~ li div:not([class*="s1-"]),
+    #s2:checked ~ li div:not([class*="s2-"]),
+    #s3:checked ~ li div:not([class*="s3-"]),
+    #s4:checked ~ li div:not([class*="s4-"]) {
+      margin-left: 149px;
+      left: -149px;
+      z-index: 100;
+      transition: 
+        z-index 0s .6s,
+        margin-left .6s ease,
+        left 0s .6s;
+    }
+    .img li.right > div {
+      
+      left: -149px;
+      transition: left .6s ease;
+    }
+
+    #s1:checked ~ li.right [class*="s1-"], 
+    #s2:checked ~ li.right [class*="s2-"],
+    #s3:checked ~ li.right [class*="s3-"],
+    #s4:checked ~ li.right [class*="s4-"] {
+      left: 0;
+      margin-left: 0px;
+      z-index: 200;
+
+    }
+    #s1:checked ~ li.right div:not([class*="s1-"]),
+    #s2:checked ~ li.right div:not([class*="s2-"]),
+    #s3:checked ~ li.right div:not([class*="s3-"]),
+    #s4:checked ~ li.right div:not([class*="s4-"]) {
+      margin-left: -149px;
+      left: 149px;
+      z-index: 100;
+      transition: 
+        z-index 0s .6s,
+        margin-left .6s ease,
+        left 0s .6s;
+    }
+    /*------------------------文字--------------------------*/
+    div[class*="w"] {
+      position: absolute;
+      width: 599px;
+      height: 120px;
+      bottom: 93px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 300;
+      text-align: center;
+      color: white;
+      transition: color .6s linear;
+    }
+    span[class*="-1"] {
+      
+      letter-spacing: 7px;
+      font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+      line-height: 84px;
+      display: block;
+      font-size: 70px;
+    }
+    span[class*="-2"] {
+      font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+      display: block;
+      line-height: 36px;
+      font-size: 14px;
+      height: 36px;
+    }
+    #s1:checked ~ main div:not(.w1),
+    #s2:checked ~ main div:not(.w2),
+    #s3:checked ~ main div:not(.w3),
+    #s4:checked ~ main div:not(.w4) {
+      color: transparent;
+    }
+    #s1:checked ~ main div:not(.w1) span[class*="-1"],
+    #s2:checked ~ main div:not(.w2) span[class*="-1"],
+    #s3:checked ~ main div:not(.w3) span[class*="-1"],
+    #s4:checked ~ main div:not(.w4) span[class*="-1"] {
+      font-size: 30px;
+      transition: font-size .6s linear;
+    }
+    #s1:checked ~ main div.w1 span[class*="-1"],
+    #s2:checked ~ main div.w2 span[class*="-1"],
+    #s3:checked ~ main div.w3 span[class*="-1"],
+    #s4:checked ~ main div.w4 span[class*="-1"] {
+      font-size: 70px;
+      transition: font-size .4s .2s linear;
+    }
+
+
+
+    .bgc {
+      position: absolute;
+      width: 599px;
+      height: 36px;
+      bottom: 93px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 250;
+      background-color: #68abc2e6;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sliding Image Panels <span>with CSS3</span></h1>
+    <ul class="link">
+      <li><a href="index1.html">Demo 1</a></li>
+      <li><a href="index2.html">Demo 2</a></li>
+      <li><a href="index3.html">Demo 3</a></li>
+      <li><a href="index4.html">Demo 4</a></li>
+    </ul>
+  </header>
+
+  
+
+
+
+  <section>
+    <ul class="img">
+      <input type="radio" id="s1" name="image" checked>
+      <input type="radio" id="s2" name="image">
+      <input type="radio" id="s3" name="image">
+      <input type="radio" id="s4" name="image">
+      <li class="li1">
+        <div class="s1-1"></div>
+        <div class="s2-1"></div>
+        <div class="s3-1"></div>
+        <div class="s4-1"></div>
+        <label for="s1">1</label>
+      </li>
+
+      <li class="right">
+        <div class="s1-2"></div>
+        <div class="s2-2"></div>
+        <div class="s3-2"></div>
+        <div class="s4-2"></div>
+        <label for="s2">2</label>
+      </li>
+
+      <li class="li3">
+        <div class="s1-3"></div>
+        <div class="s2-3"></div>
+        <div class="s3-3"></div>
+        <div class="s4-3"></div>
+        <label for="s3">3</label>
+      </li>
+
+      <li class="right">
+        <div class="s1-4"></div>
+        <div class="s2-4"></div>
+        <div class="s3-4"></div>
+        <div class="s4-4"></div>
+        <label for="s4">4</label>
+      </li>
+      
+      <main>
+        <div class="w1">
+          <span class="w1-1">Serendipity</span>
+          <span class="w1-2">What you've been dreaming of</span>
+        </div>
+        <div class="w2">
+          <span class="w2-1">Adventure</span>
+          <span class="w2-2">Where the fun begins</span>
+        </div>
+        <div class="w3">
+          <span class="w3-1">Nature</span>
+          <span class="w3-2">Unforgettable eperiences</span>
+        </div>
+        <div class="w4">
+          <span class="w4-1">Serenity</span>
+          <span class="w4-2">When silence touches nature</span>
+        </div>
+        <div class="bgc"></div>
+      </main>
+     </ul>
+
+     
+    </section>
+
+</body>
+</html>

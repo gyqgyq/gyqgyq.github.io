@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Document</title>
   <style>
-    
     body {
       margin: 0;
     }
@@ -13,37 +12,24 @@
       text-align: center;
     }
     section {
-      overflow: hidden;
+      display: flow-root;
     }
     div {
       float: left;
       font-size: 30px;
-      position: relative;
     }
-    div:before {
-      content: '';
-      width: 100%;
-      position:absolute;
-      height:9999px;
-      z-index: -100;
-    }
-    .s1, .s1:before {
-      background-color: #9ee;
-    }
-    .s2, .s2:before {
-      background-color: #e9e;
-    }
-    .s3, .s3:before {
-      background-color: #ee9;
-    }
+    
     .s1 {
       width: 30%;
+      background-color: #9ee;
     }
     .s2 {
       width: 50%;
+      background-color: #e9e;
     }
     .s3 {
       width: 20%;
+      background-color: #ee9;
     }
     
   </style>
@@ -51,7 +37,7 @@
 <body>
     
   <section>
-    <div class="s1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde officiis libero nihil vdde fugit quidem omnis obcaecati!</div>
+    <div class="s1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis et accusamus, impedit consequatur molestias, magni commodi unde nemo molestiae iure ad debitis obcaecati alias dolor error at, doloremque doloribus eaque!</div>
     <div class="s2">a</div>
     <div class="s3">aa</div>
   </section>
