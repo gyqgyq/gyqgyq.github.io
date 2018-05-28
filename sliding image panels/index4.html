@@ -167,7 +167,7 @@
       position: absolute;
       width: 149px;
       height: 401px;
-      transition: all .6s cubic-bezier(.38,.72,.21,.99);
+      transition: all 1s cubic-bezier(.38,.72,.21,.99);
     }
 
     #s1:checked ~ li [class*="s1-"], 
@@ -200,7 +200,7 @@
       z-index: 300;
       text-align: center;
       color: white;
-      transition: color .6s linear;
+      xtransition: color .3s linear;
     }
     span[class*="-1"] {
       
@@ -221,8 +221,25 @@
     #s2:checked ~ main div:not(.w2),
     #s3:checked ~ main div:not(.w3),
     #s4:checked ~ main div:not(.w4) {
-      color: transparent;
+      xcolor: transparent;
     }
+    #s1:checked ~ main div:not(.w1) span[class*="-1"],
+    #s2:checked ~ main div:not(.w2) span[class*="-1"],
+    #s3:checked ~ main div:not(.w3) span[class*="-1"],
+    #s4:checked ~ main div:not(.w4) span[class*="-1"] {
+      text-shadow: 0 0 50px;
+      opacity: 0;
+      transition: all .5s linear;
+    }
+    #s1:checked ~ main div.w1 span[class*="-1"],
+    #s2:checked ~ main div.w2 span[class*="-1"],
+    #s3:checked ~ main div.w3 span[class*="-1"],
+    #s4:checked ~ main div.w4 span[class*="-1"] {
+      text-shadow: 0 0 5px;
+      opacity: 1;
+      transition: all .5s .5s linear;
+    }
+
     .bgc {
       position: absolute;
       width: 599px;
