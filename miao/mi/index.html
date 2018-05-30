@@ -3,153 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <script src="./font/iconfont.js"></script>
   <link rel="stylesheet" href="normalize.css">
-  <style>
-    body {
-      overflow: scroll;
-      font-family: "Helvetica Neue", Helvetica, 
-        Arial, "Microsoft Yahei", "Hiragino Sans GB", 
-        "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+  <link rel="stylesheet" type="text/scss" href="index.scss" />
+  <style type="text/css">
+    .icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
     }
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-    .spacefix {
-      font-size: 0;
-    }
-    .spacefix * {
-      font-size: 12px;
-    }
-    /*-----------------------header--------------------------*/
-    header {
-      width: 100%;
-      height: 40px;
-      background-color: #333;
-      color: #b0b0b0;
-      font-size: 12px;
-      line-height: 40px;
-    }
-    header ul span {
-      color: #424242;
-      margin: 0 .5em;
-    }
-    header ul {
-      height: 40px;
-    }
-    header a {
-      color: #b0b0b0;
-      text-decoration: none;
-    }
-    header a:hover,header a:hover + span {
-      color: #fff;
-    }
-
-    header > div {
-      width: 1226px;
-      margin: 0 auto;
-      position: relative;
-    }
-     
-    header li {
-      display: inline;
-    }
-    .header-1 {
-      float:left;
-    }
-    .header-2,.header-3 {
-      float: right;
-    }
-    .header-3, .header-3 a {
-      width: 120px;
-      height: 40px;
-      display: block;
-    }
-    .header-3 {
-      margin-left: 25px;
-      background-color: #424242;
-      text-align: center;
-    }
-    .header-3 span {
-      position: relative;
-      top: -40px;
-      right: -28px;
-      pointer-events: none;
-    }
-    .header-4 {
-      width: 120px;
-      height: 40px;
-      position: relative;
-      margin-left: auto;
-    }
-    .header-4-1 {
-      width: 120px;
-      height: 40px;
-      position: absolute;
-      right: 0;
-      top: 0;
-      background-color: #fff;
-      color: #ff6700;
-      text-align: center;
-
-    }
-    .header-4-1 + span {
-      display: block;
-      position: relative;
-      top: -40px;
-      right: -81px;
-      pointer-events: none;
-      color: #ff6700;
-    }
-    .header-4-2 {
-      width: 316px;
-      height: 0px;
-      box-shadow: 0 2px 10px #00000026;
-      position: absolute;
-      right: 0;
-      top: 40px;
-      line-height: 0px;
-      font-size: 0px;
-      color: #333;
-      text-align: center;
-      transition: 
-        height .2s .3s linear,
-        line-height .2s .3s linear,
-        font-size .1s .3s linear;
-    }
-    #header-4-1 {
-      opacity: 0;
-      transition: opacity 0s .5s;
-    }
-    #header-4-1 a,
-    #header-4-1 span {
-      color: #ff6700;
-    }
-
-
-    .header-3:hover ~ .header-4-1 #header-4-1,
-    .header-4:hover #header-4-1{
-      opacity: 1;
-      transition: opacity 0s;
-      
-    }
-    .header-3:hover ~ .header-4 .header-4-2,
-    .header-4:hover .header-4-2 {
-      height: 98px;
-      line-height: 98px;
-      font-size: 12px;
-      transition: 
-        height .2s linear,
-        line-height .2s linear,
-        font-size .1s .1s linear;
-    }
-  
-
-
-
-    
-  </style>
+</style>
 </head>
 <body>
   <header>
@@ -176,7 +40,12 @@
       </ul>
      
       <div class="header-3">
-        <a href="https://static.mi.com/cart/">购物车</a>
+        <a href="https://static.mi.com/cart/">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-ai66"></use>
+          </svg>
+          购物车
+        </a>
         <span>(0)</span>
       </div>
 
@@ -189,8 +58,13 @@
       </ul>
 
       <div class="header-4">
-        <div id="header-4-1">
-          <a class="header-4-1" href="https://static.mi.com/cart/">购物车</a>
+        <div class="header-4-1">
+          <a class="header-4-1-1" href="https://static.mi.com/cart/">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-ai66"></use>
+            </svg>
+            购物车
+          </a>
           <span>(0)</span>
         </div>
         <div class="header-4-2">购物车中还没有商品，赶紧选购吧!</div>
@@ -198,5 +72,206 @@
 
     </div>
   </header>
+  
+  <section class="s1">
+    <div class="s1-div">
+      <a href="https://www.mi.com/index.html"></a>
+    </div>
+
+    <ul class="s1-ul">
+      <li class="s1-01"><a href="">小米手机</a></li>
+      <li class="s1-02"><a href="">红米</a></li>
+      <li class="s1-03"><a href="">电视</a></li>
+      <li class="s1-04"><a href="">笔记本</a></li>
+      <li class="s1-05"><a href="">盒子</a></li>
+      <li class="s1-06"><a href="">新品</a></li>
+      <li class="s1-07"><a href="">路由器</a></li>
+      <li class="s1-08"><a href="">智能硬件</a></li>
+      <li class="s1-09"><a href="">服务</a></li>
+      <li class="s1-10"><a href="">社区</a></li>
+      <main>
+        <div class="main-1">
+          <ul>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          </ul>
+        </div>
+        <div class="main-2">
+          <ul>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          </ul>
+        </div>
+        <div class="main-3">
+          <ul>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          </ul>
+        </div>
+        <div class="main-4">
+          <ul>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          </ul>
+        </div>
+        <div class="main-5">
+          <ul>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          </ul>
+        </div>
+        <div class="main-6">
+          <ul>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          </ul>
+        </div>
+        <div class="main-7">
+          <ul>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          </ul>
+        </div>
+        <div class="main-8">
+          <ul>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+            <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          </ul>
+        </div>
+      </main>
+    </ul>
+    
+    <form class="s1-form">
+      <input type="text">
+      <label for="s1-button">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-fangdajing"></use>
+        </svg>
+      </label>
+      <button id="s1-button">
+      </button>
+      <div> 
+        <a href="https://www.mi.com/p/1995.html">电视新品</a>
+        <a href="https://www.mi.com/a/h/5952.html?
+          client_id=180100031058&masid=17409.0373">618预热</a>
+      </div>
+    </form>
+    <!-- <main>
+      <div class="main-1">
+        <ul>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+        </ul>
+      </div>
+      <div class="main-2">
+        <ul>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+        </ul>
+      </div>
+      <div class="main-3">
+        <ul>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+        </ul>
+      </div>
+      <div class="main-4">
+        <ul>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+        </ul>
+      </div>
+      <div class="main-5">
+        <ul>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+        </ul>
+      </div>
+      <div class="main-6">
+        <ul>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+        </ul>
+      </div>
+      <div class="main-7">
+        <ul>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+        </ul>
+      </div>
+      <div class="main-8">
+        <ul>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+          <li><a href=""><img src="https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png" alt=""></a></li>
+        </ul>
+      </div>
+    </main> -->
+  </section>
+
 </body>
+<script src="sass.link.min.js"></script>
 </html>
