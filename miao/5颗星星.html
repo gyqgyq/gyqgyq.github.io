@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <style>
+  div, section {
+    font-size: 0;
+  }
+  i {
+    padding: 0 2px;
+  }
+  /*---------------------------------*/
+    div {
+      width: 300px;
+      margin: 100px auto;
+      text-align: center;
+      direction: rtl;
+    }
+    i {
+      font-size: 40px;
+      color: #333;
+    }
+
+    div i:nth-child(n):hover ~ i,
+    div i:nth-child(n):hover {
+      color: #be4bdb;
+    }
+
+    /*---------------------------------*/
+    section {
+      width: 300px;
+      margin: 100px auto;
+      text-align: center;
+      direction: rtl;
+    }
+    section i {
+      position: relative;
+    }
+    i i {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #be4bdb;
+      opacity: 0;
+    }
+
+    section > i:nth-child(n):hover ~ i i,
+    section > i:nth-child(n):hover i {
+      opacity: 1;
+    }
+    /*-----------------------------*/
+    main {
+      margin: auto;
+      width: 120px; height: 20px;
+      background: url(./image/star.png) repeat-x;
+      position: relative;
+      overflow: hidden;
+    }
+    .star {
+      height: 100%;
+      width: 24px;
+      line-height: 6em;
+      position: absolute;
+      z-index: 3;
+    }
+    .star_1 { left: 0; }
+    .star_2 { left: 24px; }
+    .star_3 { left: 48px; }
+    .star_4 { left: 72px; }
+    .star_5 { left: 96px; }
+    .star:hover {
+      background: url(./image/star.png) repeat-x 0 -20px;
+      left: 0;
+      z-index: 2;
+    }
+    .star_1:hover { width: 24px; }
+    .star_2:hover { width: 48px; }
+    .star_3:hover { width: 72px; }
+    .star_4:hover { width: 96px; }
+    .star_5:hover { width: 120px; }
+  </style>
+</head>
+<body>
+  <div>
+    <i class="fab fa-github"></i>
+    <i class="fab fa-github"></i>
+    <i class="fab fa-github"></i>
+    <i class="fab fa-github"></i>
+    <i class="fab fa-github"></i>
+  </div>
+
+  <section>
+    <i class="far fa-star">
+      <i class="fas fa-star"></i>
+    </i>
+    <i class="far fa-star">
+      <i class="fas fa-star"></i>
+    </i>
+    <i class="far fa-star">
+      <i class="fas fa-star"></i>
+    </i>
+    <i class="far fa-star">
+      <i class="fas fa-star"></i>
+    </i>
+    <i class="far fa-star">
+      <i class="fas fa-star"></i>
+    </i>
+  </section>
+
+  <main>
+    <a class="star star_1"></a>
+    <a class="star star_2"></a>
+    <a class="star star_3"></a>
+    <a class="star star_4"></a>
+    <a class="star star_5"></a>
+  </main>
+</body>
+</html>
