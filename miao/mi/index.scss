@@ -1037,7 +1037,10 @@ header {
 
 .s7 {
   background-color: #f5f5f5;
-  .s7-header {
+  height: 708px;
+  overflow: hidden;
+  position: relative;
+  .s7-main {
     position: relative;
     width: 1226px;
     margin: auto;
@@ -1049,180 +1052,316 @@ header {
       font-weight: 200;
       line-height: 58px;
       font-size: 22px;
-      color: #333; 
+      color: #333;
+      margin-bottom: 0;
     }
-    div {
+    > div {
       display: inline-block;
       position: absolute;
       right: 0;
       top: 59px;
-      span {
-        font-size: 16px;
-        margin-left: 30px;
+      font-size: 0;
+    }    
+    > span {
+      display: inline-block;
+      font-size: 16px;
+      margin-left: 30px;
+      display: inline-block;
+      height: 24px;
+      line-height: 24px;
+      position: absolute;
+      top: 40px;
+      &:hover {
+        color: #ff6700;
+        border-bottom: 2px solid #ff6700;
+      }
+      &:nth-of-type(1) {
+        right: 217px;
+      }
+      &:nth-of-type(2) {
+        right: 125px;
+      }
+      &:nth-of-type(3) {
+        right: 62px;
+      }
+      &:nth-of-type(4) {
+        right: 0px;
       }
     }
-  }
-  ul {
-    list-style: none;
-    padding-left: 0;
-    width: 1226px;
-    height: 628px;
-    margin: auto;
-    li {
-      width: 234px;
-      height: 300px;
-      background-color: #fff;
-      margin: 0 0 14px 14px;
-      float: left;
-      transition: all .2s linear;
-      position: relative;
-      top: 0;
-      &:nth-child(n + 10) {
-        height: 143px;
-      }
-      &:nth-child(1),
-      &:nth-child(6) {
-        margin-left: 0;
-        a {
-          display: block;
+      
+    
+    ul {
+      xdisplay: none;
+      list-style: none;
+      padding-left: 0;
+      width: 1226px;
+      height: 628px;
+      margin: auto;
+      li {
+        width: 234px;
+        height: 300px;
+        background-color: #fff;
+        margin: 0 0 14px 14px;
+        float: left;
+        transition: all .2s linear;
+        position: relative;
+        top: 0;
+        overflow: hidden;
+        &:hover .hidden {
+          bottom: 0;
+        }
+        .hidden {
+          height: 76px;
           width: 234px;
-          height: 300px;
-          padding-top: 0;
-          img {
+          background-color: #ff6700;
+          position: absolute;
+          bottom: -76px;
+          transition: all .2s;
+          a {
+            box-sizing: border-box;
+            padding: 8px 30px;
+            display: block;
+            height: 76px;
+            width: 234px;
+            font-size: 12px;
+            span:first-child {
+              height: 36px;
+              width: 174px;
+              display: block;
+              margin: 0 auto 5px auto;
+              color: #fff;
+            }
+            span:last-child {
+              height: 18px;
+              width: 174px;
+              display: block;
+              margin: auto;
+              color: rgba(255,255,255,0.6);
+            }
+          }
+        }
+        &:nth-child(n + 10) {
+          height: 143px;
+        }
+        &:nth-child(1),
+        &:nth-child(6) {
+          margin-left: 0;
+          a {
+            display: block;
             width: 234px;
             height: 300px;
+            padding-top: 0;
+            img {
+              width: 234px;
+              height: 300px;
+            }
           }
         }
-      }
-      &:nth-child(10) {
-        position: relative;
-        a {
-          display: block;
-          width: 234px;
-          height: 143px;
-          img {
-            height: 80px;
-            width: 80px;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            left: 134px;
-          }
-          span {
-            display: inline-block;
-            position: absolute;
-            font-size: 14px;
-            left: 28px;
-          }
-          .name {
-            color: #333;
-            top: 44px;
-          }
-          .price {
-            color: #ff6700;
-            top: 71px;
-          }
-        } 
-      }
-      &:nth-child(11) {
-        position: relative;
-        a {
-          display: block;
-          width: 234px;
-          height: 143px;
-          svg {
-            color: #ff6700;
-            font-size: 54px;
-            line-height: 54px;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            left: 154px;
-          }
-          span {
-            display: inline-block;
-            position: absolute;
-            font-size: 14px;
-            left: 28px;
-          }
-          .liulan {
-            color: #333;
-            top: 53px;
-            font-size: 18px;
-          }
-          .remen {
-            color: #757575;
-            top: 78px;
-          }
-        } 
-      }
-      &::before {
-        background-color: #e53935;
-        height: 20px;
-        width: 64px;
-        font-size: 12px;
-        color: #fff;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        line-height: 20px;
-        text-align: center;
-      }
-      &:nth-child(3)::before {
-        content: '享8折';
-      }
-      &:nth-child(9)::before {
-        content: '减 300 元';
-      }
-      &:hover {
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        top: -3px;
-      }
-      a {
-        box-sizing: border-box;
-        display: block;
-        height: 340px;
-        width: 234px;
-        padding-top: 39px;
-        text-align: center;
-        text-decoration: none;
-        img {
-          height: 160px;
-          width: 160px;
-          display: block;
-          margin: 0 auto 22px;
+        &:nth-child(10) {
+          position: relative;
+          a {
+            display: block;
+            width: 234px;
+            height: 143px;
+            img {
+              height: 80px;
+              width: 80px;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              margin: auto;
+              left: 134px;
+            }
+            span {
+              display: inline-block;
+              position: absolute;
+              font-size: 14px;
+              left: 28px;
+            }
+            .name {
+              color: #333;
+              top: 44px;
+            }
+            .price {
+              color: #ff6700;
+              top: 71px;
+            }
+          } 
         }
-        .s7-span-1 {
-          display: block;
-          margin: 0 auto 3px;
-          color: #212121;
-          font-size: 14px;
-          height: 21px;
-          width: 194px;
+        &:nth-child(11) {
+          position: relative;
+          a {
+            display: block;
+            width: 234px;
+            height: 143px;
+            svg {
+              color: #ff6700;
+              font-size: 54px;
+              line-height: 54px;
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              margin: auto;
+              left: 154px;
+            }
+            span {
+              display: inline-block;
+              position: absolute;
+              font-size: 14px;
+              left: 28px;
+            }
+            .liulan {
+              color: #333;
+              top: 53px;
+              font-size: 18px;
+            }
+            .remen {
+              color: #757575;
+              top: 78px;
+            }
+          } 
         }
-        .s7-span-2 {
-          display: block;
-          margin: 0 auto 3px;
-          color: #212121;
+        
+        &::before {
+          background-color: #e53935;
+          height: 20px;
+          width: 64px;
           font-size: 12px;
-          color: #b0b0b0;
-          height: 18px;
-          width: 194px;
+          color: #fff;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+          line-height: 20px;
+          text-align: center;
         }
-        .s7-span-3 {
-          font-size: 14px;
-          color: #ff6709;
+        &:nth-child(3)::before {
+          content: '享8折';
         }
-        .s7-span-4 {
-          font-size: 14px;
-          color: #b0b0b0;
-          text-decoration: line-through;
+        &:nth-child(9)::before {
+          content: '减 300 元';
         }
-      }  
+        &:hover {
+          box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+          top: -3px;
+        }
+        a {
+          box-sizing: border-box;
+          display: block;
+          height: 340px;
+          width: 234px;
+          padding-top: 39px;
+          text-align: center;
+          text-decoration: none;
+          img {
+            height: 160px;
+            width: 160px;
+            display: block;
+            margin: 0 auto 7px;
+          }
+          .s7-span-1 {
+            display: block;
+            margin: 0 auto 3px;
+            color: #212121;
+            font-size: 14px;
+            height: 21px;
+            width: 194px;
+          }
+          .s7-span-2 {
+            display: block;
+            margin: 0 auto 3px;
+            color: #212121;
+            font-size: 12px;
+            color: #b0b0b0;
+            height: 18px;
+            width: 194px;
+          }
+          .s7-span-3 {
+            font-size: 14px;
+            color: #ff6709;
+          }
+          .s7-span-4 {
+            font-size: 14px;
+            color: #b0b0b0;
+            text-decoration: line-through;
+          }
+        }  
+      }
     }
   }
+}
+
+.s8 {
+  padding-top: 9px;
+  background-color: #f5f5f5;
+  main {
+    width: 1226px;
+    margin: auto;
+    h3 {
+      width: 1226px;
+      height: 58px;
+      margin: 0;
+      font-size: 22px;
+      font-weight: 200;
+      color: #333;
+      line-height: 58px;
+    }
+    dl {
+      height: 300px;
+      width: 1226px;
+      dd {
+        height: 300px;
+        width: 234px;
+        margin: 0 14px 0 0;
+        float: left;
+        background-color: #fff;
+        text-align: center;
+        &:last-child {
+          margin: 0;
+        }
+        .s8-a-1 {
+          display: block;
+          height: 140px;
+          width: 140px;
+          margin: 40px auto 0;
+          img {
+            height: 140px;
+            width: 140px;
+          }
+        }
+        .s8-a-2 {
+          display: block;
+          width: 194px;
+          height: 18px;
+          line-height: 18px;
+          font-size: 14px;
+          color: #333;
+          text-decoration: none;
+          margin: 21px auto 10px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+        .s8-span-1 {
+          width: 194px;
+          height: 21px;
+          display: block;
+          color: #ff6700;
+          font-size: 14px;
+          margin: 0 auto 10px;
+          line-height: 21px;
+        }
+        .s8-span-2 {
+          width: 194px;
+          height: 21px;
+          display: block;
+          color: #757575;
+          font-size: 14px;
+          line-height: 21px;
+          margin: auto;
+        }
+      }
+    }
+  } 
 }

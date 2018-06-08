@@ -5,7 +5,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <style>
-  div, section {
+  div, section, footer {
     font-size: 0;
   }
   i {
@@ -80,6 +80,53 @@
     .star_3:hover { width: 72px; }
     .star_4:hover { width: 96px; }
     .star_5:hover { width: 120px; }
+    /*------------------------------------------*/
+    footer {
+      margin: 50px auto 0;
+      width: 215px;
+      text-align: center;
+      padding: 0;
+    }
+    footer i {
+      color: red;
+    }
+    footer:hover i {
+      color: blue;
+    }
+    i:hover ~ i {
+      color: red;
+    }
+    /*--------------------------------------------------*/
+    ul {
+      padding: 0;
+      list-style: none;
+      font-size: 0;
+    }
+    li {
+      float: left;
+      display: inline-block;
+    }
+    ul .fas {
+      display: none;
+    }
+    ul:hover  li i {
+      color: red;
+    }
+    li:hover ~ li i {
+      color: black;
+    }
+    ul:hover .fas {
+      display: inline-block;
+    }
+    ul:hover .far {
+      display: none;
+    }
+    li:hover ~ li .fas {
+      display: none;
+    }
+    li:hover ~ li .far {
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
@@ -116,5 +163,21 @@
     <a class="star star_4"></a>
     <a class="star star_5"></a>
   </main>
+
+  <footer>
+    <i class="fab fa-github"></i>
+    <i class="fab fa-github"></i>
+    <i class="fab fa-github"></i>
+    <i class="fab fa-github"></i>
+    <i class="fab fa-github"></i>
+  </footer>
+
+  <ul>
+    <li><i class="far fa-star"></i><i class="fas fa-star"></i></li>
+    <li><i class="far fa-star"></i><i class="fas fa-star"></i></li>
+    <li><i class="far fa-star"></i><i class="fas fa-star"></i></li>
+    <li><i class="far fa-star"></i><i class="fas fa-star"></i></li>
+    <li><i class="far fa-star"></i><i class="fas fa-star"></i></li>
+  </ul>
 </body>
 </html>

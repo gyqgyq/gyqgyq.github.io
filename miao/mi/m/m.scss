@@ -1,0 +1,151 @@
+html {
+  font-size: calc(100vw / 750 * 100);
+}
+
+.divider-line {
+  width: 7.2rem;
+  height: .16rem;
+  background-color: #f5f5f5;
+}
+
+.divider-line-short {
+  width: 7.2rem;
+  height: .04rem;
+  background-color: #f5f5f5;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.afix {
+  width: 100%;
+  height: 100%;
+  display: block;     
+}
+.imgfix {
+  width: 100%;
+  height: 100%;
+}
+
+
+#app {
+  width: 7.2rem;
+  margin: 0 auto;
+  overflow: hidden;
+  header {
+    height: .84rem;
+    background-color: #f2f2f2;
+    .header-top {
+      height: .5rem;
+      > div {
+        float: left;
+      }
+      .header-top-left {
+        width: 1rem;
+        height: .5rem;
+        display: block;
+        text-align: center;
+        img {
+          height: .31578rem;
+          width: .48rem;
+          display: block;
+          margin: auto;
+          margin-top: .06rem;
+        }
+      }
+      .header-top-middle {
+        display: inline-block;
+        height: .5rem;
+        width: 5.2rem;
+        background-color: #fff;
+        box-sizing: border-box;
+        border: 1px solid #e5e5e5;
+      }
+      .header-top-right {
+        box-sizing: border-box;
+        display: block;
+        height: .5rem;
+        width: .8rem;
+        margin: 0 .1rem;
+        font-size: .2rem;
+        color: #666;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAAAkFBMVEUAAABiYmJoaGhxcXFwcHBwcHBycnJwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBzc3NycnJwcHB2dnZwcHBwcHBxcXFwcHBwcHBwcHBwcHBwcHBwcHBwcHBvb29wcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBvb29wcHBwcHBwcHBwcHBnZ2dwcHC6NtRcAAAAMHRSTlMAAwoXHycsRXWfxdzz+jB+vv8ljv/+72HU682aahOXTQ+wNblUtazlb1elWuE7B4ObTEwxAAADdklEQVR4AZWWh5rqOgyEnd7LEA2k0Os24P3f7vLdBVOSTTizBbfflmVZWHXJUBeZlu24rmNbpm56U5bnB2EUJ0kchYHvWep9pVke40FxnqX9hLZ4VEQQgEk8vihOCAiiYnTpHGKNSQmAVd1MvdRxUm/a1BUBlJNLZz87mycAo2axNHTjctFEBJL5rI82lL0SYjxfX+sX/ZbW8zEoK1sZPexGiHL7cDa6uC1B2XTQ2uaVEDv3idS8uwNl9bflhRB7q7vbUNYelOKvhRck8g5W0znIhTI6+2rwsO5zyfpA1N2zfwg5Ub2akPLR6a0I2Jn9J2nugKjLZ5/s3FDLLfxUba0guTUYgLlg1e6wIkg2HPqZIJq1DRpj3Gu1HlbpYbrVT6QcDcOjWpKPFlxAclMNyswFRQv+ElmpN7QS+WrBe5H9kNV6XP/Kre5HuL3yHLIx1LB2gnkLzii1peuW9RwES10KhVkL/o5x8G6tXlnq8kXTn91vCjHU8Ufi75Zv3AMwvbUWIuFSGbebWIlsr+UpcXBVSyHk6zbjBGRxO3UnB+PrPT99CULVVkZU66txy42Q+/X/w7c1KGdtBJh1wE6lM5Sh0lKIn+Dbm+5iEF+3O1wIK0d1aA6Oj7ddpzkAxuMEv9le/bprTDSdsZNWxEanCescERAgCSeXputuwCrtjsMMRHEZdI2p1N/XUdhMLB1lBYjsrzSxAZk9BOPSSUfGfTaflFyb1kqtEZhkevjvqNv/U5YQUU9qXlQgG/s+n6GH2gGIaqF6tD2ACL/NVg74DEEctqpXXg0i3kxe5lzFIGpPDcgJElA4ffouiYVIAkcN6vRdM0HsKkP7MUHC8PvUz11d3JDE8Q57QrL47Rt4DB2bmMRudoetXMi4OQ4+h2b+Dwis7Ke7vieIH3/Zz7orgizPs5eT8ksS3Lt97LEE8XN+fa9dKs75AKI89rCREJujemavVS8HJTr+FdpuKUQwa6FX3ArAru8znXtQmH8/aMwClFX3gDOI5tT3oDk1IM6dG44fEknPjY+7nLbDLXuqvscUsGs3b2NtUR+dgfG2tcRe9PusD7ZLyKplzw94VidjSKoAfvTurrAPRLZ6Q3YE+C8WBoLQHjmjATkjO4QEL8EVgUn1lhKidJXxAC9A4k2RWDzBn5LwPSVkIp9Pm16m7j8ovWaF/wCc31NtcLeHeAAAAABJRU5ErkJggg==);
+        background-repeat: no-repeat;
+        background-size: .4rem .4rem;
+        background-position: center;
+      }
+    } 
+    .header-bottom {
+      height: .34rem;
+      width: 7.2rem;
+      ul {
+        height: .34rem;
+        width: 20rem;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li {
+          height: .34rem;
+          padding: 0 .25rem;
+          float: left;
+          color: #747474;
+          font-size: .26rem;
+          border-top: 1px solid transparent;
+        }
+      }
+    }
+  }
+  .s1 { 
+  }
+  .s2 {
+    width: 7.2rem;
+    height: 1.52rem;
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      width: 100%;
+      height: 1.52rem;
+      li {
+        width: 1.44rem;
+        height: 1.52rem;
+        float: left;
+      }
+    }
+  }
+  .s3 {
+    width: 100%;
+    height: 5.08rem;
+    background-color: #fff;
+    ul {
+      width: 100%;
+      height: 5.08rem;
+      li {
+        float: left;
+        &:nth-child(1) {
+          width: 3.58rem;
+          height: 5.08rem;
+          margin-right: .04rem;
+          
+        }
+        &:nth-child(n + 2) {
+          width: 3.58rem;
+          height: 2.52rem;
+        }
+        &:nth-child(2) {
+          margin-bottom: .04rem;
+        }
+      }
+    }
+  }
+  .s4 {
+    width: 100%;
+    height: 2.8rem;
+  }
+  .s5 {
+    width: 100%;
+    height: 4.4rem;
+  }
+}

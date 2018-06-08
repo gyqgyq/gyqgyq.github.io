@@ -12,7 +12,7 @@
       text-align: center;
     }
     section {
-      display: flow-root;
+      overflow: hidden;
     }
     div {
       float: left;
@@ -31,7 +31,10 @@
       width: 20%;
       background-color: #ee9;
     }
-    
+    section * {
+      padding-bottom: 999px;
+      margin-bottom: -999px;
+    }
   </style>
 </head>
 <body>

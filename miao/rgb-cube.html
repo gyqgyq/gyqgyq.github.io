@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    body {
+      background-color: #aaa;
+    }
+    div {
+      height: 200px;
+      width: 200px;
+      transform-style: preserve-3d;
+      transition: 1000s;
+      margin-left: calc(50vw - 125px);
+      margin-top: calc(50vh - 125px);
+      background-color: transparent;
+
+    }
+
+    div:hover {
+      transform: perspective(800px)  rotatex(155540deg) rotatey(155540deg);
+      position: relative;
+    }
+     div > span {
+      display: inline-block;
+      width: 200px;
+      height: 200px;
+      background-color: #fff;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    
+    .top {
+      transform:  translatez(0px) translatey(-100px) rotatex(90deg);
+    }
+    .bottom {
+      transform: translatez(0px) translatey(100px) rotatex(90deg);
+    }
+    .left {
+      transform: translatex(-100px) translatez(0px) rotatey(90deg);
+    }
+    .right {
+      transform: translatex(100px) translatez(0px) rotatey(90deg);
+    }
+    .front {
+      transform: translatez(-100px);
+    }
+    .behind {
+      transform: translatez(100px);
+    }
+    div > span {
+      background-color: transparent;
+    }
+    span span {
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      mix-blend-mode: lighten;
+    }
+
+    .behind-r {
+      background-image: linear-gradient( to left, rgb(0,0,0), rgb(255,0,0));
+    }
+    .behind-g {
+      background-image: linear-gradient( to top, rgb(0,0,0), rgb(0,255,0));
+    }
+    .behind-b {
+      background-image: linear-gradient(rgb(0,0,255), rgb(0,0,255));
+    }
+    
+    .front-r {
+      background-image: linear-gradient( to left, rgb(0,0,0), rgb(255,0,0));
+    }
+    .front-g {
+      background-image: linear-gradient( to top, rgb(0,0,0), rgb(0,255,0));
+    }
+    .front-b {
+      xbackground-image: linear-gradient(rgb(0,0,255), rgb(0,0,255));
+    }
+    
+    .bottom-r {
+      background-image: linear-gradient(to left, rgb(0,0,0), rgb(255,0,0));
+    }
+    .bottom-g {
+      xbackground-image: linear-gradient( rgb(255,255,255), rgb(255,255,255));
+    }
+    .bottom-b {
+      background-image: linear-gradient(to bottom, rgb(0,0,0), rgb(0,0,255));
+    }
+
+    .top-r {
+      background-image: linear-gradient( to left, rgb(0,0,0), rgb(255,0,0));
+    }
+    .top-g {
+      background-image: linear-gradient( rgb(0,255,0), rgb(0,255,0));
+    }
+    .top-b {
+      background-image: linear-gradient(to bottom, rgb(0,0,0), rgb(0,0,255));
+    }
+
+    .left-r {
+      background-image: linear-gradient( rgb(255,0,0), rgb(255,0,0));
+    }
+    .left-g {
+      background-image: linear-gradient(to top, rgb(0,0,0), rgb(0,255,0));
+    }
+    .left-b {
+      background-image: linear-gradient(to left, rgb(0,0,0), rgb(0,0,255));
+    }
+
+    .right-r {
+      xbackground-image: linear-gradient( to right, rgb(0,0,0), rgb(255,0,0));
+    }
+    .right-g {
+      background-image: linear-gradient( to top, rgb(0,0,0), rgb(0,255,0));
+    }
+    .right-b {
+      background-image: linear-gradient( to left, rgb(0,0,0), rgb(0,0,255));
+    }
+
+    .right span {
+      xmix-blend-mode: darken;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div>
+    <span class="top">
+      <span class="top-r"></span>
+      <span class="top-g"></span>
+      <span class="top-b"></span>
+    </span>
+    <span class="bottom">
+      <span class="bottom-r"></span>
+      <span class="bottom-g"></span>
+      <span class="bottom-b"></span>
+    </span>
+    <span class="left">
+      <span class="left-r"></span>
+      <span class="left-g"></span>
+      <span class="left-b"></span>
+    </span>
+    <span class="right">
+      <span class="right-r"></span>
+      <span class="right-g"></span>
+      <span class="right-b"></span>
+    </span>
+    <span class="front">
+      <span class="front-r"></span>
+      <span class="front-g"></span>
+      <span class="front-b"></span>
+    </span>
+    <span class="behind">
+      <span class="behind-r"></span>
+      <span class="behind-g"></span>
+      <span class="behind-b"></span>
+    </span>
+    
+    
+  </div>
+</body>
+</html>
