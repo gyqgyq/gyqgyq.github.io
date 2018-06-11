@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>潮汐牵引</title>
+  <style>
+
+    main {
+      height: 100vh;
+      display: flex;
+      position: relative;
+    }
+    section {
+      width: 400px;
+      height: 400px;
+      border: 5px solid black;
+      border-radius: 9999px;
+      margin: auto;
+      animation-name: deadpool;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+    div {
+      width: 100px;
+      height: 100px;
+      border: 1px solid;
+      background-image: url(https://s.yimg.com/bt/api/res/1.2/eXWemuyLwBnqDzi7YyNvEg--~A/YXBwaWQ9dHdhYnVuZXdzO2ZpPWZpbGw7dz0zNDE2O2g9MTU3ODs-/http://media.zenfs.com/en/homerun/feed_manager_auto_publish_494/5ea176bd145d00238fdd8cc6493cafb2);
+      background-size: 150px;
+      background-repeat: no-repeat;
+      background-position: 0 10px;
+      background-color: #fff;
+    }
+    @keyframes deadpool {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes deadpool-around {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(-360deg);
+      }
+    }
+    #a:checked ~ section div {
+      animation-name: deadpool-around;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+    #b:checked ~ section div {
+      animation: none;
+    }
+    input {
+      display: none;
+    }
+    label {
+      cursor: pointer;
+      position: absolute;
+      display: block;
+      width: 150px;
+      height: 65px;
+      left: 20px;
+      top: 50px;
+      background-color: #eee;
+      text-align: center;
+      line-height: 65px;  
+    }
+    label:last-of-type {
+      top: 150px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <input type="radio" name="a" id="a">
+    <input type="radio" name="a" id="b">
+    <label for="a">自不转模式</label>
+    <label for="b">潮汐牵引模式</label>
+    <section>
+      <div></div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>clock</title>
+  <style>
+    
+    body {
+      margin: 0;
+      
+    }
+    section {
+      xbox-sizing: border-box;
+      width: 400px;
+      height: 400px;
+      border: 10px solid #53302b;
+      border-radius: 999px;
+      display: flex;
+      position: relative;
+      z-index: -100;
+      background-image: url(./image/biao.png);
+      background-size: 471px;
+      background-position: -61px -13px;
+      margin:10px;
+    }
+
+    .center {
+      width: 10px;
+      height: 10px;
+      background-color: brown;
+      border-radius: 999px;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+    .second {
+      width: 4px;
+      height: 340px;
+      position: absolute;
+      z-index: -1;
+      background-image: linear-gradient(to top, transparent 45%, #333 0);
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      animation-name: second;
+      animation-duration: 60s;
+      animation-timing-function: steps(60);
+      animation-iteration-count: infinite;
+      
+      
+    }
+    .minute {
+      width: 6px;
+      height: 320px;
+      position: absolute;
+      z-index: -1;
+      background-image: linear-gradient(to top, transparent 45%, #333 0);
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      animation-name: second;
+      animation-duration: 3600s;
+      animation-timing-function: steps(60);
+      animation-iteration-count: infinite;
+    }
+    .hour {
+      width: 8px;
+      height: 250px;
+      position: absolute;
+      z-index: -1;
+      background-image: linear-gradient(to top, transparent 45%, #333 0);
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      animation-name: second;
+      animation-duration: 43200s;
+      animation-timing-function: steps(60);
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes second {
+      from {
+        transform: rotateZ(0deg);
+      }
+      to {
+        transform: rotateZ(360deg);
+    }
+    
+
+  </style>
+</head>
+<body>
+  <section>
+    <div class="center"></div>
+    <div class="second"></div>
+    <div class="minute"></div>
+    <div class="hour"></div>
+  </section>
+</body>
+</html>

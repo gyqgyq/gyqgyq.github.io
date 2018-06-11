@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>学会数理化，走遍天下都不怕</title>
+  <style>
+  * {
+    background-color: rgba(0,0,0,0.1);
+  }
+    body {
+      margin: 0;
+      overflow: scroll;
+    }
+    section {
+      display: flex;
+      height: 100vh;
+      position: relative;
+    }
+
+    .top {
+      transform:  translatez(0px) translatey(-100px) rotatex(90deg);
+    }
+    .bottom {
+      transform: translatez(0px) translatey(100px) rotatex(90deg);
+    }
+    .left {
+      transform: translatex(-100px) translatez(0px) rotatey(90deg);
+    }
+    .right {
+      transform: translatex(100px) translatez(0px) rotatey(90deg);
+    }
+    .behind {
+      transform: translatez(-100px);
+    }
+    .fount {
+      transform: translatez(100px);
+    }
+    
+    input {
+      display: none;
+    }
+    div {
+      height: 200px;
+      width: 200px;
+      background-color: #25c6fc77;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      border: 2px solid #0007;
+    }
+    section > span {
+      display: block;
+      height: 50px;
+      width: 150px;
+      position: absolute;
+      text-align: center;
+      line-height: 50px;
+      outline: none;
+    }
+    section > span:active {
+      background-color: #0003;
+    }
+    section >span:nth-of-type(1) {
+      top: 10px;
+    }
+    section >span:nth-of-type(2) {
+      top: 70px;
+    }
+    section >span:nth-of-type(3) {
+      top: 130px;
+    }
+    section >span:nth-of-type(4) {
+      top: 190px;
+    }
+    section >span:nth-of-type(5) {
+      top: 250px;
+    }
+    section >span:nth-of-type(6) {
+      top: 310px;
+    }
+    section >span:nth-of-type(7) {
+      top: 370px;
+    }
+    section >span:nth-of-type(8) {
+      top: 430px;
+    }
+
+    main {
+      height: 200px;
+      width: 200px;
+      margin: auto;
+      position: relative;
+      transform-style: preserve-3d;
+      background-color: transparent;
+      animation-duration: 10s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-play-state: paused;
+      animation-name: s-x;
+    }
+    main span {
+      position:absolute;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height:  200px;
+      animation-duration: 10s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-play-state: paused;
+      background-color: transparent;
+      transform-style: preserve-3d;
+    }
+
+    main > span {
+      animation-name: n-x;
+    }
+    main >span>span {
+      animation-name: s-y;
+    }
+    main >span>span>span {
+      animation-name: n-y;
+    }
+    main >span>span>span>span {
+      animation-name: s-z;
+    }
+    main >span>span>span>span>span {
+      animation-name: n-z;
+      transform-style: preserve-3d;
+    }
+    main >span>span>span>span>span>.alpha>div {
+      animation-name: alpha-up;
+    }
+    main >span>span>span>span>span>.alpha>div>div {
+      animation-name: alpha-down;
+    }
+
+    
+    @keyframes s-x {
+      from {
+        transform: rotateX(0);
+      }
+      to {
+        transform: rotateX(360deg);
+      }
+    }
+    @keyframes n-x {
+      from {
+        transform: rotateX(0);
+      }
+      to {
+        transform: rotateX(-360deg);
+      }
+    }
+    @keyframes s-y {
+      from {
+        transform: rotateY(0);
+      }
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+    @keyframes n-y {
+      from {
+        transform: rotateY(0);
+      }
+      to {
+        transform: rotateY(-360deg);
+      }
+    }
+    @keyframes s-z {
+      from {
+        transform: rotateZ(0);
+      }
+      to {
+        transform: rotateZ(360deg);
+      }
+    }
+    @keyframes n-z {
+      from {
+        transform: rotateZ(0);
+      }
+      to {
+        transform: rotateZ(-360deg);
+      }
+    }
+    span:nth-of-type(1):active ~ main {
+      animation-name: s-x;
+      animation-play-state: running;
+    }
+    span:nth-of-type(2):active ~ main >span {
+      animation-name: n-x;
+      animation-play-state: running;
+    }
+    span:nth-of-type(3):active ~ main >span>span{
+      animation-name: s-y;
+      animation-play-state: running;
+    }
+    span:nth-of-type(4):active ~ main >span>span>span{
+      animation-name: n-y;
+      animation-play-state: running;
+    }
+    span:nth-of-type(5):active ~ main >span>span>span>span{
+      animation-name: s-z;
+      animation-play-state: running;
+    }
+    span:nth-of-type(6):active ~ main >span>span>span>span>span{
+      animation-name: n-z;
+      animation-play-state: running;
+    }
+    span:nth-of-type(7):active ~ main >span>span>span>span>span>.alpha>div{
+      animation-name: alpha-up;
+      animation-play-state: running;
+    }
+    span:nth-of-type(8):active ~ main >span>span>span>span>span>.alpha>div>div{
+      animation-name: alpha-down;
+      animation-play-state: running;
+    }
+    .alpha {
+      width: 200px;
+      height: 200px;
+      background-color: transparent;
+      border: none;
+      transform: rotateX(44deg) rotateY(36deg) ;
+      transform-style: preserve-3d;
+    }
+    .alpha > div {
+      width: 200px;
+      height: 200px;
+      border: none;
+      background-color: transparent;
+      transform: translateZ(0);
+      animation-duration: 500s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-play-state: paused;
+      transform-style: preserve-3d;
+      animation-name: alpha-up;
+    }
+    .alpha > div>div {
+      width: 400px;
+      height: 400px;
+      left: -100px;
+      top: -100px;
+      border: none;
+      background-color: #7f187488;
+      transform: translateZ(0);
+      animation-duration: 500s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-play-state: paused;
+      animation-name: alpha-down;
+    }
+
+    @keyframes alpha-up {
+      from {
+        transform: translateZ(0);
+      }
+      to {
+        transform: translateZ(100000px);
+      }
+    }
+    @keyframes alpha-down {
+      from {
+        transform: translateZ(0);
+      }
+      to {
+        transform: translateZ(-100000px);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <section>
+    <span tabindex="1">X轴顺时针旋转</span>
+    <span tabindex="1">X轴逆时针旋转</span>
+    <span tabindex="1">Y轴顺时针旋转</span>
+    <span tabindex="1">Y轴逆时针旋转</span>
+    <span tabindex="1">Z轴顺时针旋转</span>
+    <span tabindex="1">Z轴逆时针旋转</span>
+    <span tabindex="1">正方向移动α平面</span>
+    <span tabindex="1">负方向移动α平面</span>
+    <main>
+      <span>
+        <span>
+          <span>
+            <span>
+              <span>
+                <div class="behind"></div>
+                <div class="fount"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+                <div class="left"></div>
+                <div class="right"></div>
+                <div class="alpha">
+                  <div>
+                    <div></div>
+                  </div>
+                </div>
+              </span>
+            </span>
+          </span>
+        </span>
+      </span>
+      
+    </main>
+  </section>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    div {
+      height: 1.5em;
+      line-height: 1.5em;
+      position: relative;
+      overflow: hidden;
+    }
+    span {
+      display: inline-block;
+      height: 100%;
+      width: 2em;
+      vertical-align: bottom;
+    }
+    span::before {
+      content: '. . .\a.\a. .';
+      white-space: pre;
+      height: 100%;
+      display: inline-block;
+      margin: 0 3px;
+      vertical-align: bottom;
+      position: absolute;
+      animation-name: dot;
+      animation-timing-function: steps(1);
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+    }
+    @keyframes dot {
+      0% {
+        top: 0;
+      }
+      33.33% {
+        top: -1.5em;
+      }
+      66.66% {
+        top: -3em;
+      }
+      to {
+        top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div>正在加载<span></span></div>
+</body>
+</html>
