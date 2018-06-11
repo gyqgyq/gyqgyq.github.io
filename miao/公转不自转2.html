@@ -5,86 +5,58 @@
   <title>潮汐牵引</title>
   <style>
 
-    main {
-      height: 100vh;
-      display: flex;
-      position: relative;
-    }
-    section {
-      width: 400px;
-      height: 400px;
-      border: 5px solid black;
-      border-radius: 9999px;
-      margin: auto;
-      animation-name: deadpool;
-      animation-duration: 4s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
+  /*-------------------旋转-平移-旋转法----------------------*/
+
+/*
     div {
-      width: 100px;
-      height: 100px;
-      border: 1px solid;
-      background-image: url(https://s.yimg.com/bt/api/res/1.2/eXWemuyLwBnqDzi7YyNvEg--~A/YXBwaWQ9dHdhYnVuZXdzO2ZpPWZpbGw7dz0zNDE2O2g9MTU3ODs-/http://media.zenfs.com/en/homerun/feed_manager_auto_publish_494/5ea176bd145d00238fdd8cc6493cafb2);
-      background-size: 150px;
-      background-repeat: no-repeat;
-      background-position: 0 10px;
-      background-color: #fff;
+      margin: 120px;
+      width: 50px;
+      height: 50px;
+      background-image: linear-gradient(to left, aqua, yellow);
+      animation: spann 5s infinite linear;
+      transform: rotate(45deg) translatex(100px) rotate(-45deg)
     }
-    @keyframes deadpool {
+    @keyframes spann {
       from {
-        transform: rotate(0);
+        transform: rotate(0) translatex(100px) rotate(0);
       }
       to {
-        transform: rotate(360deg);
+        transform: rotate(360deg) translatex(100px) rotate(-360deg);
       }
+    }*/
+    
+    /*-------------------xy轴sin曲线移动法---------------------*/
+
+    div {
+      position: fixed;
+      top: 100px;
+      left: 100px;
+      width: 50px;
+      height: 50px;
+      background-image: linear-gradient(to left, aqua, yellow);
+      animation: 
+        a 2s infinite alternate cubic-bezier(.38,0,.62,1),
+        b 2s -1s infinite alternate cubic-bezier(.38,0,.62,1);
     }
-    @keyframes deadpool-around {
+    @keyframes a {
       from {
-        transform: rotate(0);
+        margin-left: 0;
       }
       to {
-        transform: rotate(-360deg);
+        margin-left: 100px;
       }
     }
-    #a:checked ~ section div {
-      animation-name: deadpool-around;
-      animation-duration: 4s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
-    #b:checked ~ section div {
-      animation: none;
-    }
-    input {
-      display: none;
-    }
-    label {
-      cursor: pointer;
-      position: absolute;
-      display: block;
-      width: 150px;
-      height: 65px;
-      left: 20px;
-      top: 50px;
-      background-color: #eee;
-      text-align: center;
-      line-height: 65px;  
-    }
-    label:last-of-type {
-      top: 150px;
+    @keyframes b {
+      from {
+        margin-top: 0;
+      }
+      to {
+        margin-top: 100px;
+      }
     }
   </style>
 </head>
 <body>
-  <main>
-    <input type="radio" name="a" id="a">
-    <input type="radio" name="a" id="b">
-    <label for="a">自不转模式</label>
-    <label for="b">潮汐牵引模式</label>
-    <section>
-      <div></div>
-    </section>
-  </main>
+  <div></div>
 </body>
 </html>

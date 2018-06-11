@@ -4,19 +4,32 @@
   <meta charset="UTF-8">
   <title>学会数理化，走遍天下都不怕</title>
   <style>
-  * {
-    background-color: rgba(0,0,0,0.1);
-  }
+    * {
+      background-color: rgba(0,0,0,0.1);
+    }
     body {
       margin: 0;
       overflow: scroll;
     }
     section {
       display: flex;
-      height: 100vh;
+      min-height: 100vh;
       position: relative;
     }
-
+    footer {
+      width: 125px;
+      height: 50px;
+      line-height: 25px;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      padding: 10px;
+    }
+    abbr {
+      background-color: transparent;
+      text-decoration: none;
+    }
+    /*-----------------------立方体---------------------------*/
     .top {
       transform:  translatez(0px) translatey(-100px) rotatex(90deg);
     }
@@ -35,10 +48,6 @@
     .fount {
       transform: translatez(100px);
     }
-    
-    input {
-      display: none;
-    }
     div {
       height: 200px;
       width: 200px;
@@ -49,8 +58,10 @@
       box-sizing: border-box;
       border: 2px solid #0007;
     }
+    /*------------------------按钮--------------------------*/
     section > span {
       display: block;
+      color: #111;
       height: 50px;
       width: 150px;
       position: absolute;
@@ -59,7 +70,7 @@
       outline: none;
     }
     section > span:active {
-      background-color: #0003;
+      background-color: #25c6fc77;
     }
     section >span:nth-of-type(1) {
       top: 10px;
@@ -85,34 +96,61 @@
     section >span:nth-of-type(8) {
       top: 430px;
     }
-
-    main {
+    
+    /*-------------------------立方体动画-------------------------*/
+    main,
+    main span {
       height: 200px;
       width: 200px;
-      margin: auto;
-      position: relative;
-      transform-style: preserve-3d;
-      background-color: transparent;
       animation-duration: 10s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
       animation-play-state: paused;
-      animation-name: s-x;
+      background-color: transparent;
+      transform-style: preserve-3d;
+    }
+    main {
+      margin: auto;
+      position: relative;
     }
     main span {
       position:absolute;
       left: 0;
       top: 0;
+    }
+    .alpha {
       width: 200px;
-      height:  200px;
-      animation-duration: 10s;
+      height: 200px;
+      background-color: transparent;
+      border: none;
+      transform: rotateX(45deg) rotateY(35deg) ;
+      transform-style: preserve-3d;
+    }
+    .alpha div {
+      transform: translateZ(0);
       animation-timing-function: linear;
       animation-iteration-count: infinite;
       animation-play-state: paused;
+      animation-duration: 500s;
+      border: none;
+    }
+    .alpha > div {
+      width: 200px;
+      height: 200px;
       background-color: transparent;
       transform-style: preserve-3d;
     }
+    .alpha > div > div {
+      width: 400px;
+      height: 400px;
+      left: -100px;
+      top: -100px;
+      background-color: #7f187488;
+    }
 
+    main {
+      animation-name: s-x;
+    }
     main > span {
       animation-name: n-x;
     }
@@ -135,8 +173,7 @@
     main >span>span>span>span>span>.alpha>div>div {
       animation-name: alpha-down;
     }
-
-    
+  
     @keyframes s-x {
       from {
         transform: rotateX(0);
@@ -158,7 +195,7 @@
         transform: rotateY(0);
       }
       to {
-        transform: rotateY(360deg);
+        transform: rotateY(-360deg);
       }
     }
     @keyframes n-y {
@@ -166,7 +203,7 @@
         transform: rotateY(0);
       }
       to {
-        transform: rotateY(-360deg);
+        transform: rotateY(360deg);
       }
     }
     @keyframes s-z {
@@ -185,74 +222,6 @@
         transform: rotateZ(-360deg);
       }
     }
-    span:nth-of-type(1):active ~ main {
-      animation-name: s-x;
-      animation-play-state: running;
-    }
-    span:nth-of-type(2):active ~ main >span {
-      animation-name: n-x;
-      animation-play-state: running;
-    }
-    span:nth-of-type(3):active ~ main >span>span{
-      animation-name: s-y;
-      animation-play-state: running;
-    }
-    span:nth-of-type(4):active ~ main >span>span>span{
-      animation-name: n-y;
-      animation-play-state: running;
-    }
-    span:nth-of-type(5):active ~ main >span>span>span>span{
-      animation-name: s-z;
-      animation-play-state: running;
-    }
-    span:nth-of-type(6):active ~ main >span>span>span>span>span{
-      animation-name: n-z;
-      animation-play-state: running;
-    }
-    span:nth-of-type(7):active ~ main >span>span>span>span>span>.alpha>div{
-      animation-name: alpha-up;
-      animation-play-state: running;
-    }
-    span:nth-of-type(8):active ~ main >span>span>span>span>span>.alpha>div>div{
-      animation-name: alpha-down;
-      animation-play-state: running;
-    }
-    .alpha {
-      width: 200px;
-      height: 200px;
-      background-color: transparent;
-      border: none;
-      transform: rotateX(44deg) rotateY(36deg) ;
-      transform-style: preserve-3d;
-    }
-    .alpha > div {
-      width: 200px;
-      height: 200px;
-      border: none;
-      background-color: transparent;
-      transform: translateZ(0);
-      animation-duration: 500s;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      animation-play-state: paused;
-      transform-style: preserve-3d;
-      animation-name: alpha-up;
-    }
-    .alpha > div>div {
-      width: 400px;
-      height: 400px;
-      left: -100px;
-      top: -100px;
-      border: none;
-      background-color: #7f187488;
-      transform: translateZ(0);
-      animation-duration: 500s;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      animation-play-state: paused;
-      animation-name: alpha-down;
-    }
-
     @keyframes alpha-up {
       from {
         transform: translateZ(0);
@@ -268,6 +237,32 @@
       to {
         transform: translateZ(-100000px);
       }
+    }
+
+
+    span:nth-of-type(1):active ~ main {
+      animation-play-state: running;
+    }
+    span:nth-of-type(2):active ~ main >span {
+      animation-play-state: running;
+    }
+    span:nth-of-type(3):active ~ main >span>span{
+      animation-play-state: running;
+    }
+    span:nth-of-type(4):active ~ main >span>span>span{
+      animation-play-state: running;
+    }
+    span:nth-of-type(5):active ~ main >span>span>span>span{
+      animation-play-state: running;
+    }
+    span:nth-of-type(6):active ~ main >span>span>span>span>span{
+      animation-play-state: running;
+    }
+    span:nth-of-type(7):active ~ main >span>span>span>span>span>.alpha>div{
+      animation-play-state: running;
+    }
+    span:nth-of-type(8):active ~ main >span>span>span>span>span>.alpha>div>div{
+      animation-play-state: running;
     }
 
   </style>
@@ -304,8 +299,13 @@
           </span>
         </span>
       </span>
-      
     </main>
   </section>
+  <footer>
+    by: 高勇强
+    <br>
+    版权声明: 
+    <abbr title="Do What The Fuck You Want To Public License">WTFPL</abbr>
+  </footer>
 </body>
 </html>
