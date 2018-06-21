@@ -19,9 +19,16 @@
 
     }
 
-    div:hover {
-      transform: perspective(800px)  rotatex(155540deg) rotatey(155540deg) rotatez(155540deg);
-      position: relative;
+    div {
+      xanimation: aa 100s linear infinite;
+    }
+    @keyframes aa {
+      from {
+        transform: perspective(800px) rotatex(0) rotatez(0);
+      }
+      to {
+        transform: perspective(800px) rotatex(720deg) rotatez(3600deg);
+      }
     }
      div > span {
       display: inline-block;
@@ -62,7 +69,7 @@
       left: 0;
       mix-blend-mode: lighten;
     }
-
+    /*normal | multiply | screen | overlay | darken | lighten | color-dodge | color-burn | hard-light | soft-light | difference | exclusion | hue | saturation | color | luminosity*/
     .behind-r {
       background-image: linear-gradient( to left, rgb(0,0,0), rgb(255,0,0));
     }
@@ -123,9 +130,7 @@
       background-image: linear-gradient( to left, rgb(0,0,0), rgb(0,0,255));
     }
 
-    .right span {
-      xmix-blend-mode: darken;
-    }
+    
 
 
   </style>

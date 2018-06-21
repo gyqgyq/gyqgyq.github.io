@@ -1,0 +1,163 @@
+
+html {
+  box-sizing: border-box;
+}
+html * {
+  box-sizing: inherit;
+}
+  
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.42857;
+  color: #333;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.container {
+  padding: 0 15px;
+  margin: auto;
+  width: 100%;
+}
+[class*="col-"] {
+  float: left;
+  padding: 10px 15px;
+  width: 100%;
+  position: relative;
+  background-color: rgba(86, 61, 124, 0.15);
+  border: 1px solid rgba(86, 61, 124, 0.2);
+}
+.visible-xs-block,
+.visible-sm-block,
+.visible-md-block,
+.visible-lg-block {
+  display: none;
+}
+
+// ------------------------------------
+@for $i from 1 through 10 {
+  .col-xs-#{$i} {
+    width: 10% * $i;
+  }
+  .col-xs-push-#{$i} {
+    left: 10% * $i;
+  }
+  .col-xs-pull-#{$i} {
+    right: 10% * $i;
+  }
+  .col-xs-offset-#{$i} {
+    margin-left: 10% * $i;
+  }
+}
+.visible-xs-block {
+  display: block;
+}
+// ------------------------------------
+@media (min-width: 767px) {
+  .container {
+    width: 750px;
+  }
+  @for $i from 1 through 10 {
+    .col-sm-#{$i} {
+      width: 10% * $i;
+    }
+    .col-sm-push-#{$i} {
+      left: 10% * $i;
+    }
+    .col-sm-pull-#{$i} {
+      right: 10% * $i;
+    }
+    .col-sm-offset-#{$i} {
+      margin-left: 10% * $i;
+    }
+  }
+  .visible-sm-block {
+    display: block;
+  }
+}
+// ------------------------------------
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+  @for $i from 1 through 10 {
+    .col-md-#{$i} {
+      width: 10% * $i;
+    }
+    .col-md-push-#{$i} {
+      left: 10% * $i;
+    }
+    .col-md-pull-#{$i} {
+      right: 10% * $i;
+    }
+    .col-md-offset-#{$i} {
+      margin-left: 10% * $i;
+    }
+  }
+  .visible-md-block {
+    display: block;
+  }
+}
+// ------------------------------------
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+  @for $i from 1 through 10 {
+    .col-lg-#{$i} {
+      width: 10% * $i;
+    }
+    .col-lg-push-#{$i} {
+      left: 10% * $i;
+    }
+    .col-lg-pull-#{$i} {
+      right: 10% * $i;
+    }
+    .col-lg-offset-#{$i} {
+      margin-left: 10% * $i;
+    }
+  }
+  .visible-lg-block {
+    display: block;
+  }
+}
+
+// ------------------------------------
+.row {
+  margin: 0 -15px;
+}
+.row::after,
+.clearfix {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+
+
+dt {
+  font-weight: 700;
+}
+dd {
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .dl-horizontal {
+    dt {
+      width: 22%;
+      float: left;
+      clear: both;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: right;
+    }
+    dd {
+      width: 75%;
+      float: right;
+    }
+  }
+}
+
+
+ 

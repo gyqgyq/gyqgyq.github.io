@@ -1,0 +1,198 @@
+[data-balloon] {
+  background-color: #ff3d2e;
+  color: #fff;
+  font-size: 16px;
+  padding: 1.2em 2.8em;
+  border-radius: 5px;
+  border: none;
+  position: relative;
+  cursor: pointer;
+}
+[data-balloon]:hover {
+  background-color: #E01909;
+}
+[data-balloon]::before {
+  content: attr(data-balloon);
+  background-color: #111111e6;
+  font-size: 12px;
+  padding: .5em 1em;
+  border-radius: 5px;
+  margin: auto;
+  white-space: nowrap;
+  line-height: 1.2em;
+}
+[data-balloon]::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border: 5px solid #111111e6;
+  margin: auto;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}
+[data-balloon]::before,
+[data-balloon]::after {
+  transition: all .2s .1s linear;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+[data-balloon]:hover::before,
+[data-balloon]:hover::after {
+  z-index: 1;
+}
+
+/*-------------------------------------*/
+[data-balloon-pos=top]::before,
+[data-balloon]::before {
+  margin-bottom: 0;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%)
+}
+[data-balloon-pos=top]::after,
+[data-balloon]::after {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  bottom: 91%;
+  transform: rotate(45deg);
+  margin-bottom: 0;
+}
+[data-balloon-pos=top]:hover::before,
+[data-balloon]:hover::before,
+[data-balloon-pos=top]:hover::after ,
+[data-balloon]:hover::after {
+  margin-bottom: 12px;
+  opacity: 1;
+}
+/*-------------------------------------*/
+[data-balloon-pos=bottom]::before {
+  right: auto;
+  bottom: auto;
+  left: auto;
+  top: auto;
+  margin-top: 0;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%)
+}
+[data-balloon-pos=bottom]::after {
+  right: auto;
+  bottom: auto;
+  left: auto;
+  top: auto;
+  left: 0;
+  right: 0;
+  top: 91%;
+  transform: rotate(225deg);
+  margin-top: 0;
+}
+[data-balloon-pos=bottom]:hover::before,
+[data-balloon-pos=bottom]:hover::after {
+  margin-top: 12px;
+  opacity: 1;
+}
+/*-------------------------------------*/
+[data-balloon-pos=right]::before {
+  right: auto;
+  bottom: auto;
+  xleft: auto;
+  xtop: auto;
+  margin-left: 0;
+  left: 100%;
+  top: 50%;
+  transform: translatey(-50%);
+}
+[data-balloon-pos=right]::after {
+  right: auto;
+  xbottom: auto;
+  xleft: auto;
+  xtop: auto;
+  top: 0;
+  bottom: 0;
+  left: 97.5%;
+  transform: rotate(135deg);
+  margin: auto;
+  margin-left: 0;
+}
+[data-balloon-pos=right]:hover::before,
+[data-balloon-pos=right]:hover::after {
+  margin: auto auto auto 12px;
+  opacity: 1;
+}
+/*-------------------------------------*/
+[data-balloon-pos=left]::before {
+  xright: auto;
+  bottom: auto;
+  left: auto;
+  xtop: auto;
+  margin-right: 0;
+  right: 100%;
+  top: 50%;
+  transform: translatey(-50%);
+}
+[data-balloon-pos=left]::after {
+  xright: auto;
+  xbottom: auto;
+  left: auto;
+  xtop: auto;
+  top: 0;
+  bottom: 0;
+  right: 97.5%;
+  transform: rotate(-45deg);
+  margin: auto;
+  margin-right: 0;
+}
+[data-balloon-pos=left]:hover::before,
+[data-balloon-pos=left]:hover::after {
+  
+  margin: auto 12px auto auto;
+  opacity: 1;
+}
+/*-------------------------------------*/
+[data-balloon-length=small]::before {
+  width: 48px;
+  white-space: normal;
+}
+/*-------------------------------------*/
+[data-balloon-length=medium]::before {
+  width: 126px;
+  white-space: normal;
+}
+/*-------------------------------------*/
+[data-balloon-length=large]::before {
+  width: 236px;
+  white-space: normal;
+}
+/*-------------------------------------*/
+[data-balloon-length=xlarge]::before {
+  width: 90vh;
+  white-space: normal;
+}
+/*-------------------------------------*/
+[data-balloon-length=fit]::before {
+  width: calc(100% - 24px);
+  white-space: normal;
+}
+/*-------------------------------------*/
+[data-balloon-pos=top][data-balloon-visible]::before,
+[data-balloon-pos=top][data-balloon-visible]::after {
+  opacity: 1;
+  margin-bottom: 12px;
+}
+[data-balloon-pos=bottom][data-balloon-visible]::before,
+[data-balloon-pos=bottom][data-balloon-visible]::after {
+  opacity: 1;
+  margin-top: 12px;
+}
+[data-balloon-pos=left][data-balloon-visible]::before,
+[data-balloon-pos=left][data-balloon-visible]::after {
+  opacity: 1;
+  margin-right: 12px;
+}
+[data-balloon-pos=right][data-balloon-visible]::before,
+[data-balloon-pos=right][data-balloon-visible]::after {
+  opacity: 1;
+  margin-left: 12px;
+}
