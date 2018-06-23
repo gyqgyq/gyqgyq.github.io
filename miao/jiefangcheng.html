@@ -1,4 +1,5 @@
 <script>
+  debugger
   var a = +prompt('a: ')
   var b = +prompt('b: ')
   var c = +prompt('c: ')
@@ -14,9 +15,13 @@
     var x2 = (-b - Math.sqrt(delta)) / (2 * a)
     console.log("x1= " + x1 + "\nx2= " + x2)
   } else {
-    var x1 = -(b / 2 / a)
+    var x1 = -b / 2 / a
     var x2 = Math.sqrt(-delta) / 2 / a
-    console.log("x1=" + x1 + "+" + x2 + "i" + "\nx2=" + x1 + "-" + x2 + "i")
+    if (x2 > 0) {
+      console.log("x1=" + x1 + "+" + x2 + "i" + "\nx2=" + x1 + "-" + x2 + "i")
+    } else {
+      console.log("x1=" + x1 + "-" + (-x2) + "i" + "\nx2=" + x1 + "+" + (-x2) + "i")
+    }
   }
 
 </script>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="400" height="300"></canvas>
+</body>
+<script>
+  var cvs = document.querySelector('canvas')
+  var ctx = cvs.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+</script>
+<script>
+
+  // 直线
+  for (var i = 1; i <= 400; i++) {
+    dot(i, 10)
+  }
+
+  //虚线1
+  for (var i = 1; i <= 1000; i++) {
+    if (i % 2 === 1) {
+      dot(i, 20)
+    } else {
+      continue
+    }
+  }
+
+  //虚线2
+  for (var i = 1; i <= 1000; i++) {
+    dot(i, 30)
+    dot(i + 1 ,30)
+    i += 3
+  }
+
+  //虚线3
+  for (var i = 1; i <= 1000; i++) {
+    dot(i, 40)
+    dot(i + 1 ,40)
+    dot(i + 2, 40)
+    i += 4
+  }
+  //45度线
+  for (var i = 1; i <= 1000 ; i++) {
+    dot(i, i)
+  }
+  //对角线
+  for (var i = 1; i <= 1000; i++) {
+    dot(i, i * 3 / 4)
+  }
+
+  //圆
+  for (var i = 0; i < 360; i++)
+    dot(100 + 50 * Math.sin(i), 100 + 50 * Math.cos(i))
+  
+  //黑立方体
+  for (var i = 150; i <= 200; i++) {
+    for (var j = 150; j <= 200; j++) {
+      dot(j, i)
+    }
+  }
+  //彩色立方体
+  for (var i = 200; i <= 250; i++) {
+    for (var j = 200; j <= 250; j++) {
+      var g = (250 - j) * 5.1
+      var b = (i - 200) * 5.1
+      dot(j, i, 'rgb(255, ' + g + ', ' + b + ')')
+    }
+  }
+
+//
+
+
+
+
+</script>
+</html>
