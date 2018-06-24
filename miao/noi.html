@@ -53,7 +53,7 @@
 
 <script type="x" id="ch0103/09">
   var r = +prompt('r: ')
-  console.log((r * 2).toFixed(4) + ' ' + (2 * Math.PI * r).toFixed(4) + ' ' + (Math.PI * r ** 2).toFixed(4))
+  console.log((r * 2).toFixed(4) + ' ' + (2 * 3.14159 * r).toFixed(4) + ' ' + (3.14159 * r ** 2).toFixed(4))
 </script>
 
 <script type="x" id="ch0103/10">
@@ -84,14 +84,14 @@
 <script type="x" id="ch0103/14">
   var h = +prompt('深')
   var r = +prompt('半径')
-  console.log(20000 / (3.14159 * r ** 2 * h))
+  console.log(Math.ceil(20000 / (3.14159 * r ** 2 * h)))
 </script>
 
 <script type="x" id="ch0103/15">
   var n = +prompt('n: ')
   var x = +prompt('x: ')
   var y = +prompt('y: ')
-  console.log(Math.floor(n - y / x))
+  console.log(n - Math.ceil(y / x))
 </script>
 
 <script type="x" id="ch0103/16">
@@ -99,7 +99,7 @@
   var ya = +prompt('ya: ')
   var xb = +prompt('xb: ')
   var yb = +prompt('yb: ')
-  console.log((Math.sqrt((xa - xb) ** 2 - (ya - yb) ** 2)).toFixed(3))
+  console.log((Math.sqrt((xb - xa) ** 2 - (yb - ya) ** 2)).toFixed(3))
 </script>
 
 <script type="x" id="ch0103/17">
@@ -267,7 +267,7 @@
   var n = +prompt('n: ')
   if (n < 5 && n >=0) {
     console.log((-n + 2.5).toFixed(3))
-  } else if (xn < 10) {
+  } else if (n < 10) {
     console.log((2 - 1.5 * (n - 3) ** 2).toFixed(3))
   } else {
     console.log((n / 2 - 1.5).toFixed(3))
@@ -368,15 +368,11 @@
   var c = +prompt('c: ')
   var delta = b * b - 4 * a * c
   if (delta === 0) {
-    console.log('x1=x2=' + ((-b) / 2 / a).toFixed(5))
+    console.log('x1=x2=' + (-b / 2 / a).toFixed(5))
   } else if (delta > 0) {
     console.log('x1=' + ((-b + Math.sqrt(delta)) / 2 / a).toFixed(5) + ';x2=' + ((-b - Math.sqrt(delta)) / 2 / a).toFixed(5))
-  } else {
-    if (a > 0) {
-      console.log('x1=' + (-b / 2 / a).toFixed(5) + '+' + (Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i;x2=' + (-b / 2 / a).toFixed(5) + '-' + (Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i')
-    } else {
-      console.log('x1=' + (-b / 2 / a).toFixed(5) + '-' + (-Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i;x2=' + (-b / 2 / a).toFixed(5) + '+' + (-Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i')
-    }
+  } else { 
+    console.log('x1=' + (-b / 2 / a).toFixed(5) + '+' + (Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i;x2=' + (-b / 2 / a).toFixed(5) + '-' + (Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i')
   }
 
 </script>
@@ -427,8 +423,8 @@
 <script type="x" id='ch0105/04'>
   var n = +prompt('n: ')
   var result = 0
-  for (var i = 1; i <= n; i++) {
-    result += +prompt('第' + i + '个数: ')
+  for (var i = 0; i < n; i++) {
+    result += +prompt('第' + (i + 1) + '个数: ')
   }
   console.log(result + ' ' + (result / n).toFixed(5))
 </script>
@@ -552,6 +548,7 @@
   var n = +prompt('n: ')
   var a = +prompt('a: ')
   var result = 1
+  var a = Math.abs(a)
   for (var i = 0; i < n; i++) {
     result *= a
   }
@@ -580,7 +577,7 @@
   for (var i = 0; i < y; i++) {
     m *= (1 + r / 100)
   }
-  console.log(floor(m))
+  console.log(Math.floor(m))
 </script>
 
 <script type="x" id='ch0105/16'>
@@ -647,15 +644,15 @@
 
 </script>
 
-<script type="x" id='ch0105/20'>
+<script xtype="x" id='ch0105/20'>
   var h = +prompt('height: ')
   var distance = h
   for (var i = 1; i < 10; i++) {
     h /= 2
     distance += h * 2
   }
-  console.log(distance)
-  console.log(h / 2)
+  console.log(distance.toFixed(4))
+  console.log((h / 2).toFixed(4))
 </script>
 
 
