@@ -28,13 +28,13 @@
 <script type="x" id="ch0103/05">
   var a = +prompt('A: ')
   var b = +prompt('B: ')
-  console.log(a / b)
+  console.log((a / b).toFixed(9))
 </script>
 
 <script type="x" id="ch0103/06">
   var a = +prompt('A: ')
   var b = +prompt('B: ')
-  console.log(b / a * 100 + '%')
+  console.log((b / a * 100).toFixed + '%')
 </script>
 
 <script type="x" id="ch0103/07">
@@ -48,29 +48,29 @@
 
 <script type="x" id="ch0103/08">
   var f = +prompt('F: ')
-  console.log(5 * (f - 32) / 9)
+  console.log((5 * (f - 32) / 9).toFixed(5))
 </script>
 
 <script type="x" id="ch0103/09">
   var r = +prompt('r: ')
-  console.log(r * 2, 2 * 3.14 * r, 3.14 * r ** 2)
+  console.log((r * 2).toFixed(4), (2 * 3.14 * r).toFixed(4), (3.14 * r ** 2).toFixed(4))
 </script>
 
 <script type="x" id="ch0103/10">
   var r1 = +prompt('r1: ')
   var r2 = +prompt('r2: ')
-  console.log(1 / (1 / r1 + 1 / r2)) 
+  console.log((1 / (1 / r1 + 1 / r2)).toFixed(2)) 
 </script>
 
 <script type="x" id="ch0103/11">
   var a = +prompt('a:')
   var b = +prompt('b:')
-  console.log(a % b)
+  console.log((a % b).toFixed(4))
 </script>
 
 <script type="x" id="ch0103/12">
   var r = +prompt('r: ')
-  console.log(4 / 3 * 3.14 * r ** 3)
+  console.log((4 / 3 * 3.14 * r ** 3).toFixed(2))
 </script>
 
 <script type="x" id="ch0103/13">
@@ -84,7 +84,7 @@
 <script type="x" id="ch0103/14">
   var h = +prompt('深')
   var r = +prompt('半径')
-  console.log(20 / 3.14 * r ** 2 * h)
+  console.log(20000 / 3.14 * r ** 2 * h)
 </script>
 
 <script type="x" id="ch0103/15">
@@ -99,7 +99,7 @@
   var ya = +prompt('ya: ')
   var xb = +prompt('xb: ')
   var yb = +prompt('yb: ')
-  console.log(Math.sqrt((xa - xb) ** 2 - (ya - yb) ** 2))
+  console.log((Math.sqrt((xa - xb) ** 2 - (ya - yb) ** 2)).toFixed(2))
 </script>
 
 <script type="x" id="ch0103/17">
@@ -109,7 +109,7 @@
   var y2 = +prompt('y2: ')
   var x3 = +prompt('x3: ')
   var y3 = +prompt('y3: ')
-  console.log((x1 * y2 - x2 * y1 + x2 * y3 - x3 * y2 + x3 * y1 - x1 * y3) / 2)
+  console.log(((x1 * y2 - x2 * y1 + x2 * y3 - x3 * y2 + x3 * y1 - x1 * y3) / 2).toFixed(2))
 </script>
 
 <script type="x" id="ch0103/18">
@@ -155,7 +155,7 @@
 
 <script type="x" id="ch0104/03">
   var n = +prompt('n: ')
-  if (n % 2 === 0) {
+  if (n % 2 !== 0) {
     console.log('odd')
   } else {
     console.log('even')
@@ -221,7 +221,7 @@
     result += '5 '
   }
   if (n % 7 === 0) {
-    result += '7 '
+    result += '7'
   }
   if (result == false) {
     result = 'n'
@@ -270,7 +270,7 @@
   } else if (xn < 10) {
     console.log(2 - 1.5 * (n - 3) ** 2)
   } else {
-    console.log(n / 2 - 1.5)
+    console.log((n / 2 - 1.5).toFixed(3))
   }
 </script>
 
@@ -368,14 +368,14 @@
   var c = +prompt('c: ')
   var delta = b * b - 4 * a * c
   if (delta === 0) {
-    console.log('x1=x2=' + ((-b) / 2 / a))
+    console.log('x1=x2=' + ((-b) / 2 / a).toFixed(5))
   } else if (delta > 0) {
-    console.log('x1=' + ((-b + Math.sqrt(delta)) / 2 / a) + ';x2=' + ((-b - Math.sqrt(delta)) / 2 / a))
+    console.log('x1=' + ((-b + Math.sqrt(delta)) / 2 / a).toFixed(5) + ';x2=' + ((-b - Math.sqrt(delta)) / 2 / a).toFixed(5))
   } else {
     if (a > 0) {
-      console.log('x1=' + (-b / 2 / a) + '+' + (Math.sqrt(-delta) / 2 / a) + 'i;x2=' + (-b / 2 / a) + '-' + (Math.sqrt(-delta) / 2 / a) + 'i')
+      console.log('x1=' + (-b / 2 / a).toFixed(5) + '+' + (Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i;x2=' + (-b / 2 / a).toFixed(5) + '-' + (Math.sqrt(-delta) / 2 / a) + 'i').toFixed(5)
     } else {
-      console.log('x1=' + (-b / 2 / a) + '-' + (-Math.sqrt(-delta) / 2 / a) + 'i;x2=' + (-b / 2 / a) + '+' + (-Math.sqrt(-delta) / 2 / a) + 'i')
+      console.log('x1=' + (-b / 2 / a).toFixed(5) + '-' + (-Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i;x2=' + (-b / 2 / a).toFixed(5) + '+' + (-Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i')
     }
   }
 
@@ -404,7 +404,7 @@
   for (var i = 0; i < num; i++) {
     age += +prompt('第' + (i + 1) + '个学生年龄:')
   }
-  console.log(age / num)
+  console.log((age / num).toFixed(2))
 </script>
 
 <script type="x" id='ch0105/02'>
@@ -421,7 +421,7 @@
   for (var i = 1; i <= n; i++) {
     result += +prompt('第' + i + '个数: ')
   }
-  console.log(result / n)
+  console.log((result / n).toFixed(4))
 </script>
 
 <script type="x" id='ch0105/04'>
@@ -430,7 +430,7 @@
   for (var i = 1; i <= n; i++) {
     result += +prompt('第' + i + '个数: ')
   }
-  console.log(result, result / n)
+  console.log(result, (result / n).toFixed(5))
 </script>
 
 
@@ -476,7 +476,7 @@
     copper += +prompt('第' + i + '天获得铜牌数量:')
   }
   var total = gold + silver + copper
-  console.log(gold, silver, copper, total)
+  console.log(gold + ' ' + silver + ' ' + copper + ' ' + total)
 </script>
 
 <script type="x" id='ch0105/08'>
@@ -530,7 +530,9 @@
       ten++
     }
   }
-  console.log(one + '\n' + five + '\n' + ten)
+  console.log(one)
+  console.log(five)
+  console.log(ten)
 </script>
 
 <script type="x" id='ch0105/12'>
@@ -553,7 +555,11 @@
   for (var i = 0; i < n; i++) {
     result *= a
   }
-  console.log(result)
+  if (a < 0) {
+    console.log(-result)
+  } else {
+    console.log(result)
+  }
 </script>
 
 <script type="x" id='ch0105/14'>
@@ -562,7 +568,7 @@
   for (var i = 0; i < year; i++) {
     people *= 1.001
   }
-  console.log(people)
+  console.log(people.toFixed(4))
 </script>
 
 <script type="x" id='ch0105/15'>
@@ -572,7 +578,7 @@
   for (var i = 0; i < y; i++) {
     m *= (1 + r / 100)
   }
-  console.log(m)
+  console.log(m.toFix(0))
 </script>
 
 <script type="x" id='ch0105/16'>
@@ -639,14 +645,15 @@
 
 </script>
 
-<script type="x" id='ch0105/20'>
+<script xtype="x" id='ch0105/20'>
   var h = +prompt('height: ')
   var distance = h
   for (var i = 1; i < 10; i++) {
     h /= 2
     distance += h * 2
   }
-  console.log(distance + '\n' + h / 2)
+  console.log(distance)
+  console.log(h / 2)
 </script>
 
 
