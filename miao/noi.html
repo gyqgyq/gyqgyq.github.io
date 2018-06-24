@@ -15,7 +15,7 @@
   var a = +prompt('A: ')
   var b = +prompt('B: ')
   var c = +prompt('C: ')
-  console.log((a + b) / c)
+  console.log((a - b) / c)
 </script>
 
 <script type="x" id="ch0103/04">
@@ -34,7 +34,7 @@
 <script type="x" id="ch0103/06">
   var a = +prompt('A: ')
   var b = +prompt('B: ')
-  console.log(a / b /100 + '%')
+  console.log(b / a * 100 + '%')
 </script>
 
 <script type="x" id="ch0103/07">
@@ -53,9 +53,7 @@
 
 <script type="x" id="ch0103/09">
   var r = +prompt('r: ')
-  console.log(r * 2)
-  console.log(2 * Math.PI * r)
-  console.log(Math.PI * r ** 2)
+  console.log(r * 2, 2 * 3.14 * r, 3.14 * r ** 2)
 </script>
 
 <script type="x" id="ch0103/10">
@@ -641,7 +639,7 @@
 
 </script>
 
-<script xtype="x" id='ch0105/20'>
+<script type="x" id='ch0105/20'>
   var h = +prompt('height: ')
   var distance = h
   for (var i = 1; i < 10; i++) {
