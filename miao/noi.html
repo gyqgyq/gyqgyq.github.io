@@ -99,7 +99,7 @@
   var ya = +prompt('ya: ')
   var xb = +prompt('xb: ')
   var yb = +prompt('yb: ')
-  console.log(Math.sqrt((xa - xb) ** 2 - (ya - yb) ** 2).toFixed(3))
+  console.log(Math.sqrt((xa - xb) ** 2 + (ya - yb) ** 2).toFixed(3))
 </script>
 
 <script type="x" id="ch0103/17">
@@ -547,15 +547,15 @@
 <script type="x" id='ch0105/13'>
   var n = +prompt('n: ')
   var a = +prompt('a: ')
-  var result = 1
   if (n === 0) {
-    result = 1
+    console.log(1)
   } else {
+    var result = 1
     for (var i = 0; i < n; i++) {
       result *= a
     }
+    console.log(result)
   }
-  console.log(result)
 </script>
 
 <script type="x" id='ch0105/14'>
