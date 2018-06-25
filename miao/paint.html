@@ -31,27 +31,21 @@
   }
 
   //虚线1
-  for (var i = 1; i <= 1000; i++) {
-    if (i % 2 === 1) {
-      dot(i, 20)
-    } else {
-      continue
-    }
+  for (var i = 1; i <= 1000; i += 2) {
+    dot(i, 20)
   }
 
   //虚线2
-  for (var i = 1; i <= 1000; i++) {
+  for (var i = 1; i <= 1000; i += 4) {
     dot(i, 30)
     dot(i + 1 ,30)
-    i += 3
   }
 
   //虚线3
   for (var i = 1; i <= 1000; i++) {
-    dot(i, 40)
-    dot(i + 1 ,40)
-    dot(i + 2, 40)
-    i += 4
+    if (i % 5 < 3) {
+      dot(i, 40)
+    }
   }
   //45度线
   for (var i = 1; i <= 1000 ; i++) {
@@ -59,13 +53,36 @@
   }
   //对角线
   for (var i = 1; i <= 1000; i++) {
-    dot(i, i * 3 / 4)
+    dot(i, i * 0.75)
   }
 
   //圆
-  for (var i = 0; i < 360; i++)
+  for (var i = 0; i < 360; i += 1)
     dot(100 + 50 * Math.sin(i), 100 + 50 * Math.cos(i))
-  
+  //   
+  //   ---------------------------
+  var cx = 100
+  var cy = 100
+  var r = 50
+  // for (var i = 0; i <= 300; i++) {
+  //   for (var j = 0; j <= 400; j++) {
+  //     var distence = (j - cx) ** 2 + (i - cy) ** 2
+  //     if (Math.abs(distence - r * r) < 55 )
+  //     dot(j, i)
+  //   }
+  // }
+  // -------------------------------
+  // for (var i = -50; i <= 50; i++) {
+  //   dot(i + 100, Math.sqrt(r ** 2 - i ** 2) + 100)
+  //   dot(i + 100, -Math.sqrt(r ** 2 - i ** 2) + 100)
+  //   dot(Math.sqrt(r ** 2 - i ** 2) + 100 ,i + 100)
+  //   dot(-Math.sqrt(r ** 2 - i ** 2) + 100 ,i + 100)
+  // }
+
+
+
+
+
   //黑立方体
   for (var i = 150; i <= 200; i++) {
     for (var j = 150; j <= 200; j++) {
@@ -75,13 +92,16 @@
   //彩色立方体
   for (var i = 200; i <= 250; i++) {
     for (var j = 200; j <= 250; j++) {
-      var g = (250 - j) * 5.1
-      var b = (i - 200) * 5.1
+      var g = (250 - j) * 256 / 50
+      var b = (i - 200) * 256 / 50
       dot(j, i, 'rgb(255, ' + g + ', ' + b + ')')
     }
   }
 
-//
+  //sin
+  for(var i = 0; i < 400; i+=0.01) {
+    dot(i * 15, Math.sin(i) * 15 + 150)
+  }
 
 
 
