@@ -1,0 +1,108 @@
+<script type='x'>
+  //第二章最后一题时间复杂度低的版本
+
+  n = 8
+  var odd = ''
+  var even = ''
+  var result = ''
+
+  for (var i = 0 ; i < n; i++) {
+    if (i % 2 === 0) {
+      even += '#'
+    } else {
+      even += ' '
+    }
+  }
+
+  for (var i = 0 ; i < n; i++) {
+    if (i % 2 === 0) {
+      odd += ' '
+    } else {
+      odd += '#'
+    }
+  }
+
+  for (var i = 0; i < n; i++) {
+    if ( i % 2 === 0) {
+      result += odd
+    } else {
+      result += even
+    }
+    result += '\n'
+  }
+
+  console.log(result)
+</script>
+
+
+<script type='x'>
+  // 题目：在控制输出九九乘法表。
+
+  var result = ''
+  for (var i = 1; i <= 9; i++) {
+    for ( var j = 1; j <= i; j++) {
+      result += i + '*' + j + '=' + (i * j) + '\t'
+    }
+    result += '\n'
+  }
+  console.log(result)
+</script>
+
+
+<script type='x'>
+  // 题目：求s=a+aa+aaa+aaaa+aa...a的值，其中a是一个数字。
+  // 例如2+22+222+2222+22222(此时共有5个数相加)，
+  // 具体有几个数相加有通过输入或者函数的实际参数决定。
+
+  var n = +prompt('n: ')
+  var number = +prompt('几位数: ')
+  var result = 0 
+  var sum = n
+  for (var i = 0; i < number; i++) {
+    result += sum
+    sum = sum * 10 + n
+  }
+  console.log(result)
+  
+</script>
+
+
+<script type='x'>
+  // 给定M和N，求从M个物体中选出N个的排列与组合的数量：
+  // Ｃ（ｍ，ｎ）
+  // Ａ（ｍ，ｎ）
+  
+  var m = +prompt('从m个物体: ')
+  var n = +prompt('选出n个物体: ')
+  var mj = 1
+  var nj = 1
+  var mnj = 1
+  for (var i = 0; i < m; i++) {
+    mj *= (m - i)
+  }
+  for (var i = 0; i < n; i++) {
+    nj *= (n - i)
+  }
+  for (var i = 0; i < m - n; i++) {
+    mnj *= (m - n - i)
+  }
+  var amn = mj/mnj
+  var cmn = amn/nj
+  console.log('C (m, n): ' + cmn)
+  console.log('A (m, n): ' + amn)
+</script>
+
+<script type='x'>
+  //题目：给定一个数，对其进行四舍五入，如1.4返回1，1.6返回2
+  var n = +prompt('n: ')
+  if (n * 10 % 10 > 4) {
+    n = parseInt(n) + 1
+  } else {
+    n = parseInt(n)
+  }
+  console.log(n)
+
+</script>
+
+
+

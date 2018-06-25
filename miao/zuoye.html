@@ -1,0 +1,247 @@
+<script type='x' id="sort" sample-input="4 1 7" sample-output="1 4 7" comment="输入三个数，把此三个数按升序输出">
+  var a = +prompt('a: ')
+  var b = +prompt('b: ')
+  var c = +prompt('c: ')
+  var min = Math.min(a, b, c)
+  var max = Math.max(a, b, c)
+  var middle
+
+  if (a > min && a < max) {
+    middle = a
+  } else if (b > min && b < max) {
+    middle = b
+  } else {
+    middle = c
+  }
+
+  console.log(min)
+  console.log(middle)
+  console.log(max)
+</script>
+
+<script type='x' id="narcissistic " sample-input="153" sample-output="YES" comment="判断一个数是否为水仙花数">
+  
+  var n = +prompt('n: ')
+
+  var m = n
+  var jinzhi = 0
+  while (m >= 1) {
+    jinzhi++
+    m = parseInt(m / 10)
+  }
+
+  var result = 0
+  var number = n
+  while (number >= 1) {
+    result += (number % 10) ** jinzhi
+    number = parseInt(number / 10)
+  }
+
+  if (result === n) {
+    console.log('YES')
+  } else {
+    console.log('NO')
+  }
+  
+</script>
+
+<script type='x' id="narcissistics" sample-input="" sample-output="" comment="找出100到10000以内所有的水仙花数">
+  for (var i = 100; i <= 10000; i++) {
+    var m = i
+    var jinzhi = 0
+    while (m >= 1) {
+      jinzhi++
+      m = parseInt(m / 10)
+    }
+
+    var result = 0
+    var number = i
+    while (number >= 1) {
+      result += (number % 10) ** jinzhi
+      number = parseInt(number / 10)
+    }
+
+    if (result === i) {
+      console.log(i)
+    }
+  }
+</script>
+
+<script type='x' id="palindrom" sample-input="12321" sample-output="YES" comment="判断一个非负整数是否为回文数字">
+  var n = +prompt('n: ')
+  var m = n
+  var hui = 0
+  while (m >= 1) {
+    hui *= 10
+    hui += m % 10
+    m = parseInt(m / 10)
+  }
+  if (n === hui) {
+    console.log('YES')
+  } else {
+    console.log('NO')
+  }
+</script>
+
+<script type='x' id="weekday" sample-input="2018 6" sample-output="5" comment="输入年份与月份，给出该年该月的第一天是星期几">
+  var year = +prompt('Year: ') - 2000
+  var month = +prompt('Month: ')
+  var days = 0
+  for (var i = 0; i <= year; i++) {
+    if ((i + 1) % 4 === 0) {
+      days++
+    }
+    days += 365
+  }
+  if (year === 0 && month > 2) {
+    days++
+  }
+  if (month == 2) {
+    days += 31
+  }
+  if (month == 3) {
+    days += 31 + 28
+  }
+  if (month == 4) {
+    days += 31 + 28 + 31
+  }
+  if (month == 5) {
+    days += 31 + 28 + 31 + 30
+  }
+  if (month == 6) {
+    days += 31 + 28 + 31 + 30 + 31
+  }
+  if (month == 7) {
+    days += 31 + 28 + 31 + 30 + 31 + 30
+  }
+  if (month == 8) {
+    days += 31 + 28 + 31 + 30 + 31 + 30 + 31
+  }
+  if (month == 9) {
+    days += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31
+  }
+  if (month == 10) {
+    days += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30
+  }
+  if (month == 11) {
+    days += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31
+  }
+  if (month == 12) {
+    days += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30
+  }
+
+  days++
+
+  var week = days % 7
+  if (week >= 3) {
+    console.log(week - 2)
+  } else {
+    console.log(week + 5)
+  }
+</script>
+
+<script type='x' id="complete-number" sample-input="6" sample-output="YES" comment="判断一个数是否为完全数">
+  var n = +prompt('n: ')
+  var num = n / 2
+  var sum = 0
+  for (var i = 1; i <= num; i++) {
+    if (n % i === 0) {
+      sum += i
+    }
+  }
+  if (n === sum) {
+    console.log('YES')
+  } else {
+    console.log('NO')
+  }
+</script>
+<script type='x' id="complete-numbers" sample-input="" sample-output="" comment="输出10000以内所有的完全数">
+  for (var j = 1; j <= 10000; j++) {
+    var num = j / 2
+    var sum = 0
+    for (var i = 1; i <= num; i++) {
+      if (j % i === 0) {
+        sum += i
+      }
+    }
+    if (j === sum) {
+      console.log(j)
+    }
+  }
+</script>
+
+<script type='x' id="prime" sample-input="7" sample-output="YES" comment="判断一个数是否为素数">
+  var n = +prompt('n: ')
+  var sqrtn = Math.sqrt(n)
+  var su = 0
+  for (var i = 2; i <= sqrtn; i++) {
+    if (7 % i === 0) {
+      su = 1
+      break
+    }
+  }
+  if (su === 0) {
+    console.log('YES')
+  } else {
+    console.log('NO')
+  }
+</script>
+
+<script type='x' id="primes" sample-input="" sample-output="" comment="输出100以内所有的素数">
+  for (var i = 2; i <= 100; i++) {
+    var sqrti = Math.sqrt(i)
+    var su = 0
+    for (var j = 2; j <= sqrti; j++) {
+      if (i % j === 0) {
+        su = 1
+        break
+      }
+    }
+    if (su === 0) {
+      console.log(i)
+    }
+  }
+</script>
+
+<script type='x' id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
+  var n = prompt('n: ')
+  console.log(n)
+</script>
+
+<script type='x' id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
+  var a = +prompt('a: ')
+  var b = +prompt('b: ')
+  var max = 0
+  for (var i = Math.min(a, b); i > 0; i--) {
+    if (a % i === 0 && b % i === 0) {
+      max = i
+      break
+    }
+  }
+  var min = a * b / max
+  console.log(min)
+  console.log(max)
+</script>
+
+<script type='x' id="7" sample-input="" sample-output="" comment="敲7">
+  for (var i = 1; i <= 100; i++) {
+    if (i % 7 === 0) {
+      console.log(i)
+    } else if (i % 10 === 7) {
+      console.log(i)
+    } else if (parseInt(i / 10) % 10 ===7) {
+      console.log(i)
+    }
+  }
+</script>
+
+<script type='x' id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
+  var n = + prompt('n: ')
+  for (var i = 0.001; i < n; i += 0.001) {
+    if (Math.abs(i ** 2 - n) < 0.001) {
+      console.log(i.toFixed(3))
+      break
+    }
+  }
+</script>
+
