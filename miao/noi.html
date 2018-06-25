@@ -665,7 +665,7 @@
     } else {
       m = n
       n = n * 3 + 1
-      console.log(n + '*3+1=' + m)
+      console.log(m + '*3+1=' + n)
     }
   }
   console.log('End')
@@ -678,7 +678,7 @@
     money += 300
     money -= +prompt('第' + (i + 1) + '个月的预算:')
     if (money < 0) {
-      console.log(i + 1)
+      console.log(-(i + 1)
       break
     }
     while (money >= 100) {
