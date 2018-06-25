@@ -653,7 +653,181 @@
 </script>
 
 
-<script type="x" id='ch0105/2111'>
+<script type="x" id='ch0105/21'>
+  var n = +prompt('n: ')
+  var m
+  while (n !== 1) {
+    if (n % 2 === 0) {
+      m = n
+      n /= 2
+      console.log(m + '/2=' + n)
+
+    } else {
+      m = n
+      n = n * 3 + 1
+      console.log(n + '*3+1=' + m)
+    }
+  }
+  console.log('End')
+</script>
+
+<script type="x" id='ch0105/22'>
+  var money = 0
+  var save = 0
+  for (var i = 0; i < 12; i++) {
+    money += 300
+    money -= +prompt('第' + (i + 1) + '个月的预算:')
+    if (money < 0) {
+      console.log(i + 1)
+      break
+    }
+    while (money >= 100) {
+      money -= 100
+      save += 100
+    }
+    if (i === 11) {
+      console.log(money + save * 1.2)
+      break
+    }
+  }
+</script>
+
+<script type="x" id='ch0105/23'>
+  var m = +prompt('药品总量: ')
+  var n = +prompt('取药人数: ')
+  var num = 0
+  for (var i = 0; i < n; i++) {
+    num += +prompt('第' + (i + 1) + '个人取走的药品数量: ')
+    if (num >= m) {
+      console.log(n - i - 2)
+      break
+    }
+  }
+</script>
+
+<script type="x" id='ch0105/24'>
+  var n = +prompt('n: ')
+  var hours = 0
+  var result = 0
+  for (var i = 0; i < n; i++) {
+    var ss = +prompt('第' + (i + 1) +'次收缩压: ')
+    var sz = +prompt('第' + (i + 1) +'次舒张压: ')
+    if (ss <= 140 && ss >= 90 && sz <= 60 && sz <= 90) {
+      hours ++
+    }
+  }
+  if (hours > result) {
+    result = hours
+  }
+  console.log(result)
+</script>
+
+<script type="x" id='ch0105/25'>
+  for (var i = 1;;i++) {
+    var seven = 0
+    var nine = 0
+    var n = 0.1
+    for (var j = i; j >= 1; j = Math.floor(j / 7)) {
+      n *= 10
+      seven += (j % 7) * n
+    }
+    n = 0.1
+    for (var j = i; j >= 1; j = Math.floor(j / 9)) {
+      n *= 10
+      nine += (j % 9) * n
+    }
+    seven += ''
+    nine += ''
+    if (seven.length == 3 && nine.length == 3) {
+      var sevenFan = seven[2] + seven[1] + seven[0]
+      if (sevenFan == nine) {
+        console.log(i)
+        console.log(seven)
+        console.log(nine)
+        break
+      }
+    }
+  }
+  
+</script>
+
+<script type="x" id='ch0105/26'>
+
+</script>
+
+<script type="x" id='ch0105/27'>
+
+</script>
+
+<script type="x" id='ch0105/28'>
+
+</script>
+
+<script type="x" id='ch0105/29'>
+
+</script>
+
+<script type="x" id='ch0105/30'>
+
+</script>
+
+<script type="x" id='ch0105/31'>
+
+</script>
+
+<script type="x" id='ch0105/32'>
+
+</script>
+
+<script type="x" id='ch0105/33'>
+
+</script>
+
+<script type="x" id='ch0105/34'>
+
+</script>
+
+<script type="x" id='ch0105/35'>
+
+</script>
+
+<script type="x" id='ch0105/36'>
+
+</script>
+
+<script type="x" id='ch0105/37'>
+
+</script>
+
+<script type="x" id='ch0105/38'>
+
+</script>
+
+<script type="x" id='ch0105/39'>
+
+</script>
+
+<script type="x" id='ch0105/40'>
+
+</script>
+
+<script type="x" id='ch0105/41'>
+
+</script>
+
+<script type="x" id='ch0105/42'>
+
+</script>
+
+<script type="x" id='ch0105/43'>
+
+</script>
+
+<script type="x" id='ch0105/44'>
+
+</script>
+
+<script type="x" id='ch0105/45'>
 
 </script>
 
