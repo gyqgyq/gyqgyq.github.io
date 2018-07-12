@@ -1,0 +1,125 @@
+<script xtype="x">
+  //日历
+  //闰年
+  function isLeapYear(year) {
+    if (year % 400 ===0) {
+      return true
+    }
+    if (year % 100 === 0) {
+      return false
+    }
+    if (year % 4 === 0) {
+      return true
+    }
+    return false
+  }
+  //当月天数
+  function daysOfMonth(month, year) {
+    if (month === 2) {
+      return isLeapYear(year) ? 29 : 28
+    }
+
+    switch (month) {
+      case 1:
+        return 31
+      case 3:
+        return 31
+      case 4:
+        return 30
+      case 5:
+        return 31
+      case 6:
+        return 30
+      case 7:
+        return 31
+      case 8:
+        return 31
+      case 9:
+        return 30
+      case 10:
+        return 31
+      case 11:
+        return 30
+      case 12:
+        return 31
+    } 
+  }
+  //当月1号周几
+  function weekday(year, month) {
+    year--
+    var days = year * 365 + parseInt(year / 4) -
+               parseInt(year / 100) + parseInt(year / 400)
+    year++
+
+    for (var i = 1; i < month; i++) {
+      days += daysOfMonth(i, year)
+    }
+    if (days % 7 === 6) {
+      return 0
+    }
+    return days % 7 + 1
+  }
+  //当月几号是周几
+  function dayWeek(day, year, month) {
+    var one = weekday(year, month)
+    var n = day % 7
+    switch (n) {
+      case 0:
+        return one + 6 <= 6 ? one + 6: one - 7
+      case 1:
+        return one
+      case 2:
+        return one + 1 <= 6 ? one + 1 : one - 7
+      case 3:
+        return one + 2 <= 6 ? one + 2: one - 7
+      case 4:
+        return one + 3 <= 6 ? one + 3: one - 7
+      case 5:
+        return one + 4 <= 6 ? one + 4: one - 7
+      case 6:
+        return one + 5 <= 6 ? one + 5: one - 7
+    }
+  }
+  //打印当月空白
+  function printBlanks(year, month) {
+    var firstday = weekday(year, month)
+    for (var i = 0; i < firstday; i++) {
+      document.write('<td> </td>')
+    }
+  }
+  //打印星期
+  function printWeek() {
+    var week = ['日', '一', '二', '三', '四', '五', '六', ]
+    document.write('<tr>')
+    for (var i = 0; i < 7; i++) {
+      document.write('<td>')
+      document.write(week[i])
+      document.write('</td>')
+    }
+    document.write('</tr>')
+  }
+  //打印日期
+  function printDays(year, month) {
+    var day = daysOfMonth(month, year)
+    document.write('<tr>')
+    printBlanks(year, month)
+    for (var i = 1; i <= day; i++) {
+      document.write('<td>' + i + '</td>')
+      if (dayWeek(i, year, month) === 6) {
+        document.write('</tr>' + '<tr>')
+      }
+    }
+    document.write('</tr>')
+  }
+  //打印日历
+  function printCalender (year, month) {
+    document.write('<div style="display: inline-block; text-align: center; padding: 20px;">' + year + '年 ' + month + '月')
+    document.write('<table style="text-align: right;">')
+    printWeek()
+    printDays(year, month)
+    document.write('</table>')
+    document.write('</div>')
+  }
+
+  printCalender(2018, 7)
+</script>

@@ -724,7 +724,7 @@
   console.log(result)
 </script>
 
-<script xtype="x" id='ch0105/25'>
+<script type="x" id='ch0105/25'>
   for (var i = 1;;i++) {
     var seven = 0
     var nine = 0
@@ -882,6 +882,48 @@
   
 </script>
 
+
+<script type='x' comment="判断一个数是否为水仙花数">
+  
+  function numberWidth(n) {
+    var digit
+    var sum = 0
+    do {
+      digit = n % 10
+      n = (n - digit) / 10
+      sum++
+    } while (n > 0)
+    return sum
+  }
+
+  function power(n, a) {
+    var result = 1
+    for (var i = 1; i <= a; i++) {
+      result *= n
+    }
+    return result
+  }
+
+  function numPowAdd (n, w) {
+    var digit
+    var sum = 0
+    do {
+      digit = n % 10
+      n = (n - digit) / 10
+      sum += power(digit, w)
+    } while (n > 0)
+    return sum
+  }
+
+  function isWaterNumber(n) {
+    var numwidth = numberWidth(n)
+    var sum = numPowAdd(n, numwidth)
+    return sum === n
+  }
+
+  
+</script>
+
 <script type='x' id="narcissistics" sample-input="" sample-output="" comment="找出100到10000以内所有的水仙花数">
   for (var i = 100; i <= 10000; i++) {
     var m = i
@@ -905,75 +947,102 @@
 </script>
 
 <script type='x' id="palindrom" sample-input="12321" sample-output="YES" comment="判断一个非负整数是否为回文数字">
-  var n = +prompt('n: ')
-  var m = n
-  var hui = 0
-  while (m >= 1) {
-    hui *= 10
-    hui += m % 10
-    m = parseInt(m / 10)
+  function isPalindrom(n) {
+    var x = n
+    var back = 0
+    var digit
+    while (n > 0) {
+      digit = n % 10
+      n = (n - digit) / 10
+      back = back * 10 + digit
+    }
+    return x === back 
   }
-  if (n === hui) {
-    console.log('YES')
-  } else {
-    console.log('NO')
+</script>
+
+<script type='x' comment="判断一个非负整数是否为回文数字">
+  function numWidth(n) {
+    var digit
+    var result = 0
+    do {
+      digit = n % 10
+      n = (n - digit) / 10
+      result++
+    } while (n > 0)
+    return result
+  }
+
+  function isPalindrom(n) {
+    var width = numWidth(n)
+    var c = Math.floor(width / 2)
+    for (var i = 0; i < c; i++) {
+      var r = parseInt(n / 10 ** i) % 10
+      var l = parseInt(n / 10 ** (width - i - 1)) % 10
+      if (r !== l) {
+        return false
+      }
+    }
+    return true
+  }
+</script>
+
+<script type='x' comment="判断一个非负整数是否为回文数字">
+  function isPalindrom(n) {
+    return String(n) = n.toString().split('').reverse().join()
   }
 </script>
 
 <script type='x' id="weekday" sample-input="2018 6" sample-output="5" comment="输入年份与月份，给出该年该月的第一天是星期几">
-  var year = +prompt('Year: ') - 2000
-  var month = +prompt('Month: ')
-  var days = 0
-  for (var i = 0; i <= year; i++) {
-    if ((i + 1) % 4 === 0) {
-      days++
+  function isLeapYear(n) {
+    if (n % 400 ===0) {
+      return true
     }
-    days += 365
+    if (n % 100 === 0) {
+      return false
+    }
+    if (n % 4 === 0) {
+      return true
+    }
+    return false
   }
-  if (year === 0 && month > 2) {
-    days++
+  function daysOfMonth(n, year) {
+    if (n === 2) {
+      return isLeapYear(year) ? 29 : 28
+    }
+    switch (n) {
+      case 1:
+        return 31
+      case 3:
+        return 31
+      case 4:
+        return 30
+      case 5:
+        return 31
+      case 6:
+        return 30
+      case 7:
+        return 31
+      case 8:
+        return 31
+      case 9:
+        return 30
+      case 10:
+        return 31
+      case 11:
+        return 30
+      case 12:
+        return 31
+    } 
   }
-  if (month == 2) {
-    days += 31
-  }
-  if (month == 3) {
-    days += 31 + 28
-  }
-  if (month == 4) {
-    days += 31 + 28 + 31
-  }
-  if (month == 5) {
-    days += 31 + 28 + 31 + 30
-  }
-  if (month == 6) {
-    days += 31 + 28 + 31 + 30 + 31
-  }
-  if (month == 7) {
-    days += 31 + 28 + 31 + 30 + 31 + 30
-  }
-  if (month == 8) {
-    days += 31 + 28 + 31 + 30 + 31 + 30 + 31
-  }
-  if (month == 9) {
-    days += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31
-  }
-  if (month == 10) {
-    days += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30
-  }
-  if (month == 11) {
-    days += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31
-  }
-  if (month == 12) {
-    days += 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30
-  }
-
-  days++
-
-  var week = days % 7
-  if (week >= 3) {
-    console.log(week - 2)
-  } else {
-    console.log(week + 5)
+  function weekday (year, month) {
+    year--
+    var days = year * 365 + parseInt(year / 4) -
+               parseInt(year / 100) + parseInt(year / 400)
+    year++
+    for (var i = 1; i < month; i++) {
+      days += daysOfMonth(i, year)
+    }
+    return days % 7 + 1
   }
 </script>
 
@@ -1041,8 +1110,54 @@
 </script>
 
 <script type='x' id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
-  var n = prompt('n: ')
-  console.log(n)
+  var n = 1234
+  var digit
+  var result = ''
+
+  do {
+    digit = n % 10
+    result = String.fromCharCode(digit + 48) + result
+    n = (n - digit) / 10
+  } while (n > 0)
+
+  console.log(result)
+</script>
+
+<script type='x' id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
+  function digit2char(n) {
+    switch (n) {
+      case 0:
+        return '0'
+      case 1:
+        return '1'
+      case 2:
+        return '2'
+      case 3:
+        return '3'
+      case 4:
+        return '4'
+      case 5:
+        return '5'
+      case 6:
+        return '6'
+      case 7:
+        return '7'
+      case 8:
+        return '8'
+      case 9:
+        return '9'
+    }
+  }
+  function int2str(n) {
+    var digit
+    var result = ''
+    do {
+      digit = n % 10
+      n = (n - digit) / 10
+      result = digit2char(digit) + result
+    } while (n > 0)
+    return result
+  }
 </script>
 
 <script type='x' id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
@@ -1060,26 +1175,82 @@
   console.log(max)
 </script>
 
+<script xtype='x' id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
+  function gcd (a, b) {
+    var t
+    while (b !== 0) {
+      t = b
+      b = a % b
+      a = t
+    }
+    return a
+  }
+</script>
+
 <script type='x' id="7" sample-input="" sample-output="" comment="敲7">
   for (var i = 1; i <= 100; i++) {
+    var flag = false 
     if (i % 7 === 0) {
-      console.log(i)
+      flag = true
     } else if (i % 10 === 7) {
-      console.log(i)
+      flag = true
     } else if (parseInt(i / 10) % 10 ===7) {
+      flag = true
+    }
+    if (flag === false) {
       console.log(i)
     }
   }
 </script>
 
-<script type='x' id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
-  var n = + prompt('n: ')
-  for (var i = 0.001; i < n; i += 0.001) {
-    if (Math.abs(i ** 2 - n) < 0.001) {
-      console.log(i.toFixed(3))
-      break
+<script type='x'>
+  //敲7
+  
+  for (var i = 1; i <= 100; i++) {
+    var n = i 
+    var flag = false
+    if (n % 7 === 0) {
+      flag = true
+    } else {
+      var digit
+      while (n > 0) {
+        digit = n % 10
+        if (digit === 7) {
+          flag = true
+          break
+        }
+        n = (n - digit) / 10
+      }
+    }
+
+    if (flag === false) {
+      console.log(i) 
     }
   }
+
+</script>
+
+<script type='x' id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
+  // var n = + prompt('n: ')
+  // for (var i = 0.001; i < n; i += 0.001) {
+  //   if (Math.abs(i ** 2 - n) < 0.001) {
+  //     console.log(i.toFixed(3))
+  //     break
+  //   }
+  // }
+  var n = 2
+  var i
+  var max = n
+  var min = 0
+  while (max - min > 0.0000000001) {
+    i = (max + min) / 2
+    if (i ** 2 > n) {
+      max = i
+    } else if (i ** 2 < n) {
+      min = i
+    }
+  }
+  console.log(i)
 </script>
 
 

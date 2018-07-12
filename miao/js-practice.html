@@ -1,3 +1,13 @@
+<style type='x'>
+  td {
+    border: 1px solid black;
+    padding: 5px;
+  }
+  table {
+    border-collapse: collapse;
+    letter-spacing: 1px;
+  }
+</style>
 <script type='x'>
   //第二章最后一题时间复杂度低的版本
 
@@ -48,6 +58,18 @@
   console.log(result)
 </script>
 
+<table>
+<script type='x'>
+  // 题目：在控制输出九九乘法表。
+  for (var i = 1; i <= 9; i++) {
+    document.write('<tr>')
+    for (var j = 1; j <=i; j++) {
+      document.write('<td>' + i + '*' + j + '=' + i * j + '</td>')
+    }
+    document.write('</tr>')
+  }
+</script>
+</table>
 
 <script type='x'>
   // 题目：求s=a+aa+aaa+aaaa+aa...a的值，其中a是一个数字。
@@ -63,6 +85,22 @@
     sum = sum * 10 + n
   }
   console.log(result)
+  
+</script>
+<script type='x'>
+  // 题目：求s=a+aa+aaa+aaaa+aa...a的值，其中a是一个数字。
+  // 例如2+22+222+2222+22222(此时共有5个数相加)，
+  // 具体有几个数相加有通过输入或者函数的实际参数决定。
+
+  function isSum(a, b) {
+    var result = 0
+    while (b > 0) {
+      result += a * b
+      a *= 10
+      b -= 1
+    }
+    return result
+  }
   
 </script>
 
@@ -91,6 +129,48 @@
   console.log('C (m, n): ' + cmn)
   console.log('A (m, n): ' + amn)
 </script>
+<script type='x'>
+  // 给定M和N，求从M个物体中选出N个的排列与组合的数量：
+  // Ｃ（ｍ，ｎ）
+  // Ａ（ｍ，ｎ）
+
+  var m = 4
+  var n = 6
+  var max = m > n ? m : n
+  for (var i = max;; i++) {
+    if (i % m === 0 && i % n === 0) {
+      console.log(i)
+      break
+    }
+  }
+  var min = m > n ? n : m
+  for (var i = min;; i--) {
+    if (m % i === 0 && n % i === 0) {
+      console.log(i)
+      break
+    }
+  }
+</script>
+
+<script type='x'>
+  // 给定M和N，求从M个物体中选出N个的排列与组合的数量：
+  // Ｃ（ｍ，ｎ）
+  // Ａ（ｍ，ｎ）
+  function factorial(n) {
+    var result = 1
+    for (var i = n; i > 1; i--) {
+      result *= i
+    }
+    return result
+  }
+  function a(m, n) {
+    return factorial(m) / factorial(m - n)
+  }
+  function c(m, n) {
+    return a(m, n) / factorial(n)
+  }
+  
+</script>
 
 <script type='x'>
   //题目：给定一个数，对其进行四舍五入，如1.4返回1，1.6返回2
@@ -102,7 +182,355 @@
   }
   console.log(n)
 
+  //加0.5,向下取整
+  function a (n) {
+    return parseInt(n + 0.5)
+  }
+
+</script>
+
+<script type='x'>
+  // 证明一个数能被3整除
+  var n = +prompt('n: ')
+  var digit 
+  var sum = 0
+  do {
+    do {
+      digit = n % 10
+      sum += digit
+      n = (n - digit) / 10
+    } while (n > 0)
+  } while (digit > 10)
+
+  console.log(digit)
+</script>
+
+<script type='x'>
+  //最大公约数 辗转相除法
+  var a = +prompt('a: ')
+  var b = +prompt('b: ')
+  while (a !== b) {
+    if (a > b) {
+      a -= b
+    } else {
+      b -= a
+    }
+  }
+  console.log(a)
+</script>
+
+<script type='x'>
+  //牛顿法算Math.sqrt()
+  
+  var x = 2
+  while (Math.abs(x ** 2 - 2) > 0.000001) {
+    x = x - (x ** 2 - 2) / (2 * x)
+  }
+  console.log(x)
+</script>
+
+<script type='x'>
+  // 题目：分解质因数，把一个数分解为若干质数的乘积：
+  // 12 = 2 * 2 * 3
+  // 120 = 2 * 2 * 2 * 3 * 5
+  // 1260 = 2 * 2 * 3 * 3 * 5 * 7
+  // 
+  function fenjie (n) {
+    var result = ''
+    while (n > 1) {
+      var i = 2
+      for (i; i < n; i++) {
+        if (n % i === 0) {
+          result += i + '*'
+          n /= i
+          break
+        }
+      }
+      if (i === n) {
+        break
+      }
+    }
+    result += n
+    return result
+  }
+  fenjie(1260)
+</script>
+
+<script type='x'>
+  // 题目：找出最小的能被1到20所有数整除的数
+
+  function isMin (n) {
+    for (var i = n;; i++) {
+      for (var j = 2; j <= n; j++) {
+        if (i % j !== 0) {
+          break
+        }
+        if (j === n) {
+          return i
+        }
+      } 
+    }
+  }
+  isMin(3)
+    
 </script>
 
 
+<script type='x'>
+  // 题目：将一个数字的各位加起来求和。如果该和大于10，将得到这个数字继续进行这种操作，直到其只有一位数。
+  // 例如：459->4+6+9->19->1+9->10->1+0->1
+  // 于是就输出1
+  function digitSum (n) {
+    if (n < 10) {
+      return n
+    }
+    var digit
+    var sum = 0
+    while (n > 0) {
+      digit = n % 10
+      sum += digit
+      n = (n - digit) / 10
+    }
+    return digitSum(sum)
+  }
+</script>
 
+<script type='x'>
+  // 题目：找出唯一的满足a + b + c =1000
+  // 的毕达哥拉斯三元组{a, b, c}。
+  // 一个毕达哥拉斯三元组是一个包含三个自然数的集合，
+  // a<b<c，满足条件：
+  // a^2 + b^2 = c^2
+  // 例如：3^2 + 4^2 = 9 + 16 = 25 = 5^2.
+  // （说白了就是一组勾股数）
+  // 已知存在并且只存在一个毕达哥拉斯三元组满足条件
+  // a + b + c = 1000。
+  // 找出这个三元组。
+  // 题目中a^b代表a的b次方（这是一个通用表示法） 。
+  // 
+  for (var c = 334; c < 499; c++) {
+    for (var a = 1; a < 251; a++) {
+      var b = 1000 - a - c
+      if (a ** 2 + b ** 2 === c ** 2) {
+        console.log('a=' + a + '\nb=' + b + '\nc=' +c)
+      }
+    }
+  }
+</script>
+
+<script type='x'>
+  // 小于n的素数
+var countPrimes = function(n) {
+  var result = 0
+  if (n > 2) {
+    result++
+  }
+  arr = [2]
+  for (var i = 3; i < n; i++) {
+    var sqrt_i = Math.sqrt(i)
+    for (var j = 0;; j++) {
+      if (i % arr[j] === 0) {
+        break
+      }
+      if (arr[j] > sqrt_i) {
+        arr.push(i)
+        result++
+        break
+      }
+    }
+  }
+  return result
+};
+  debugger
+  countPrimes(3)
+</script>
+
+<script type='x'>
+  // 小于n的素数
+  var countPrimes = function(n) {
+    var result = 0
+    if (n > 2) {
+      result++
+    }
+    arr = [2]
+    for (var i = 3; i < n; i++) {
+      for (var j = 0; j < arr.length; j++) {
+        if (i % arr[j] === 0 ) {
+          break
+        }
+      }
+      if (j === arr.length) {
+        arr.push(i)
+        result++
+      }
+    }
+    return result
+  };
+</script>
+
+<script type='x'>
+  // 不使用第三个变量,交换两个整型变量的值
+  function changexy(x, y) {
+    x = x - y
+    y = x + y
+    x = y - x
+    return '' + x + ',' +y
+  }
+</script>
+
+<script type="x">
+  //日历
+  //闰年
+  function isLeapYear(year) {
+    if (year % 400 ===0) {
+      return true
+    }
+    if (year % 100 === 0) {
+      return false
+    }
+    if (year % 4 === 0) {
+      return true
+    }
+    return false
+  }
+  //当月天数
+  function daysOfMonth(month, year) {
+    if (month === 2) {
+      return isLeapYear(year) ? 29 : 28
+    }
+
+    switch (month) {
+      case 1:
+        return 31
+      case 3:
+        return 31
+      case 4:
+        return 30
+      case 5:
+        return 31
+      case 6:
+        return 30
+      case 7:
+        return 31
+      case 8:
+        return 31
+      case 9:
+        return 30
+      case 10:
+        return 31
+      case 11:
+        return 30
+      case 12:
+        return 31
+    } 
+  }
+  //当月1号周几
+  function weekday(year, month) {
+    year--
+    var days = year * 365 + parseInt(year / 4) -
+               parseInt(year / 100) + parseInt(year / 400)
+    year++
+
+    for (var i = 1; i < month; i++) {
+      days += daysOfMonth(i, year)
+    }
+
+    return days % 7 + 1
+  }
+  //当月几号是周几
+  function dayWeek(day, year, month) {
+    var one = weekday(year, month)
+    var n = day % 7
+    switch (n) {
+      case 0:
+        return n + 6 <= 6 ? n : n - 7
+      case 1:
+        return n
+      case 2:
+        return n + 1 <= 6 ? n : n - 7
+      case 3:
+        return n + 2 <= 6 ? n : n - 7
+      case 4:
+        return n + 3 <= 6 ? n : n - 7
+      case 5:
+        return n + 4 <= 6 ? n : n - 7
+      case 6:
+        return n + 5 <= 6 ? n : n - 7
+    }
+  }
+  //打印当月空白
+  function printBlanks(year, month) {
+    var firstday = weekday(year, month)
+    for (var i = 0; i < firstday; i++) {
+      document.write('<td> </td>')
+    }
+  }
+  //打印星期
+  function printWeek() {
+    var week = ['日', '一', '二', '三', '四', '五', '六', ]
+    document.write('<tr>')
+    for (var i = 0; i < 7; i++) {
+      document.write('<td>')
+      document.write(week[i])
+      document.write('</td>')
+    }
+    document.write('</tr>')
+  }
+  //打印日期
+  function printDays(year, month) {
+    var day = daysOfMonth(year, month)
+    document.write('<tr>')
+    printBlanks(year, month)
+    for (var i = 1; i <= day; i++) {
+      document.write('<td>' + i + '</td>')
+      if (dayWeek(i, year, month) === 6) {
+        document.write('</tr>' + '<tr>')
+      }
+    }
+    document.write('</tr>')
+  }
+  //打印日历
+  function printCalender (year, month) {
+    document.write('<div>' + year + '年 ' + month + '月' + '</div>')
+    document.write('<table>')
+    printWeek()
+    printDays(year, month)
+    document.write('</table>')
+  }
+
+  printCalender(2018, 6)
+</script>
+
+
+<script type='x'>
+  // 递归求pow
+function power(x, n) {
+  function f(n) {
+    if (n === 0) {
+      return 1
+    } else if (n % 2 === 1) {
+      return f((n - 1) / 2) ** 2 * x
+    } else if (n % 2 === 0) {
+      return f(n / 2) ** 2
+    }
+  }
+  return f(n)
+}
+</script>
+
+<script>
+  //随机数计算PI
+  function pi() {
+    var x, y, z
+    var c = 0
+    for (var i = 0; i < 10000000; i++) {
+      x = Math.random() - 0.5
+      y = Math.random() - 0.5
+      z = Math.sqrt(x * x + y * y)
+      if (z <= 0.5) {
+        c++
+      }
+    }
+    return 4 * c / 10000000
+  }
+</script>
