@@ -132,5 +132,7 @@ function differenceBy(array, value, iteratee) {
     chunk: chunk
     compact: compact
     concat: concat
+    difference : difference
+    differenceBy: differenceBy
   }
 }()
