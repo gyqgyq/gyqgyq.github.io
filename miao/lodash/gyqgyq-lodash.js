@@ -66,8 +66,14 @@ function difference(array, value) {
     return array
   }
   let res = []
+  let val = []
+  for (let i = 1; i < arguments.length; i++) {
+    for (let j = 0; j < arguments[i].length; j++) {
+      val.push(arguments[i][j])
+    }
+  }
   for (let i of array) {
-    if (value.indexOf(i) === -1) {
+    if (val.indexOf(i) === -1) {
       res.push(i)
     }
   }
@@ -124,8 +130,19 @@ function dropRight(array, n = 1) {
   return array.splice(0, array.length - n)
 }
 
+/**
+ * [dropRightWhile description]
+ * @param  {[type]} array     [description]
+ * @param  {[type]} predicate [description]
+ * @return {[type]}           [description]
+ */
 function dropRightWhile(array, predicate) {
+  let res = []
+  if (typeof predicate === 'function') {
 
+  } else if (typeof predicate === '') {
+
+  }
 }
 
 
