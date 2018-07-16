@@ -157,13 +157,30 @@ function dropRight(array, n = 1) {
 function dropRightWhile(array, predicate) {
   let res = []
   if (typeof predicate === 'function') {
-
-  } else if (typeof predicate === '') {
-
+    array.forEach(val => {
+      if (!predicate(val)) {
+        res.push(val.user)
+      }
+    })
+  } else {
+    array.forEach(val => {
+      if (!predicate in val) {
+        res.push(val.user)
+      }
+    })
   }
+  return res
 }
 
+/**
+ * [dropWhile description]
+ * @param  {[type]} array     [description]
+ * @param  {[type]} predicate [description]
+ * @return {[type]}           [description]
+ */
+function dropWhile(array, predicate) {
 
+}
 
 
 
@@ -181,6 +198,6 @@ function dropRightWhile(array, predicate) {
     drop: drop,
     dropRight: dropRight,
     dropRightWhile: dorpRightWhile,
-
+    dropWhile: dropWhile,
   }
 }()
