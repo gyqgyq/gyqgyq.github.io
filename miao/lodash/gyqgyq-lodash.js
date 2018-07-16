@@ -214,7 +214,7 @@ function fill(array, value, start = 0, end = array.length) {
     differenceWith: differenceWith,
     drop: drop,
     dropRight: dropRight,
-    dropRightWhile: dorpRightWhile,
+    dropRightWhile: dropRightWhile,
     dropWhile: dropWhile,
     fill: fill,
   }
