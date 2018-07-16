@@ -449,7 +449,58 @@ function isEqual(value, other) {
   return value === other
 }
 
+/**
+ * [head description]
+ * @param  {[type]} array [description]
+ * @return {[type]}       [description]
+ */
+function head(array) {
+  return array[0]
+}
 
+/**
+ * [indexOf description]
+ * @param  {[type]} array     [description]
+ * @param  {[type]} value     [description]
+ * @param  {Number} fromIndex [description]
+ * @return {[type]}           [description]
+ */
+function indexOf(array, value, fromIndex = 0) {
+  for (let i = fromIndex; i < array.length; i++) {
+    if (array[i] === value) {
+      return i
+    }
+  }
+  return -1
+}
+
+/**
+ * [initial description]
+ * @param  {[type]} array [description]
+ * @return {[type]}       [description]
+ */
+function initial(array) {
+  let res = []
+  for (let i = 0; i < array.length - 1; i++) {
+    res.push(array[i])
+  }
+  return res
+}
+
+/**
+ * [intersection description]
+ * @param  {[type]} array [description]
+ * @return {[type]}       [description]
+ */
+function intersection(array) {
+  let res = []
+  arguments[0].forEach(val => {
+    if (arguments[1].indexOf(val) !== -1) {
+      res.push(val)
+    }
+  })
+  return res
+}
 
 
   return {
@@ -473,6 +524,10 @@ function isEqual(value, other) {
     sumBy: sumBy,
     uniq: uniq,
     isEqual: isEqual,
-
+    head: head,
+    indexOf: indexOf,
+    initial: initial,
+    intersection: intersection,
+    
   }
 }()
