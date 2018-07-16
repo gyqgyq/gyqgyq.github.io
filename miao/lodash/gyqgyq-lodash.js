@@ -121,7 +121,7 @@ function differenceBy(array, value, iteratee) {
 function differenceWith (array, value, comparator) {
   let res = []
   array.forEach(val => {
-    if (comparator(val) !== comparator(value)) {
+    if (!comparator(val, value)) {
       res.push(value)
     }
   })
@@ -159,10 +159,10 @@ function dropRightWhile(array, predicate) {
   if (typeof predicate === 'function') {
     array.forEach(val => {
       if (!predicate(val)) {
-        res.push(val.user)
+        res.push(val)
       }
     })
-  } else {
+  } else if (predicate) {
     array.forEach(val => {
       if (!predicate in val) {
         res.push(val.user)
@@ -201,6 +201,126 @@ function fill(array, value, start = 0, end = array.length) {
 }
 
 
+/**
+ * [unary description]
+ * @param  {[type]} func [description]
+ * @return {[type]}      [description]
+ */
+function unary(func) {
+  return function (value) {
+    return func(value)
+  }
+}
+
+/**
+ * [negate description]
+ * @param  {[type]} predicate [description]
+ * @return {[type]}           [description]
+ */
+function negate(predicate) {
+  return function (...args) {
+    return !predicate(...args)
+  }
+}
+
+/**
+ * [range description]
+ * @param  {[type]} start [description]
+ * @param  {[type]} end   [description]
+ * @param  {Number} step  [description]
+ * @return {[type]}       [description]
+ */
+function range(start, end, step = 1) {
+  let res = []
+  if (arguments.length === 1) {
+    end = start
+    start = 0
+  }
+  if (step === 0) {
+    for (let i = start; i < end; i += 1) {
+      res.push(start)
+    }
+    return res
+  }
+  if (end < start) {
+    if (arguments.length < 3) {
+      step = -1
+    }
+    for (let i = start; i > end; i += step) {
+      res.push(i)
+    }
+  } else {
+    for (let i = start; i < end; i += step) {
+      res.push(i)
+    }
+  }
+  return res
+}
+
+/**
+ * [rangeRight description]
+ * @param  {[type]} start [description]
+ * @param  {[type]} end   [description]
+ * @param  {Number} step  [description]
+ * @return {[type]}       [description]
+ */
+function rangeRight(start, end, step = 1) {
+  let res = []
+  if (arguments.length === 1) {
+    end = start
+    start = 0
+  }
+  if (step === 0) {
+    for (let i = start; i < end; i += 1) {
+      res.unshift(start)
+    }
+    return res
+  }
+  if (end < start) {
+    if (arguments.length < 3) {
+      step = -1
+    }
+    for (let i = start; i > end; i += step) {
+      res.unshift(i)
+    }
+  } else {
+    for (let i = start; i < end; i += step) {
+      res.unshift(i)
+    }
+  }
+  return res
+}
+
+/**
+ * [inRange description]
+ * @param  {[type]} number [description]
+ * @param  {[type]} start  [description]
+ * @param  {[type]} end    [description]
+ * @return {[type]}        [description]
+ */
+function inRange(number, start, end) {
+  if (arguments.length === 2) {
+    end = start
+    start = 0
+  }
+  if (number >= 0) {
+    if (number >= start && number < end) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    if (number <= start && number > end) {
+      return true
+    } else {
+      return false
+    }
+  }
+}
+
+
+
+
 
 
 
@@ -217,5 +337,11 @@ function fill(array, value, start = 0, end = array.length) {
     dropRightWhile: dropRightWhile,
     dropWhile: dropWhile,
     fill: fill,
+    unary: unary,
+    negate: negate,
+    range: range,
+    rangeRight: rangeRight,
+    inRange: inRange,
+    
   }
 }()
