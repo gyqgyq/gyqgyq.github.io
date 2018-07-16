@@ -110,6 +110,24 @@ function differenceBy(array, value, iteratee) {
   }
   return res
 }
+
+/**
+ * [differenceWith description]
+ * @param  {[type]} array      [description]
+ * @param  {[type]} value      [description]
+ * @param  {[type]} comparator [description]
+ * @return {[type]}            [description]
+ */
+function differenceWith (array, value, comparator) {
+  let res = []
+  array.forEach(val => {
+    if (!comparator(val) === comparator(value)) {
+      res.push(value)
+    }
+  })
+  return res
+}
+
 /**
  * [drop description]
  * @param  {[type]} array [description]
@@ -159,6 +177,7 @@ function dropRightWhile(array, predicate) {
     concat: concat,
     difference: difference,
     differenceBy: differenceBy,
+    differenceWith: differenceWith,
     drop: drop,
     dropRight: dropRight,
   }
