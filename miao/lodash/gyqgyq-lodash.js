@@ -162,10 +162,22 @@ function dropRightWhile(array, predicate) {
         res.push(val)
       }
     })
-  } else if (predicate) {
+  } else if (Array.isArray(predicate)) {
     array.forEach(val => {
-      if (!predicate in val) {
-        res.push(val.user)
+      if (val[predicate[0]] !== predicate[1]) {
+        res.push(val)
+      }
+    })
+  } else if (typeof predicate === 'object') {
+    array.forEach(val => {
+      if (!isEqual(val, predicate)) {
+        res.push(val)
+      }
+    })
+  } else if (typeof predicate === 'string') {
+    array.forEach(val => {
+      if (predicate in val) {
+        res.push(val)
       }
     })
   }
@@ -318,9 +330,94 @@ function inRange(number, start, end) {
   }
 }
 
+/**
+ * [sum description]
+ * @param  {[type]} array [description]
+ * @return {[type]}       [description]
+ */
+function sum(array) {
+  let sum = 0
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i]
+  }
+  return sum
+}
 
+/**
+ * [sumBy description]
+ * @param  {[type]} array    [description]
+ * @param  {[type]} iteratee [description]
+ * @return {[type]}          [description]
+ */
+function sumBy(array, iteratee = identity) {
+  let sum = 0
+  if (typeof iteratee === 'function') {
+    for (let i = 0; i < array.length; i++) {
+      sum += iteratee(array[i])
+    }
+  } else {
+    for (let i = 0; i < array.length; i++) {
+      sum += array[i][iteratee]
+    }
+  } 
+  return sum
+}
 
+/**
+ * [uniq description]
+ * @param  {[type]} array [description]
+ * @return {[type]}       [description]
+ */
+function uniq(array) {
+  let res = []
+  for (let i of array) {
+    if (res.indexOf(i) === -1) {
+      res.push(i)
+    }
+  }
+  return res
+}
 
+/**
+ * [isEqual description]
+ * @param  {[type]}  value [description]
+ * @param  {[type]}  other [description]
+ * @return {Boolean}       [description]
+ */
+function isEqual(value, other) {
+  if (value === other) {
+    return true
+  }
+  if (value !== value && other !== other) {
+    return true
+  }
+  if (Array.isArray(value) && Array.isArray(other)) {
+    let len = Math.max(value.length, other.length)
+    for (let i = 0; i < len; i++) {
+      if (!isEqual(value[i], other[i])) {
+        return false
+      }
+      return true  
+    }
+  }
+  if (typeof value === 'object' && typeof other === 'object') {
+    let propNames = []
+    for (let i in value) {
+      propNames.push(i)
+    }
+    for (let i in other) {
+      propNames.push(i)
+    }
+    propNames = uniq(propNames)
+    for (let prop of propNames) {
+      if (!isEqual(value[prop], other[prop])) {
+        return false
+      }
+    }
+    return true
+  }
+  return value === other
+}
 
 
 
@@ -342,6 +439,10 @@ function inRange(number, start, end) {
     range: range,
     rangeRight: rangeRight,
     inRange: inRange,
-    
+    sum: sum,
+    sumBy: sumBy,
+    uniq: uniq,
+    isEqual: isEqual,
+
   }
 }()
