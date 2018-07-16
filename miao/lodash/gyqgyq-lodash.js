@@ -120,9 +120,9 @@ function differenceBy(array, value, iteratee) {
  */
 function differenceWith (array, value, comparator) {
   let res = []
-  array.forEach(val => {
-    if (!comparator(val, value)) {
-      res.push(value)
+  array.forEach(item => {
+    if (!comparator(item, value)) {
+      res.push(item)
     }
   })
   return res
@@ -191,10 +191,33 @@ function dropRightWhile(array, predicate) {
  * @return {[type]}           [description]
  */
 function dropWhile(array, predicate) {
-  if (array && array.length) {
-    return []
+  let res = []
+  if (typeof predicate === 'function') {
+    array.forEach(val => {
+      if (!predicate(val)) {
+        res.push(val)
+      }
+    })
+  } else if (Array.isArray(predicate)) {
+    array.forEach(val => {
+      if (val[predicate[0]] !== predicate[1]) {
+        res.push(val)
+      }
+    })
+  } else if (typeof predicate === 'object') {
+    array.forEach(val => {
+      if (!isEqual(val, predicate)) {
+        res.push(val)
+      }
+    })
+  } else if (typeof predicate === 'string') {
+    array.forEach(val => {
+      if (predicate in val) {
+        res.push(val)
+      }
+    })
   }
-
+  return res
 }
 
 /**
@@ -388,11 +411,15 @@ function isEqual(value, other) {
   if (value === other) {
     return true
   }
+
   if (value !== value && other !== other) {
     return true
   }
   if (Array.isArray(value) && Array.isArray(other)) {
-    let len = Math.max(value.length, other.length)
+    let len = value.length
+    if (len !== other.length) {
+      return false
+    }
     for (let i = 0; i < len; i++) {
       if (!isEqual(value[i], other[i])) {
         return false
@@ -401,6 +428,9 @@ function isEqual(value, other) {
     }
   }
   if (typeof value === 'object' && typeof other === 'object') {
+    if (Array.isArray(value) || Array.isArray(other)) {
+      return false
+    }
     let propNames = []
     for (let i in value) {
       propNames.push(i)
