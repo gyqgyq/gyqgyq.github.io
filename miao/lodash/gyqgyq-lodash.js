@@ -179,9 +179,26 @@ function dropRightWhile(array, predicate) {
  * @return {[type]}           [description]
  */
 function dropWhile(array, predicate) {
+  if (array && array.length) {
+    return []
+  }
 
 }
 
+/**
+ * [fill description]
+ * @param  {[type]} array [description]
+ * @param  {[type]} value [description]
+ * @param  {Number} start [description]
+ * @param  {[type]} end   [description]
+ * @return {[type]}       [description]
+ */
+function fill(array, value, start = 0, end = array.length) {
+  for (let i = start; i < end; i++) {
+    array[i] = value
+  }
+  return array
+}
 
 
 
@@ -199,5 +216,6 @@ function dropWhile(array, predicate) {
     dropRight: dropRight,
     dropRightWhile: dorpRightWhile,
     dropWhile: dropWhile,
+    fill: fill,
   }
 }()
