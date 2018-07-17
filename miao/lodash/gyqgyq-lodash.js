@@ -119,7 +119,7 @@ var gyqgyq = function() {
    * @return {[type]}            [description]
    */
   function differenceWith (array, value, comparator) {
-    return array.filter(val => !comparator(val, value))
+    return array.filter(val => value.every(item => !comparator(val, item)))
   }
 
   /**
@@ -544,10 +544,70 @@ var gyqgyq = function() {
     return array.length === 0 ? undefined : array.reduce((a, b) => a > b ? a : b , -Infinity)
   }
 
+  /**
+   * [join description]
+   * @param  {[type]} array     [description]
+   * @param  {String} separator [description]
+   * @return {[type]}           [description]
+   */
+  function join(array, separator = ',') {
+    return array.join(separator)
+  }
 
+  /**
+   * [lase description]
+   * @param  {[type]} array [description]
+   * @return {[type]}       [description]
+   */
+  function last(array) {
+    return array[array.length - 1]
+  }
 
+  /**
+   * [lastIndexOf description]
+   * @param  {[type]} array     [description]
+   * @param  {[type]} value     [description]
+   * @param  {[type]} fromIndex [description]
+   * @return {[type]}           [description]
+   */
+  function lastIndexOf(array, value, fromIndex = array.length - 1) {
+    for (let i = fromIndex; i >= 0; i--) {
+      if (array[i] === value) {
+        return i
+      }
+    }
+    return -1
+  }
+
+  /**
+   * [nth description]
+   * @param  {[type]} array [description]
+   * @param  {Number} n     [description]
+   * @return {[type]}       [description]
+   */
+  function nth(array, n = 0) {
+    return n < 0 ? array[array.length + n] : array[n]
+  }
+
+  function pull(array, ...argus) {
+    return array.filter(item => argus.indexOf(item) === -1)
+  }
+
+  function pullAll(array, values) {
+    return array.filter(item => values.indexOf(item) === -1)
+  }
+
+  function pullAt(array, indexes) {
+    let res = []
+    for (let i = indexes.length - 1; i >= 0; i--) {
+      res.push(array.splice(indexes[i], 1)[0])
+    }
+    return res
+  }
 
   return {
+    pullAt: pullAt,
+    pullAll: pullAll,
     chunk: chunk,
     compact: compact,
     concat: concat,
@@ -577,6 +637,10 @@ var gyqgyq = function() {
     divide: divide,
     floor: floor,
     max: max,
-
+    join: join,
+    last: last,
+    lastIndexOf: lastIndexOf,
+    nth: nth,
+    pull: pull,
   }
 }()
