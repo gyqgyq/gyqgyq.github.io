@@ -386,13 +386,10 @@ var gyqgyq = function() {
    * @return {[type]}       [description]
    */
   function uniq(array) {
-    let res = []
-    for (let i of array) {
-      if (res.indexOf(i) === -1) {
-        res.push(i)
-      }
-    }
-    return res
+    return array.reduce((acc, item) => {
+      acc.indexOf(item) === -1 ? acc.push(item) : ''
+      return acc
+    }, [])
   }
 
   /**
@@ -418,8 +415,8 @@ var gyqgyq = function() {
         if (!isEqual(value[i], other[i])) {
           return false
         }
-        return true  
       }
+      return true  
     }
     if (typeof value === 'object' && typeof other === 'object') {
       if (Array.isArray(value) || Array.isArray(other)) {
@@ -600,12 +597,21 @@ var gyqgyq = function() {
   function pullAt(array, indexes) {
     let res = []
     for (let i = indexes.length - 1; i >= 0; i--) {
-      res.push(array.splice(indexes[i], 1)[0])
+      res.unshift(array.splice(indexes[i], 1)[0])
     }
     return res
   }
 
+  function flatten(array) {
+    return array.reduce((acc, item) => {
+      Array.isArray(item) ? acc.push(...item) : acc.push(item)
+      return acc
+    }, [])
+  }
+
+
   return {
+    flatten: flatten,
     pullAt: pullAt,
     pullAll: pullAll,
     chunk: chunk,
