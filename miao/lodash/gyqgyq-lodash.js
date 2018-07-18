@@ -353,11 +353,7 @@ var gyqgyq = function() {
    * @return {[type]}       [description]
    */
   function sum(array) {
-    let sum = 0
-    for (let i = 0; i < array.length; i++) {
-      sum += array[i]
-    }
-    return sum
+    return sumBy(array, gyqgyq.identity)
   }
 
   /**
@@ -366,18 +362,12 @@ var gyqgyq = function() {
    * @param  {[type]} iteratee [description]
    * @return {[type]}          [description]
    */
-  function sumBy(array, iteratee = identity) {
-    let sum = 0
-    if (typeof iteratee === 'function') {
-      for (let i = 0; i < array.length; i++) {
-        sum += iteratee(array[i])
-      }
-    } else {
-      for (let i = 0; i < array.length; i++) {
-        sum += array[i][iteratee]
-      }
-    } 
-    return sum
+  function sumBy(array, iteratee = gyqgyq.identity) {
+    var result = 0
+    for (let i = 0; i < array.length; i++) {
+      result += iteratee(array[i])
+    }
+    return result
   }
 
   /**
@@ -662,8 +652,8 @@ var gyqgyq = function() {
   function flattenDepth(array, depth = 1) {
     function flattenPush(ary, depth) {
       if (depth === 0) {
-        res.push(ary)
-        return
+        res.push(...ary)
+        return res
       }
       ary.forEach(item => {
         if (Array.isArray(item)) {
@@ -869,9 +859,12 @@ var gyqgyq = function() {
     }, [])
   }
 
-
+  /**
+   * [xor description]
+   * @param  {...[type]} array [description]
+   * @return {[type]}          [description]
+   */
   function xor(...array) {
-
     let res =  array.reduce((acc,item) => {
       item.reduce((ac, val) => {
         ac.push(val)
@@ -891,11 +884,38 @@ var gyqgyq = function() {
     return res.filter(item => dict[item] === 1)
   }
   
-
-
+  /**
+   * [identity description]
+   * @param  {[type]} v [description]
+   * @return {[type]}   [description]
+   */
+  function identity(v) {
+    return v
+  }
+  
+  /**
+   * [matches description]
+   * @param  {[type]} src [description]
+   * @return {[type]}     [description]
+   */
+  function matches(src) {
+    return function(obj) {
+      for (let key in src) {
+        if (obj[key] !== src[key]) {
+          if (isMatch()) {
+            return false
+          } else if (0) {
+            return false
+          }
+        }
+      }
+      return true
+    }
+  }
 
 
   return {
+    identity: identity,
     xor: xor,
     union: union,
     takeRight: takeRight,
