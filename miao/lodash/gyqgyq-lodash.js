@@ -850,13 +850,54 @@ var gyqgyq = function() {
     return res
   }
 
-
+  /**
+   * [union description]
+   * @param  {...[type]} array [description]
+   * @return {[type]}          [description]
+   */
   function union(...array) {
-    
+    return array.reduce((acc, item) => {
+      item.reduce((ac, val) => {
+        if (ac.indexOf(val) === -1) {
+          ac.push(val)
+          return ac
+        } else {
+          return ac
+        }
+      }, acc)
+      return acc
+    }, [])
   }
 
 
+  function xor(...array) {
+
+    let res =  array.reduce((acc,item) => {
+      item.reduce((ac, val) => {
+        ac.push(val)
+        return ac
+      }, acc)
+      return acc
+    }, [])
+
+    let dict = {}
+    res.forEach(item => {
+      if (dict[item] === undefined) {
+        dict[item] = 1
+      } else {
+        dict[item] += 1
+      }
+    })
+    return res.filter(item => dict[item] === 1)
+  }
+  
+
+
+
+
   return {
+    xor: xor,
+    union: union,
     takeRight: takeRight,
     take: take,
     tail: tail,
