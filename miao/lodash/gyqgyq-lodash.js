@@ -61,23 +61,9 @@ var gyqgyq = function() {
    * @param  {[type]} value [description]
    * @return {[type]}       [description]
    */
-  function difference(array, value) {
-    if (value === undefined || array === []) {
-      return array
-    }
-    let res = []
-    let val = []
-    for (let i = 1; i < arguments.length; i++) {
-      for (let j = 0; j < arguments[i].length; j++) {
-        val.push(arguments[i][j])
-      }
-    }
-    for (let i of array) {
-      if (val.indexOf(i) === -1) {
-        res.push(i)
-      }
-    }
-    return res
+  function difference(array, ...value) {
+    let val = flatten([...value])
+    return differenceBy(array, val)
   }
   /**
    * [differenceBy description]
@@ -86,30 +72,17 @@ var gyqgyq = function() {
    * @param  {[type]} iteratee [description]
    * @return {[type]}          [description]
    */
-  function differenceBy(array, value, iteratee) {
-    let res = []
-    let newValue = []
+  function differenceBy(array, value, iteratee = gyqgyq.identity) {
+    let func
     if (typeof iteratee === 'function') {
-      for (let i of value) {
-        newValue.push(iteratee(i))
-      }
-      for (let i of array) {
-        if (newValue.indexOf(iteratee(i)) === -1) {
-          res.push(i)
-        }
-      }
+      func = iteratee
     } else {
-      for (let i of value) {
-        newValue.push(i[iteratee])
-      }
-      for (let i of array) {
-        if (newValue.indexOf(i[iteratee]) === -1) {
-          res.push(i)
-        }
-      }
+      func = gyqgyq.property(iteratee)
     }
-    return res
+    let newValue = value.map(x => func(x))
+    return array.filter(item => newValue.indexOf(func(item)) === -1)
   }
+
 
   /**
    * [differenceWith description]
@@ -148,34 +121,22 @@ var gyqgyq = function() {
    * @param  {[type]} predicate [description]
    * @return {[type]}           [description]
    */
-  function dropRightWhile(array, predicate) {
-    let res = []
+  function dropRightWhile(array, predicate = gyqgyq.identity) {
+    let func
     if (typeof predicate === 'function') {
-      array.forEach(val => {
-        if (!predicate(val)) {
-          res.push(val)
-        }
-      })
-    } else if (Array.isArray(predicate)) {
-      array.forEach(val => {
-        if (val[predicate[0]] !== predicate[1]) {
-          res.push(val)
-        }
-      })
-    } else if (typeof predicate === 'object') {
-      array.forEach(val => {
-        if (!isEqual(val, predicate)) {
-          res.push(val)
-        }
-      })
+      func = predicate
     } else if (typeof predicate === 'string') {
-      array.forEach(val => {
-        if (predicate in val) {
-          res.push(val)
-        }
-      })
+      func = gyqgyq.property(predicate)
+    } else if (Array.isArray(predicate)) {
+      func = gyqgyq.matchesProperty(predicate)
+    } else {
+      func = gyqgyq.matches(predicate)
     }
-    return res
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (!func(array[i])) {
+        return array.splice(0, i + 1)
+      }
+    }
   }
 
   /**
@@ -185,33 +146,21 @@ var gyqgyq = function() {
    * @return {[type]}           [description]
    */
   function dropWhile(array, predicate) {
-    let res = []
+    let func
     if (typeof predicate === 'function') {
-      array.forEach(val => {
-        if (!predicate(val)) {
-          res.push(val)
-        }
-      })
-    } else if (Array.isArray(predicate)) {
-      array.forEach(val => {
-        if (val[predicate[0]] !== predicate[1]) {
-          res.push(val)
-        }
-      })
-    } else if (typeof predicate === 'object') {
-      array.forEach(val => {
-        if (!isEqual(val, predicate)) {
-          res.push(val)
-        }
-      })
+      func = predicate
     } else if (typeof predicate === 'string') {
-      array.forEach(val => {
-        if (predicate in val) {
-          res.push(val)
-        }
-      })
+      func = gyqgyq.property(predicate)
+    } else if (Array.isArray(predicate)) {
+      func = gyqgyq.matchesProperty(predicate)
+    } else {
+      func = gyqgyq.matches(predicate)
     }
-    return res
+    for (let i = 0; i < array.length; i++) {
+      if (!func(array[i])) {
+        return array.splice(i)
+      }
+    }
   }
 
   /**
@@ -621,7 +570,9 @@ var gyqgyq = function() {
       return acc
     }, [])
   }
-
+  // function flatten(ary) {
+  //   return [].concat(...ary)
+  // }
   /**
    * [flattenDeep description]
    * @param  {[type]} array [description]
@@ -894,27 +845,145 @@ var gyqgyq = function() {
   }
   
   /**
-   * [matches description]
+   * [property description]
+   * @param  {[type]} propName [description]
+   * @return {[type]}          [description]
+   */
+  function property(propName) {
+    return function (obj) {
+      return obj[propName]
+    }
+  }
+
+  /**
+   * 返回函数深度对比对象子集
    * @param  {[type]} src [description]
    * @return {[type]}     [description]
    */
   function matches(src) {
-    return function(obj) {
+    return function (obj) {
       for (let key in src) {
-        if (obj[key] !== src[key]) {
-          if (isMatch()) {
-            return false
-          } else if (0) {
+        if (src[key] !== obj[key]) {
+          if (!gyqgyq.isMatch(obj[key], src[key])) {
             return false
           }
-        }
+        } 
       }
       return true
     }
   }
 
+  /**
+   * 深度对比对象是否是子集
+   * @param  {[type]}  object [description]
+   * @param  {[type]}  source [description]
+   * @return {Boolean}        [description]
+   */
+  function isMatch(object, source) {
+    if (typeof object !== 'object' || typeof source !== 'object') {
+      return false
+    }
+    for (let key in source) {
+      if (object[key] !== source[key]) {
+        if (!isMatch(object[key], source[key])) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+  
+  /**
+   * [fromPairs description]
+   * @param  {[type]} pairs [description]
+   * @return {[type]}       [description]
+   */
+  function fromPairs(pairs) {
+    let res = {}
+    for (let i = 0; i < pairs.length; i++) {
+      res[pairs[i][0]] = pairs[i][1]
+    }
+    return res
+  }
 
+  /**
+   * [matchesProperty description]
+   * @param  {[type]} path     [description]
+   * @param  {[type]} srcValue [description]
+   * @return {[type]}          [description]
+   */
+  function matchesProperty(path, srcValue) {
+    let ary = [].concat(path, srcValue)
+    return matches(fromPairs([ary]))
+  }
+
+  /**
+   * [findIndex description]
+   * @param  {[type]} array     [description]
+   * @param  {[type]} predicate [description]
+   * @param  {Number} fromIndex [description]
+   * @return {[type]}           [description]
+   */
+  function findIndex(array, predicate = gyqgyq.identity, fromIndex = 0) {
+    let func
+    if (typeof predicate === 'function') {
+      func = predicate
+    } else if (typeof predicate === 'string') {
+      func = gyqgyq.property(predicate)
+    } else if (Array.isArray(predicate)) {
+      func = gyqgyq.matchesProperty(predicate)
+    } else {
+      func = gyqgyq.matches(predicate)
+    }
+    for (let i = fromIndex; i < array.length; i++) {
+      if (func(array[i])) {
+        return i
+      }
+    }
+    return -1
+  }
+
+  /**
+   * [findLastIndex description]
+   * @param  {[type]} array     [description]
+   * @param  {[type]} predicate [description]
+   * @param  {[type]} fromIndex [description]
+   * @return {[type]}           [description]
+   */
+  function findLastIndex(array, predicate = gyqgyq.identity, fromIndex = array.length - 1) {
+    let func
+    if (typeof predicate === 'function') {
+      func = predicate
+    } else if (typeof predicate === 'string') {
+      func = gyqgyq.property(predicate)
+    } else if (Array.isArray(predicate)) {
+      func = gyqgyq.matchesProperty(predicate)
+    } else {
+      func = gyqgyq.matches(predicate)
+    }
+    for (let i = fromIndex; i >= 0; i--) {
+      if (func(array[i])) {
+        return i
+      }
+    }
+    return -1
+  }
+
+
+  function intersectionBy(array, iteratee = gyqgyq.identity) {
+    
+  }
+
+
+  //-----------------啪-------------------
   return {
+    findLastIndex: findLastIndex,
+    findIndex: findIndex,
+    matchesProperty: matchesProperty,
+    fromPairs: fromPairs,
+    matches: matches,
+    isMatch: isMatch,
+    property: property,
     identity: identity,
     xor: xor,
     union: union,
