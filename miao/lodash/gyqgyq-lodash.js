@@ -678,27 +678,6 @@ var gyqgyq = function() {
   }
 
   /**
-   * [sortedIndex description]
-   * @param  {[type]} array [description]
-   * @param  {[type]} value [description]
-   * @return {[type]}       [description]
-   */
-  function sortedIndex(array, value) {
-    let left = 0
-    let right = array.length - 1
-    while (left < right) {
-      let mid = (left + right) >>> 1
-      let computed = array[mid]
-      if (computed < value) {
-        left = mid + 1
-      } else if (computed >= value) {
-        right = mid
-      }
-    }
-    return right
-  }
-
-  /**
    * [sortedLastIndex description]
    * @param  {[type]} array [description]
    * @param  {[type]} value [description]
@@ -969,14 +948,131 @@ var gyqgyq = function() {
     return -1
   }
 
+  /**
+   * [intersectionBy description]
+   * @param  {[type]} array    [description]
+   * @param  {[type]} ary      [description]
+   * @param  {[type]} iteratee [description]
+   * @return {[type]}          [description]
+   */
+  function intersectionBy(array, ary, iteratee = gyqgyq.identity) {
+    let func
+    if (typeof iteratee === 'function') {
+      func = iteratee
+    } else {
+      func = gyqgyq.property(iteratee)
+    }
+    let newAry = array.map(x => func(x))
+    return ary.filter(item => gyqgyq.indexOf(newAry, func(item)) !== -1)
+  } 
 
-  function intersectionBy(array, iteratee = gyqgyq.identity) {
-    
+  /**
+   * [intersectionWith description]
+   * @param  {[type]} array      [description]
+   * @param  {[type]} other      [description]
+   * @param  {[type]} comparator [description]
+   * @return {[type]}            [description]
+   */
+  function intersectionWith(array, other, comparator) {
+    return array.filter(item => {
+      for (let i = 0; i < other.length; i++) {
+        if (comparator(item, other[i])) {
+          return true
+        }
+      }
+      return false
+    })
   }
+
+  /**
+   * [pullAllBy description]
+   * @param  {[type]} array    [description]
+   * @param  {[type]} values   [description]
+   * @param  {[type]} iteratee [description]
+   * @return {[type]}          [description]
+   */
+  function pullAllBy(array, values, iteratee = gyqgyq.identity) {
+    let func
+    if (typeof iteratee === 'function') {
+      func = iteratee
+    } else {
+      func = gyqgyq.property(iteratee)
+    }
+    let newVal = values.map(x => func(x))
+    return array.filter(item => gyqgyq.indexOf(newVal, func(item)) === -1)
+  }
+
+  /**
+   * [pullAllWith description]
+   * @param  {[type]} array      [description]
+   * @param  {[type]} values     [description]
+   * @param  {[type]} comparator [description]
+   * @return {[type]}            [description]
+   */
+  function pullAllWith(array, values, comparator) {
+    return array.filter(item => {
+      for (let i = 0; i < values.length; i++) {
+        if (comparator(item, values[i])) {
+          return false
+        }
+      }
+      return true
+    })
+  }
+
+  /**
+   * [sortedIndex description]
+   * @param  {[type]} array [description]
+   * @param  {[type]} value [description]
+   * @return {[type]}       [description]
+   */
+  function sortedIndex(array, value) {
+    let left = 0
+    let right = array.length - 1
+    while (left < right) {
+      let mid = (left + right) >>> 1
+      let computed = array[mid]
+      if (computed < value) {
+        left = mid + 1
+      } else if (computed >= value) {
+        right = mid
+      }
+    }
+    return right
+  }
+
+
+  function sortedIndexBy(array, value, iteratee = gyqgyq.identity) {
+    let func
+    if (typeof iteratee === 'function') {
+      func = iteratee
+    } else {
+      func = gyqgyq.property(iteratee)
+    }
+    let left = 0
+    let right = array.length
+    let ary = array.map(x => func(x))
+    let val = func(value)
+    while (left < right) {
+      let mid = (left + right) >>> 1
+      if (ary[mid] >= val) {
+        right = mid 
+      } else {
+        left = mid + 1
+      }
+    }
+    return right
+  }
+
 
 
   //-----------------啪-------------------
   return {
+    sortedIndexBy: sortedIndexBy,
+    pullAllWith: pullAllWith,
+    pullAllBy: pullAllBy,
+    intersectionWith: intersectionWith,
+    intersectionBy: intersectionBy,
     findLastIndex: findLastIndex,
     findIndex: findIndex,
     matchesProperty: matchesProperty,
