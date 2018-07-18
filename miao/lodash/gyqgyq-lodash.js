@@ -586,14 +586,32 @@ var gyqgyq = function() {
     return n < 0 ? array[array.length + n] : array[n]
   }
 
+  /**
+   * [pull description]
+   * @param  {[type]}    array [description]
+   * @param  {...[type]} argus [description]
+   * @return {[type]}          [description]
+   */
   function pull(array, ...argus) {
     return array.filter(item => argus.indexOf(item) === -1)
   }
 
+  /**
+   * [pullAll description]
+   * @param  {[type]} array  [description]
+   * @param  {[type]} values [description]
+   * @return {[type]}        [description]
+   */
   function pullAll(array, values) {
     return array.filter(item => values.indexOf(item) === -1)
   }
 
+  /**
+   * [pullAt description]
+   * @param  {[type]} array   [description]
+   * @param  {[type]} indexes [description]
+   * @return {[type]}         [description]
+   */
   function pullAt(array, indexes) {
     let res = []
     for (let i = indexes.length - 1; i >= 0; i--) {
@@ -602,6 +620,11 @@ var gyqgyq = function() {
     return res
   }
 
+  /**
+   * [flatten description]
+   * @param  {[type]} array [description]
+   * @return {[type]}       [description]
+   */
   function flatten(array) {
     return array.reduce((acc, item) => {
       Array.isArray(item) ? acc.push(...item) : acc.push(item)
@@ -609,8 +632,244 @@ var gyqgyq = function() {
     }, [])
   }
 
+  /**
+   * [flattenDeep description]
+   * @param  {[type]} array [description]
+   * @return {[type]}       [description]
+   */
+  function flattenDeep(array) {
+    function flattenPush(ary) {
+      ary.forEach(item => {
+        if (Array.isArray(item)) {
+          return flattenPush(item)
+        } else {
+          res.push(item)
+          return res
+        }
+      })
+    }
+    let res = []
+    flattenPush(array)
+    return res
+  }
+
+  /**
+   * [flattenDepth description]
+   * @param  {[type]} array [description]
+   * @param  {Number} depth [description]
+   * @return {[type]}       [description]
+   */
+  function flattenDepth(array, depth = 1) {
+    function flattenPush(ary, depth) {
+      if (depth === 0) {
+        res.push(ary)
+        return
+      }
+      ary.forEach(item => {
+        if (Array.isArray(item)) {
+          flattenPush(item, depth - 1)
+        } else {
+          res.push(item)
+          return res
+        }
+      })
+    }
+    let res = []
+    flattenPush(array, depth)
+    return res
+  }
+
+  /**
+   * [fromPairs description]
+   * @param  {[type]} pairs [description]
+   * @return {[type]}       [description]
+   */
+  function fromPairs(pairs) {
+    let res = {}
+    pairs.forEach(item => {
+      res[item[0]] = item[1]
+    })
+    return res
+  }
+
+  /**
+   * [remove description]
+   * @param  {[type]} array     [description]
+   * @param  {[type]} predicate [description]
+   * @return {[type]}           [description]
+   */
+  function remove(array, predicate = gyqgyq.identity) {
+    return array.reduce((acc, item, index) => {
+      if (predicate(item)) {
+        acc.push(item)
+        array.splice(index, 1)
+        return acc
+      } else {
+        return acc
+      }
+    }, [])
+  }
+
+  /**
+   * [reverse description]
+   * @param  {[type]} array [description]
+   * @return {[type]}       [description]
+   */
+  function reverse(array) {
+    let index = (array.length - 1) / 2 | 0
+    for (let i = 0; i <= index; i++) {
+      let a = array[i]
+      array[i] = array[array.length - 1 - i]
+      array[array.length - 1 - i] = a
+    }
+    return array
+  }
+
+  /**
+   * [slice description]
+   * @param  {[type]} array [description]
+   * @param  {Number} start [description]
+   * @param  {[type]} end   [description]
+   * @return {[type]}       [description]
+   */
+  function slice(array, start = 0, end = array.length) {
+    return array.slice(start, end)
+  }
+
+  /**
+   * [sortedIndex description]
+   * @param  {[type]} array [description]
+   * @param  {[type]} value [description]
+   * @return {[type]}       [description]
+   */
+  function sortedIndex(array, value) {
+    let left = 0
+    let right = array.length - 1
+    while (left < right) {
+      let mid = (left + right) >>> 1
+      let computed = array[mid]
+      if (computed < value) {
+        left = mid + 1
+      } else if (computed >= value) {
+        right = mid
+      }
+    }
+    return right
+  }
+
+  /**
+   * [sortedLastIndex description]
+   * @param  {[type]} array [description]
+   * @param  {[type]} value [description]
+   * @return {[type]}       [description]
+   */
+  function sortedLastIndex(array, value) {
+    let left = 0
+    let right = array.length - 1
+    while (left < right) {
+      let mid = (left + right) >>> 1
+      let computed = array[mid]
+      if (computed <= value) {
+        left = mid + 1
+      } else if (computed > value) {
+        right = mid
+      }
+    }
+    return right
+  }
+
+  /**
+   * [sortedUniq description]
+   * @param  {[type]} array [description]
+   * @return {[type]}       [description]
+   */
+  function sortedUniq(array) {
+    let res = []
+    return array
+    .filter((item, index)=> item !== array[index - 1])
+    .reduce((acc, val) => {
+      res.push(val)
+      return res
+    }, [])
+  }
+
+  /**
+   * [sortedUniqBy description]
+   * @param  {[type]} array    [description]
+   * @param  {[type]} iteratee [description]
+   * @return {[type]}          [description]
+   */
+  function sortedUniqBy(array, iteratee) {
+    let res = []
+    return array
+    .filter((item, index)=> iteratee(item) !== 
+      iteratee(array[index - 1]))
+    .reduce((acc, val) => {
+      res.push(val)
+      return res
+    }, [])
+  }
+
+  /**
+   * [tail description]
+   * @param  {[type]} array [description]
+   * @return {[type]}       [description]
+   */
+  function tail(array) {
+    array.shift()
+    return array
+  }
+
+  /**
+   * [take description]
+   * @param  {[type]} array [description]
+   * @param  {Number} n     [description]
+   * @return {[type]}       [description]
+   */
+  function take(array, n = 1) {
+    let res = []
+    let size = n > array.length ? array.length : n
+    for (let i = 0; i < size; i++) {
+      res.push(array[i])
+    }
+    return res
+  }
+
+  /**
+   * [takeRight description]
+   * @param  {[type]} array [description]
+   * @param  {Number} n     [description]
+   * @return {[type]}       [description]
+   */
+  function takeRight(array, n = 1) {
+    let res = []
+    let size = n > array.length ? 0 : array.length - n
+    for (let i = size; i < array.length; i++) {
+      res.push(array[i])
+    }
+    return res
+  }
+
+
+  function union(...array) {
+    
+  }
+
 
   return {
+    takeRight: takeRight,
+    take: take,
+    tail: tail,
+    sortedUniqBy: sortedUniqBy,
+    sortedUniq: sortedUniq,
+    sortedLastIndex: sortedLastIndex,
+    sortedIndex: sortedIndex,
+    slice: slice,
+    reverse: reverse,
+    remove: remove,
+    fromPairs: fromPairs,
+    flattenDepth: flattenDepth,
+    flattenDeep: flattenDeep,
     flatten: flatten,
     pullAt: pullAt,
     pullAll: pullAll,
