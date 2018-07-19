@@ -73,12 +73,8 @@ var gyqgyq = function() {
    * @return {[type]}          [description]
    */
   function differenceBy(array, ...args) {
-    let iteratee
-    if (typeof args[args.length - 1] === 'string' || typeof args[args.length - 1] === 'function') {
-      iteratee = args.pop()
-    } else {
-      iteratee = identity
-    }
+    if (typeof args[arge.length - 1] === 'function' || typeof args[arge.length - 1] === 'string')
+    let iteratee = gyqgyq.iteratee(args.pop())
     let newValue = value.map(x => iteratee(x))
     return array.filter(item => newValue.indexOf(iteratee(item)) === -1)
   }
@@ -295,7 +291,7 @@ var gyqgyq = function() {
    */
   function sumBy(array, iteratee = gyqgyq.identity) {
     var result = 0
-    iteratee = iteratee(iteratee)
+    iteratee = gyqgyq.iteratee(iteratee)
     for (let i = 0; i < array.length; i++) {
       result += iteratee(array[i])
     }
@@ -939,12 +935,7 @@ var gyqgyq = function() {
    * @return {[type]}          [description]
    */
   function intersectionBy(array, ary, iteratee = gyqgyq.identity) {
-    let func
-    if (typeof iteratee === 'function') {
-      func = iteratee
-    } else {
-      func = gyqgyq.property(iteratee)
-    }
+    let func = gyqgyq.iteratee(iteratee)
     let newAry = array.map(x => func(x))
     return ary.filter(item => gyqgyq.indexOf(newAry, func(item)) !== -1)
   } 
@@ -975,12 +966,7 @@ var gyqgyq = function() {
    * @return {[type]}          [description]
    */
   function pullAllBy(array, values, iteratee = gyqgyq.identity) {
-    let func
-    if (typeof iteratee === 'function') {
-      func = iteratee
-    } else {
-      func = gyqgyq.property(iteratee)
-    }
+    let func = gyqgyq.iteratee(iteratee)
     let newVal = values.map(x => func(x))
     return array.filter(item => gyqgyq.indexOf(newVal, func(item)) === -1)
   }
@@ -1026,12 +1012,7 @@ var gyqgyq = function() {
 
 
   function sortedIndexBy(array, value, iteratee = gyqgyq.identity) {
-    let func
-    if (typeof iteratee === 'function') {
-      func = iteratee
-    } else {
-      func = gyqgyq.property(iteratee)
-    }
+    let func = gyqgyq.iteratee(iteratee)
     let left = 0
     let right = array.length
     let ary = array.map(x => func(x))
@@ -1062,7 +1043,7 @@ var gyqgyq = function() {
 
   function keyBy(collection, iteratee = gyqgyq.identity) {
     let obj = {}
-    let func = iteratee(iteratee)
+    let func = gyqgyq.iteratee(iteratee)
     // if (typeof iteratee === 'function') {
     //   func = iteratee
     // } else {
