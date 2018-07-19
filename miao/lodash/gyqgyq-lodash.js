@@ -72,15 +72,15 @@ var gyqgyq = function() {
    * @param  {[type]} iteratee [description]
    * @return {[type]}          [description]
    */
-  function differenceBy(array, value, iteratee = gyqgyq.identity) {
-    let func
-    if (typeof iteratee === 'function') {
-      func = iteratee
+  function differenceBy(array, ...args) {
+    let iteratee
+    if (typeof args[args.length - 1] === 'string' || typeof args[args.length - 1] === 'function') {
+      iteratee = args.pop()
     } else {
-      func = gyqgyq.property(iteratee)
+      iteratee = identity
     }
-    let newValue = value.map(x => func(x))
-    return array.filter(item => newValue.indexOf(func(item)) === -1)
+    let newValue = value.map(x => iteratee(x))
+    return array.filter(item => newValue.indexOf(iteratee(item)) === -1)
   }
 
 
@@ -122,16 +122,7 @@ var gyqgyq = function() {
    * @return {[type]}           [description]
    */
   function dropRightWhile(array, predicate = gyqgyq.identity) {
-    let func
-    if (typeof predicate === 'function') {
-      func = predicate
-    } else if (typeof predicate === 'string') {
-      func = gyqgyq.property(predicate)
-    } else if (Array.isArray(predicate)) {
-      func = gyqgyq.matchesProperty(predicate)
-    } else {
-      func = gyqgyq.matches(predicate)
-    }
+    let func = iteratee(predicate)
     for (let i = array.length - 1; i >= 0; i--) {
       if (!func(array[i])) {
         return array.splice(0, i + 1)
@@ -146,16 +137,7 @@ var gyqgyq = function() {
    * @return {[type]}           [description]
    */
   function dropWhile(array, predicate) {
-    let func
-    if (typeof predicate === 'function') {
-      func = predicate
-    } else if (typeof predicate === 'string') {
-      func = gyqgyq.property(predicate)
-    } else if (Array.isArray(predicate)) {
-      func = gyqgyq.matchesProperty(predicate)
-    } else {
-      func = gyqgyq.matches(predicate)
-    }
+    let func = iteratee(predicate)
     for (let i = 0; i < array.length; i++) {
       if (!func(array[i])) {
         return array.splice(i)
@@ -1065,9 +1047,40 @@ var gyqgyq = function() {
   }
 
 
+  function iteratee(shorthand = gyqgyq.identity) {
+    if (typeof shorthand === 'function') {
+      return shorthand
+    } else if (typeof shorthand === 'string') {
+      return gyqgyq.property(shorthand)
+    } else if (Array.isArray(shorthand)) {
+      return gyqgyq.matchesProperty(shorthand)
+    } else {
+      return gyqgyq.matches(shorthand)
+    }
+  }
 
+  function keyBy(collection, iteratee = gyqgyq.identity) {
+    let obj = {}
+    let func = iteratee(iteratee)
+    // if (typeof iteratee === 'function') {
+    //   func = iteratee
+    // } else {
+    //   func = property(iteratee)
+    // }
+    for (let item of collection) {
+      obj[func(item)] = item
+    }
+    return obj
+  }
+
+
+  function groupBy (collection, iteratee = gyqgyq.identity) {
+
+  }
   //-----------------啪-------------------
   return {
+    keyBy: keyBy,
+    iteratee: iteratee,
     sortedIndexBy: sortedIndexBy,
     pullAllWith: pullAllWith,
     pullAllBy: pullAllBy,
