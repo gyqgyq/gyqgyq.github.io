@@ -295,6 +295,7 @@ var gyqgyq = function() {
    */
   function sumBy(array, iteratee = gyqgyq.identity) {
     var result = 0
+    iteratee = iteratee(iteratee)
     for (let i = 0; i < array.length; i++) {
       result += iteratee(array[i])
     }
