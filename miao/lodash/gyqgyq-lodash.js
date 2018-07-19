@@ -941,8 +941,8 @@ var gyqgyq = function() {
    */
   function intersectionBy(array, ary, iteratee = gyqgyq.identity) {
     let func = gyqgyq.iteratee(iteratee)
-    let newAry = array.map(x => func(x))
-    return ary.filter(item => gyqgyq.indexOf(newAry, func(item)) !== -1)
+    let newAry = ary.map(x => func(x))
+    return array.filter(item => newAry.includes(func(item)))
   } 
 
   /**
@@ -1049,11 +1049,6 @@ var gyqgyq = function() {
   function keyBy(collection, iteratee = gyqgyq.identity) {
     let obj = {}
     let func = gyqgyq.iteratee(iteratee)
-    // if (typeof iteratee === 'function') {
-    //   func = iteratee
-    // } else {
-    //   func = property(iteratee)
-    // }
     for (let item of collection) {
       obj[func(item)] = item
     }
@@ -1062,10 +1057,126 @@ var gyqgyq = function() {
 
 
   function groupBy (collection, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    return collection.reduce((result, item, key) => (key = func(item), key in result ? result[key].push(item) : result[key] = [item], result), {})
+  }
 
+
+  function after(n, func) {
+    let c = 0
+    let lastResult
+    return function(...args) {
+      c++
+      if (c >= n) {
+        lastResult = func(...args)
+      }
+      return lastResult
+    }
+  }
+
+  function before(n, func) {
+    let c = 0
+    let result
+    return function (...args) {
+      c++
+      if (c <= n) {
+        result = func(...args)
+      }
+      return result
+    }
+  }
+
+
+  function ary(func, n = func.length) {
+    return function (...args) {
+      return func(...args.slice(0, n))
+    }
+  }
+
+  function flip(func) {
+    return function(...args) {
+      return func(...args.reverse())
+    }
+  }
+  function spread(func, start = 0) {
+    return function(ary) {
+      return func.apply(null, ary)
+    }
+  }
+
+  function sortedIndexOf(array, value) {
+    let left = 0
+    let right = array.length - 1
+    while (left < right) {
+      let mid = (left + right) >>> 1
+      let computed = array[mid]
+      if (computed < value) {
+        left = mid + 1
+      } else if (computed >= value) {
+        right = mid
+      }
+    }
+    return right
+  }
+
+  function sortedLastIndex(array, value) {
+    let left = 0
+    let right = array.length - 1
+    while (left < right) {
+      let mid = (left + right) >>> 1
+      let computed = array[mid]
+      if (computed <= value) {
+        left = mid + 1
+      } else if (computed > value) {
+        right = mid
+      }
+    }
+    return right
+  }
+
+  function sortedLastIndexBy(array, value, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let left = 0
+    let right = array.length
+    let ary = array.map(x => func(x))
+    let val = func(value)
+    while (left < right) {
+      let mid = (left + right) >>> 1
+      if (ary[mid] > val) {
+        right = mid 
+      } else {
+        left = mid + 1
+      }
+    }
+    return right
+  }
+
+  function sortedLastIndexOf(array, value) {
+    let left = 0
+    let right = array.length - 1
+    while (left < right) {
+      let mid = (left + right) >>> 1
+      let computed = array[mid]
+      if (computed <= value) {
+        left = mid + 1
+      } else if (computed > value) {
+        right = mid
+      }
+    }
+    return right - 1
   }
   //-----------------啪-------------------
   return {
+    sortedLastIndexOf: sortedLastIndexOf,
+    sortedLastIndexBy: sortedLastIndexBy,
+    sortedLastIndex: sortedLastIndex,
+    sortedIndexOf: sortedIndexOf,
+    spread: spread,
+    flip: flip,
+    ary: ary,
+    before: before,
+    after: after,
+    groupBy: groupBy,
     keyBy: keyBy,
     iteratee: iteratee,
     sortedIndexBy: sortedIndexBy,
