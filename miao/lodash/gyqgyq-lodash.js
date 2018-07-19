@@ -73,10 +73,15 @@ var gyqgyq = function() {
    * @return {[type]}          [description]
    */
   function differenceBy(array, ...args) {
-    if (typeof args[arge.length - 1] === 'function' || typeof args[arge.length - 1] === 'string')
-    let iteratee = gyqgyq.iteratee(args.pop())
-    let newValue = value.map(x => iteratee(x))
-    return array.filter(item => newValue.indexOf(iteratee(item)) === -1)
+    let func
+    if (typeof args[args.length - 1] === 'function' || typeof args[args.length - 1] === 'string') {
+      func = gyqgyq.iteratee(args.pop())
+    } else {
+      func = gyqgyq.identity
+    }
+    args = gyqgyq.flattenDeep([...args])
+    let newValue = args.map(it => func(it))
+    return array.filter(item => !newValue.includes(func(item)))
   }
 
 
