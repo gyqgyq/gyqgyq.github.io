@@ -813,9 +813,17 @@ var gyqgyq = function() {
    * @return {[type]}          [description]
    */
   function property(propName) {
-    return function (obj) {
-      return obj[propName]
+    let name = propName.split('.')
+    if (name.length === 1) {
+      return function (obj) {
+        return obj[propName]
+      }
+    } else {
+      return function (obj) {
+        return obj[name[0]][name[1]]
+      }
     }
+    
   }
 
   /**
@@ -1171,7 +1179,7 @@ var gyqgyq = function() {
     let res = []
     for (let i = array.length - 1; i >= 0; i--) {
       if (func(array[i])) {
-        res.push(array[i])
+        res.unshift(array[i])
       } else {
         break
       }
@@ -1328,7 +1336,8 @@ var gyqgyq = function() {
       for (let i = 0; i < key.length; i++) {
         iteratee(collection[key[i]], key[i], collection)
       }
-    } 
+    }
+    return collection
   }
 
 
@@ -1342,7 +1351,8 @@ var gyqgyq = function() {
       for (let i = key.length - 1; i >= 0; i--) {
         iteratee(collection[key[i]], key[i], collection)
       }
-    } 
+    }
+    return collection
   }
 
 
