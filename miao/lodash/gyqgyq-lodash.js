@@ -1165,8 +1165,586 @@ var gyqgyq = function() {
     }
     return right - 1
   }
+
+  function takeRightWhile(array, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    let res = []
+    for (let i = array.length - 1; i >= 0; i--) {
+      if (func(array[i])) {
+        res.push(array[i])
+      } else {
+        break
+      }
+    }
+    return res
+  }
+
+  function takeWhile(array, predicate = gyqgyq.iteratee) {
+    let func = gyqgyq.iteratee(predicate)
+    let res = []
+    for (let i = 0; i < array.length; i++) {
+      if (func(array[i])) {
+        res.push(array[i])
+      } else {
+        break
+      }
+    }
+    return res
+  }
+
+  function unionBy(...args) {
+    let func
+    if (typeof args[args.length - 1] === 'function' || typeof args[args.length - 1] === 'string') {
+      func = gyqgyq.iteratee(args.pop())
+    } else {
+      func = gyqgyq.identity
+    }
+    args = gyqgyq.flattenDepth(args)
+    let res = []
+    let value = []
+    for (let val of args) {
+      if (!value.includes(func(val))) {
+        res.push(val)
+        value.push(func(val))
+      }
+    }
+    return res
+  }
+  function unionWith(...args) {
+    let func
+    if (typeof args[args.length - 1] === 'function') {
+      func = gyqgyq.iteratee(args.pop())
+    } else {
+      func = gyqgyq.identity
+    }
+    args = gyqgyq.flattenDepth(args)
+    let res = []
+    let flag
+    for (let val of args) {
+      flag = true
+      for (let i of res) {
+        if (func(val, i)) {
+          flag = false
+          break
+        }
+      }
+      if (flag) {
+        res.push(val)
+      }
+    }
+    return res
+  }
+
+
+  function uniqBy(array, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let res = []
+    let val = []
+    for (let i of array) {
+      if (!val.includes(func(i))) {
+        res.push(i)
+        val.push(func(i))
+      }
+    }
+    return res
+  }
+
+
+  function uniqWith(array, comparator) {
+    let res = []
+    let flag
+    for (let i = 0; i < array.length; i++) {
+      flag = true
+      for (let j = 0; j < res.length; j++) {
+        if (comparator(array[i], res[j])) {
+          flag = false
+          break
+        }
+      }
+      if (flag) {
+        res.push(array[i])
+      }
+    }
+    return res
+  }
+
+  function unzip(array) {
+    let str = []
+    let num = []
+    let bool = []
+    array = gyqgyq.flattenDepth(array)
+    array.forEach(item => {
+      let t = typeof item
+      if (t === 'string') {
+        str.push(item)
+      } else if (t === 'number') {
+        num.push(item)
+      } else {
+        bool.push(item)
+      }
+    })
+    return [str, num, bool]
+  }
+
+
+  function unzipWith(array, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let res = []
+    for (let i = 0; i < array[0].length; i++) {
+      res.push(func.bind(null, array[0][i]))
+    }
+    for (let i = 0; i < array[1].length; i++) {
+      res[i] = res[i](array[1][i])
+    }
+    return res
+  }
+
+
+  function without(array, ...args) {
+    return array.filter(item => !args.includes(item))
+  }
+
+  function countBy(collection, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let res = {}
+    collection.forEach(item => {
+      if (func(item)in res) {
+        res[func(item)] += 1
+      } else {
+        res[func(item)] = 1
+      }
+    })
+    return res
+  }
+
+
+  function forEach(collection, iteratee = gyqgyq.identity) {
+    if (Array.isArray(collection)) {
+      for (let i = 0; i < collection.length; i++) {
+        iteratee(collection[i], i, collection)
+      }
+    } else {
+      let key = Object.keys(collection)
+      for (let i = 0; i < key.length; i++) {
+        iteratee(collection[key[i]], key[i], collection)
+      }
+    } 
+  }
+
+
+  function forEachRight(collection, iteratee = gyqgyq.identity) {
+    if (Array.isArray(collection)) {
+      for (let i = collection.length - 1; i >= 0; i--) {
+        iteratee(collection[i], i, collection)
+      }
+    } else {
+      let key = Object.keys(collection)
+      for (let i = key.length - 1; i >= 0; i--) {
+        iteratee(collection[key[i]], key[i], collection)
+      }
+    } 
+  }
+
+
+  function every(collection, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    for (let i = 0; i < collection.length; i++) {
+      if (!func(collection[i], i, collection)) {
+        return false
+      }
+    }
+    return true
+  }
+
+  function filter(collection, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    let res = []
+    gyqgyq.forEach(collection, function (item, key, collection) {
+      if (func(item, key, collection)) {
+        res.push(item)
+      }
+    })
+    return res
+  }
+
+
+  function find(collection, predicate = gyqgyq.identity, fromIndex = 0) {
+    let func = gyqgyq.iteratee(predicate)
+    for (let i = fromIndex; i < collection.length; i++) {
+      if (func(collection[i], i, collection)) {
+        return collection[i]
+      }
+    }
+    return undefined
+  }
+
+
+  function findLast(collection, predicate = gyqgyq.identity, fromIndex = collection.length - 1) {
+    let func = gyqgyq.iteratee(predicate)
+    for (let i = fromIndex; i >= 0; i--) {
+      if (func(collection[i], i, collection)) {
+        return collection[i]
+      }
+    }
+    return undefined
+  }
+
+
+  function flatMap(collection, iteratee = gyqgyq.identity) {
+    let res = []
+    let func = gyqgyq.iteratee(iteratee)
+    for (let i = 0; i < collection.length; i++) {
+      res.push(func(collection[i], i, collection))
+    }
+    return flatten(res)
+  }
+
+
+  function flatMapDeep(collection, iteratee = gyqgyq.identity) {
+    let res = []
+    let func = gyqgyq.iteratee(iteratee)
+    for (let i = 0; i < collection.length; i++) {
+      res.push(func(collection[i], i, collection))
+    }
+    return flattenDeep(res)
+  }
+
+
+  function flatMapDepth(collection, iteratee = gyqgyq.identity, depth = 1) {
+    let res = []
+    let func = gyqgyq.iteratee(iteratee)
+    for (let i = 0; i < collection.length; i++) {
+      res.push(func(collection[i], i, collection))
+    }
+    return flattenDepth(res, depth)
+  }
+
+  function includes(collection, value, fromIndex = 0) {
+    if (Array.isArray(collection)) {
+      for (let i = fromIndex; i < collection.length; i++) {
+        if (collection[i] === value) {
+          return true
+        }
+      }
+    } else if (typeof collection === 'string') {
+      for (let i = fromIndex; i < collection.length; i++) {
+        let j = 0
+        for (; j < value.length; j++) {
+          if (collection[i] === value[j]) {
+            if (collection[i + j] !== value[j]) {
+              break
+            }
+          } 
+        }
+        if (j === value.length) {
+          return true
+        }
+      }
+    } else {
+      for (let key in collection) {
+        if (collection[key] === value) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  function bind(f, thisArg, ...fixedArgs) {
+    return function (...restArgs) {
+      return f.apply(thisArg, [...fixedArgs, ...restArgs])
+    }
+  }
+
+
+  function map(collection, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let res = []
+    if (Array.isArray(collection)) {
+      for (let i = 0; i < collection.length; i++) {
+        res.push(func(collection[i], i, collection))
+      }
+    } else {
+      for (let key in collection) {
+        res.push(func(collection[key], key, collection))
+      }
+    }
+    return res
+  }
+
+  
+  function partition(collection, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    let t = []
+    let f = []
+    for (let i = 0; i < collection.length; i++) {
+      if (func(collection[i])) {
+        t.push(collection[i])
+      } else {
+        f.push(collection[i])
+      }
+    }
+    return [t, f]
+  }
+
+  function reduce(collection, iteratee = gyqgyq.identity, accumulator) {
+    let func = gyqgyq.iteratee(iteratee)
+    if (Array.isArray(collection)) {
+      let i = 0
+      if (arguments.length < 3) {
+        i = 1
+        accumulator = collection[0]
+      }
+      for (; i < collection.length; i++) {
+        accumulator = func(accumulator, collection[i],i ,collection)
+      }
+      return accumulator
+    }
+
+    for (let key in collection) {
+      if (arguments.length < 3 && accumulator === undefined) {
+        accumulator = collection[key]
+      } 
+      accumulator = func(accumulator, collection[key], key, collection)
+    }
+    return accumulator
+  }
+
+  function reduceRight(collection, iteratee = gyqgyq.identity, accumulator) {
+    let func = gyqgyq.iteratee(iteratee)
+    if (Array.isArray(collection)) {
+      let i = collection.length - 1
+      if (arguments.length < 3) {
+        i = collection.length - 2
+        accumulator = collection[collection.length - 1]
+      }
+      for (; i >= 0; i--) {
+        accumulator = func(accumulator, collection[i],i ,collection)
+      }
+      return accumulator
+    }
+
+    for (let key in collection) {
+      if (arguments.length < 3 && accumulator === undefined) {
+        accumulator = collection[key]
+      } 
+      accumulator = func(accumulator, collection[key], key, collection)
+    }
+    return accumulator
+  }
+
+
+  function reject(collection, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    return gyqgyq.reduce(collection, (acc, item, index) => {
+      if (!func(item)) {
+        acc.push(item)
+      }
+      return acc
+    }, [])
+  }
+  
+
+  function sample(collection) {
+    let len = collection.length
+    let n = Math.random() * len | 0
+    return collection[n]
+  }
+
+  function sampleSize(collection, n = 1) {
+    let res = []
+    while (n > 0) {
+      let len = collection.length
+      let num = Math.random() * len | 0
+      res.push(...collection.splice(num, 1))
+      n--
+    }
+    return res
+  }
+
+  function shuffle(collection) {
+    let res = []
+    while (collection.length > 0) {
+      let len = collection.length
+      let num = Math.random() * len | 0
+      res.push(...collection.splice(num, 1))
+    }
+    return res
+  }
+
+  function size(collection) {
+    if(Array.isArray(collection || typeof collection === 'string')) {
+      return collection.length
+    } else {
+      let count = 0
+      for (let key in collection) {
+        count++
+      }
+      return count
+    }
+  }
+
+  function some(collection, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    for (let i = 0; i < collection.length; i++) {
+      if (func(collection[i])) {
+        return true
+      }
+    }
+    return false
+  }
+
+  function ary(func, n = func.length) {
+    return function (...args) {
+      return func(...args.slice(0, n))
+    }
+  }
+
+  function forOwn(object, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    for (let key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        func(object[key], key)
+      }
+    }
+  }
+
+  function forOwnRight(object, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let ary = []
+    for (let key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        ary.push([object[key], key])
+      }
+    }
+    for (let i = ary.length - 1; i >= 0; i--) {
+      func.apply(null, ary[i])
+    }
+  }
+
+  function assign(object, ...args) {
+    let hasOwn = Object.prototype.hasOwnProperty
+    for (let i = 0; i < args.length; i++) {
+      for (let key in args[i]) {
+        if (hasOwn.call(args[i], key)) {
+          object[key] = args[i][key]
+        }
+      }
+    }
+    return object
+  }
+
+  function merge(object, ...args) {
+    let hasOwn = Object.prototype.hasOwnProperty
+    for (let i = 0; i < args.length; i++) {
+      for (let key in args[i]) {
+        if (hasOwn.call(args[i], key)) {
+          if (key in object) {
+            if (Array.isArray(object[key]) || typeof object[key] === 'object') {
+              object[key] = [gyqgyq.assign(...object[key]), gyqgyq.assign(...args[i][key])]
+            } else {
+              object[key] = args[i][key]
+            }
+          } else {
+            object[key] = args[i][key]
+          }
+        }
+      }
+    }
+    return object
+  }
+
+  function keys(object) {
+    let res = []
+    if (typeof object === 'object') {
+      for (let key in object) {
+        if (Object.prototype.hasOwnProperty.call(object, key)) {
+          res.push(key)
+        }
+      }
+      return res
+    } else {
+      for (let i in object) {
+        res.push('' + i)
+      }
+      return res
+    }
+  }
+
+  function toPairs(object) {
+    let res = []
+    for (let key in object) {
+      if (Object.prototype.hasOwnProperty.call(object, key)) {
+        res.push([key, object[key]])
+      }
+    }
+    return res
+  }
+
+  function values(object) {
+    let res = []
+    if (typeof object === 'object') {
+      for (let key in object) {
+        if (Object.prototype.hasOwnProperty.call(object, key)) {
+          res.push(object[key])
+        }
+      }
+      return res
+    } else {
+      for (let i = 0; i < object.length; i++) {
+        res.push(object[i])
+      }
+      return res
+    }
+  }
+
+  function bindKey(object, key, partials) {
+    return function(...args) {
+      return object[key].apply(object, [partials, args])
+    }
+  }
   //-----------------啪-------------------
   return {
+    bindKey: bindKey,
+    values: values,
+    toPairs: toPairs,
+    keys: keys,
+    merge: merge,
+    assign: assign,
+    forOwnRight: forOwnRight,
+    forOwn: forOwn,
+    ary: ary,
+    some: some,
+    size: size,
+    shuffle: shuffle,
+    sampleSize: sampleSize,
+    sample: sample,
+    reject: reject,
+    reduceRight: reduceRight,
+    reduce: reduce,
+    partition: partition,
+    map: map,
+    bind: bind,
+    includes: includes,
+    flatMapDepth: flatMapDepth,
+    flatMapDeep: flatMapDeep,
+    flatMap: flatMap,
+    findLast: findLast,
+    find: find,
+    filter: filter,
+    every: every,
+    forEachRight: forEachRight,
+    forEach: forEach,
+    countBy: countBy,
+    without: without,
+    unzipWith: unzipWith,
+    unzip: unzip,
+    uniqWith: uniqWith,
+    uniqBy: uniqBy,
+    unionWith: unionWith,
+    unionBy: unionBy,
+    takeWhile: takeWhile,
+    takeRightWhile: takeRightWhile,
     sortedLastIndexOf: sortedLastIndexOf,
     sortedLastIndexBy: sortedLastIndexBy,
     sortedLastIndex: sortedLastIndex,

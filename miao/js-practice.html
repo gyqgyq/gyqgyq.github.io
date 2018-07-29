@@ -378,7 +378,7 @@ var countPrimes = function(n) {
   }
 </script>
 
-<script type="x">
+<script xtype="x">
   //日历
   //闰年
   function isLeapYear(year) {
@@ -518,7 +518,7 @@ function power(x, n) {
 }
 </script>
 
-<script>
+<script type='x'>
   //随机数计算PI
   function pi() {
     var x, y, z
@@ -533,4 +533,49 @@ function power(x, n) {
     }
     return 4 * c / 10000000
   }
+
+
+
+
+
+  function objToString(val) {
+  if (val === null) {
+    return '[object Null]'
+  }
+  if (val === undefined) {
+    return '[object Undefined]'
+  }  
+  return '[object ' + val.constructor.name + ']'
+}
+
+
+
+function NEW(F, ...args) {
+  var obj = {}
+  obj.__proto__ = F.prototype
+  var result = F.apply(obj, args)
+  if (!result) {
+    return obj
+  }
+  if (typeof result === 'object') {
+    return result
+  }
+  return obj
+}
+
+function INSTANCEOF(val, fn) {
+  if (!val) {
+    return false
+  }
+  if (!val.__proto__) {
+    return false
+  }
+  if (val.__proto__.constructor === fn) {
+    return true
+  } else {
+    return INSTANCEOF(val.__proto__, fn)
+  }
+}
+
+
 </script>
