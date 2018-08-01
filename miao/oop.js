@@ -1,4 +1,4 @@
-  //集合类型Set
+//集合类型Set
 function MySet(ary) {
   this.set = []
   if (ary.length !== 0 || ary !== null) {
@@ -495,7 +495,86 @@ MyArray.prototype.some = function(callback, thisArg = null) {
   return false
 }
 
+MyArray.prototype.splice = function(start = 0, deleteCount = this.length, ...args) {
+  start = start < 0 ? this.length - 1 + start : start
+  let res = new MyArray()
+  //把删除的值放入res
+  for (let i = start; i < deleteCount + start; i++) {
+    if (i === this.length) {
+      break
+    }
+    res.push(this[i])
+    delete this[i]
+  }
+  let store = new MyArray()
+  //把deleteCount后面的值拿出来
+  for (let i = start + deleteCount; i < this.length; i++) {
+    store.push(this[i])
+    delete this[i]
+  }
+  this.length = start
+  //把要传入的值放入this
+  for (let i = 0; i < args.length; i++) {
+    this.push(args[i])
+  }
+  //把存起来的值放入this
+  for (let i = 0; i < store.length; i++) {
+    this.push(store[i])
+  }
+  return res
+}
 
+
+MyArray.prototype.toSource = function() {
+  let res = '['
+  let flag = true
+  for (let key in this) {
+    if (key === '_length') {
+      break
+    }
+    if (flag) {
+      flag = false
+      res += this[key]
+      continue
+    }
+    res += ', '
+    res += this[key]
+    
+  }
+  res += ']'
+  return res
+}
+
+MyArray.prototype.toString = function() {
+  let res = ''
+  let flag = true
+  for (let key in this) {
+    if (key === '_length') {
+      break
+    }
+    if (flag) {
+      flag = false
+      res += this[key]
+      continue
+    }
+    res += ','
+    res += this[key]
+    
+  }
+  return res
+}
+
+MyArray.prototype.unshift = function(...args) {
+  let len = args.length
+  this.length += len
+  for (let i = this.length; i >= len; i--) {
+    this[i] = this[i - len]
+  }
+  for (let i = 0; i < len; i++) {
+    this[i] = args[i]
+  }
+  return this.length
+}
 
 Object.defineProperties(MyArray.prototype, {
   '_length': {enumerable: false, configurable: false, writable: true},
@@ -519,4 +598,9 @@ Object.defineProperties(MyArray.prototype, {
   'reverse': {enumerable: false},
   'shift': {enumerable: false},
   'slice': {enumerable: false},
+  'some': {enumerable: false},
+  'splice': {enumerable: false},
+  'toSource': {enumerable: false},
+  'toString': {enumerable: false},
+  'unshift': {enumerable: false},
 })
