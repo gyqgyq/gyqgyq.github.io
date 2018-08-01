@@ -1617,6 +1617,7 @@ var gyqgyq = function() {
         func(object[key], key)
       }
     }
+    return object
   }
 
   function forOwnRight(object, iteratee = gyqgyq.identity) {
@@ -1630,6 +1631,7 @@ var gyqgyq = function() {
     for (let i = ary.length - 1; i >= 0; i--) {
       func.apply(null, ary[i])
     }
+    return object
   }
 
   function assign(object, ...args) {
@@ -1713,8 +1715,387 @@ var gyqgyq = function() {
       return object[key].apply(object, [partials, args])
     }
   }
+
+  function xorBy(...args) {
+    let func
+    if (!Array.isArray(args[args.length - 1])) {
+      func = gyqgyq.iteratee(args.pop())
+    } else {
+      func = gyqgyq.identity
+    }
+    let ary = flattenDeep(args)
+    let dict = ary.reduce((acc, item) => {
+      let a = func(item)
+      if (a in acc) {
+        acc[a] += 1
+      } else {
+        acc[a] = 1
+      }
+      return acc
+    }, {})
+    return ary.filter(it => dict[func(it)] === 1)
+  }
+
+  function xorWith(...args) {
+    let func = args.pop()
+    for (let i = 0; i < args[0].length; i++) {
+      for (let j = 0; j < args[1].length; j++) {
+        if (func(args[0][i], args[1][j])) {
+          args[0].splice(i, 1)
+          i--
+          args[1].splice(j, 1)
+          j--
+        }
+      }
+    }
+    return flattenDeep(args)
+  }
+
+  function zip(...args) {
+    let res = []
+    let flag = true
+    let count = 0
+    while (flag) {
+      flag = false
+      res[count] = []
+      for (let i = 0; i < args.length; i++) {
+        res[count].push(args[i][count])
+        if (args[i][count + 1] !== undefined) {
+          flag = true
+        }
+      }
+      count++
+    }
+    return res 
+  }
+
+  function zipObject(props = [], value = []) {
+    let res = {}
+    for (let i = 0; i < props.length; i++) {
+      res[props[i]] = value[i]
+    }
+    return res
+  }
+
+  function zipWith(...args) {
+    let func
+    if (!Array.isArray(args[args.length - 1])) {
+      func = gyqgyq.iteratee(args.pop())
+    } else {
+      func = gyqgyq.identity
+    }
+    let res = []
+    let count = 0
+    while (count < args[0].length) {
+      res.push(func(...args.reduce((acc, item) => {
+        acc.push(item[count])
+        return acc
+      }, [])))
+      count++
+    }
+    return res
+  }
+
+  function castArray(value) {
+    if (Array.isArray(value)) {
+      return value
+    } else if (value === undefined) {
+      return []
+    } else {
+      return [value]
+    }
+  }
+
+  function clone(value) {
+    return value
+  }
+
+  function conformsTo(object, source) {
+    for (let key in source) {
+      if (!source[key](object[key])) {
+        return false
+      }
+    }
+    return true
+  }
+  
+
+  function eq(value, other) {
+    if (value !== value && other !== other) {
+      return true
+    }
+    return value === other
+  }
+
+  function gt(value, other) {
+    return value > other
+  }
+
+  function gte(value, other) {
+    return value >= other
+  }
+
+  function isArray(value) {
+    return Array.isArray(value)
+  }
+
+  function isArrayBuffer(value) {
+    return value.__proto__ === ArrayBuffer.prototype
+  }
+
+  function isArrayLike(value) {
+    if (typeof value === 'function' || value === undefined) {
+      return false
+    }
+    return true
+  }
+
+  function isArrayLikeObject(value) {
+    if (Array.isArray(value) || typeof value === 'object') {
+      return true
+    }
+    return false
+  }
+
+  function isBoolean(value) {
+    return value === true || value === false
+  }
+
+  function isBuffer(value) {
+    return value.__proto__ === Buffer.prototype
+  }
+
+  function isDate(value) {
+    return value.__proto__ === Date.prototype
+  }
+
+  function isError(value) {
+    return value.__proto__ === Error.prototype
+  }
+
+  function isFinite(value) {
+    if (value === Infinity || value === -Infinity || typeof value !== 'number') {
+      return false
+    }
+    return true
+  }
+
+  function isFunction(value) {
+    return typeof value === 'function'
+  }
+
+  function isMap(value) {
+    return value.__proto__ === Map.prototype
+  }
+
+  function isMatchWith(object, source, customizer) {
+    for (let key in object) {
+      if (source[key] !== undefined) {
+        if (customizer(object[key], source[key])) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  function isNaN(value) {
+    if (value !== value) {
+      return true
+    } else if (typeof value === 'object') {
+      return value.toString() === 'NaN'
+    }
+    return false
+  }
+
+  function isNil(value) {
+    return value === undefined || value === null || value === void 0
+  }
+  
+  function isNull(value) {
+    return  value === null
+  }
+
+  function isNumber(value) {
+    return typeof value === 'number'
+  }
+
+  function isObject(value) {
+    return typeof value === 'object'
+  }
+
+  function isObjectLike(value) {
+    return typeof value === 'object'
+  }
+
+  function isSafeInteger(value) {
+    if (typeof value === 'number') {
+      if (value > Number.MIN_VALUE && value < Number.MAX_VALUE) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  }
+
+  function isSet(value) {
+    return value.__proto__ === Set.prototype
+  }
+
+  function isString(value) {
+    return typeof value === 'string'
+  }
+
+  function isSymbol(value) {
+    return typeof value === 'symbol'
+  }
+
+  function isTypedArray(value) {
+    return value.__proto__ = Uint8Array.prototype
+  }
+
+  function isUndefined(value) {
+    return value === undefined || value === void 0
+  }
+
+  function isWeakMap(value) {
+    return value.__proto__ === WeakMap.prototype
+  }
+
+  function isWeakSet(value) {
+    return value.__proto__ === WeakSet.prototype
+  }
+
+  function lt(value, other) {
+    return value > other
+  }
+
+  function lte(value, other) {
+    return value >= other
+  }
+
+  function toArray(value) {
+    let res = []
+    if (typeof value === 'string') {
+      for (let i = 0; i < value.length; i++) {
+        res.push(value[i])
+      }
+    } else if (typeof value === 'object') {
+      for (let key in value) {
+        res.push(value[key])
+      }
+    }
+    return res
+  }
+
+  function toString(value) {
+    if (value === null || value === undefined) {
+      return ''
+    } else if (typeof value === 'number') {
+      if (value === -0) {
+        return '-0'
+      } else {
+        return '' + value
+      }
+    }
+    return value.toString()
+  }
+
+  function maxBy(array, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    return array.reduce((acc, iter) => func(acc) > func(iter) ? acc : iter)
+  }
+
+  function mean(array) {
+    return array.reduce((res, item, index) => (res * index + item) / (index + 1))
+  }
+
+  function meanBy(array, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    return array.reduce((res, item, index) => (res * index + func(item)) / (index + 1), 0)
+  }
+
+  function min(array) {
+    if (array.length === 0) {
+      return undefined
+    }
+    return gyqgyq.reduce(array, (res, item) => res < item ? res : item)
+  }
+
+  function minBy(array, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    return gyqgyq.reduce(array, (res, item) => func(res) < func(item) ? res : item)
+  }
+
+  function multiply(multiplier, multiplicand) {
+    return multiplicand * multiplier
+  }
+
+  function round(number, precision = 0) {
+    return Math.round(number * 10 ** precision) * 10 ** (-precision)
+  }
+
+  function subtract(minuend, subtrahend) {
+    return minuend - subtrahend
+  }
+
+  function clamp(number, lower, upper) {
+    return [number, lower, upper].sort((a,b) => a - b)[1]
+  }
+
+  
   //-----------------啪-------------------
   return {
+    clamp: clamp,
+    subtract: subtract,
+    round: round,
+    multiply: multiply,
+    minBy: minBy,
+    min: min,
+    meanBy: meanBy,
+    mean: mean,
+    maxBy: maxBy,
+    toString: toString,
+    toArray: toArray,
+    lte: lte,
+    lt: lt,
+    isWeakSet: isWeakSet,
+    isWeakMap: isWeakMap,
+    isUndefined: isUndefined,
+    isTypedArray: isTypedArray,
+    isSymbol: isSymbol,
+    isString: isString,
+    isSet: isSet,
+    isSafeInteger: isSafeInteger,
+    isNumber: isNumber,
+    isNull: isNull,
+    isNil: isNil,
+    isNaN: isNaN,
+    isMatchWith: isMatchWith,
+    isMap: isMap,
+    isFunction: isFunction,
+    isFinite: isFinite,
+    isError: isError,
+    isDate: isDate,
+    isBuffer: isBuffer,
+    isBoolean: isBoolean,
+    isArrayLikeObject: isArrayLikeObject,
+    isArrayLike: isArrayLike,
+    isArrayBuffer: isArrayBuffer,
+    isArray: isArray,
+    gte: gte,
+    gt: gt,
+    eq: eq,
+    conformsTo: conformsTo,
+    clone: clone,
+    castArray: castArray,
+    zipWith: zipWith,
+    zipObject: zipObject,
+    zip: zip,
+    xorWith: xorWith,
+    xorBy: xorBy,
     bindKey: bindKey,
     values: values,
     toPairs: toPairs,
