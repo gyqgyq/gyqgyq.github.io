@@ -75,71 +75,106 @@ MySet.prototype.values = function() {
 }
 
 //映射类型 Map
-
-function MyMap(ary) {
-  this.map = {}
-  for (let i = 0; i < ary.length; i++) {
-    let key = ary[i][0] === undefined ? null : ary[i][0]
-    let val = ary[i][1] === undefined ? null : ary[i][1]
-    this.map[key] = val
+//全局有一个indexOf函数, 为了安全, 把整个代码放入闭包里
+let MyMap = (function () {
+  function indexOf(ary, tar) {
+    if (tar !== tar) {
+      for (let i = 0; i < ary.length; i++) {
+        if (ary[i] !== ary[i]) {
+          return i
+        } 
+      } 
+      return -1
+    } else {
+      return ary.indexOf(tar)
+    }
   }
-}
 
-MyMap.prototype.set = function(key, val) {
-  this.map[key] = val
-  return this
-}
-
-MyMap.prototype.clear = function () {
-  this.map = {}
-  return this
-}
-
-MyMap.prototype.delete = function(key) {
-  delete this.map[key]
-  return this
-}
-
-MyMap.prototype.entries = function() {
-  let res = []
-  for (let key in this.set) {
-    res.push([key, this.set[key]])
+  function MyMap(maps) {
+    if (new.target !== MyMap) {
+      throw new Error('MyMap 必须用new调用')
+    }
+    if (!Array.isArray(maps)) {
+      throw new Error('MyMap 仅支持接收数组作为参数')
+    }
+    this._keys = []
+    this._values = []
+    for (let pair of maps) {
+      this.set(pair[0], pair[1])
+    }
   }
-  return res
-}
 
-MyMap.prototype.forEach = function(action) {
-  let res = []
-  for (let key in this.set) {
-    res.push(action(key, this.set[key]))
+  MyMap.prototype.get = function(key) {
+    let idx = indexOf(this._keys, key)
+    if (idx >= 0) {
+      return this._values[idx]
+    } else {
+      return undefined
+    }
   }
-  return res
-}
 
-MyMap.prototype.get = function(key) {
-  return this.set[key]
-}
-
-MyMap.prototype.has = function(key) {
-  return key in this.set
-}
-
-MyMap.prototype.keys = function () {
-  let res = []
-  for (let key in this.set) {
-    res.push(key)
+  MyMap.prototype.set = function(key, val) {
+    let idx = indexOf(this._keys, key)
+    if (idx >=0) {
+      this._values[idx] = val
+    } else {
+      this._keys.push(key)
+      this._values.push(val)
+    }
+    return this
   }
-  return res
-}
 
-MyMap.prototype.values = function() {
-  let res = []
-  for (let key in this.set) {
-    res.push(this.set[key])
+  MyMap.prototype.clear = function () {
+    this._keys = []
+    this._values = []
+    return this
   }
-  return res
-}
 
+  MyMap.prototype.delete = function(key) {
+    let idx = index(this._keys, key) 
+    if (idx >= 0) {
+      this._keys.splice(idx, 1)
+      this._values.splice(idx, 1)
+    }
+    return this
+  }
+
+  MyMap.prototype.entries = function() {
+    let res = []
+    for (let i = 0; i < this._keys.length; i++) {
+      res.push([this._keys[i], this._values[i]])
+    }
+    return res
+  }
+
+  MyMap.prototype.forEach = function(action) {
+    let res = []
+    for (let i = 0; i < this._keys.length; i++) {
+      res.push(action(this._keys[i], this._values[i]))
+    }
+    return res
+  }
+
+  MyMap.prototype.has = function(key) {
+    return indexOf(this._keys, key) >= 0
+  }
+
+  MyMap.prototype.keys = function () {
+    return this._keys.slice()
+  }
+
+  MyMap.prototype.values = function() {
+    return this._values.slice()
+  }
+
+  Object.defineProperty(MyMap.prototype, 'size', {
+    get: function() {
+      return this._keys.length
+    }
+  })
+
+  return MyMap
+}())
 
 
 //-----------------------------------------------------
