@@ -1858,6 +1858,8 @@ var gyqgyq = function() {
   function castArray(value) {
     if (Array.isArray(value)) {
       return value
+    } else if (arguments.length === 0) {
+      return []
     } else {
       return [value]
     }
@@ -1915,7 +1917,11 @@ var gyqgyq = function() {
   }
 
   function isBoolean(value) {
-    return typeof value === 'boolean'
+    if (value === true || value === false) {
+      return true
+    } else {
+      return false
+    }
   }
 
   function isBuffer(value) {
@@ -2906,7 +2912,7 @@ var gyqgyq = function() {
       let res = '{'
       for (let key in val) {
         let v = val[key]
-        res += `"${key}"` + ':' + stringify(v) + ','
+        res += `"${key}"` + ':' + stringifyJson(v) + ','
       }
       res = res.slice(0, -1) + '}'
       return res
@@ -2919,8 +2925,9 @@ var gyqgyq = function() {
     } else if (typeof val === 'number') {
       return val.toString()
     }
-    
-  } 
+  }
+
+  
   //-----------------啪-------------------
   return {
     stringifyJson: stringifyJson,
