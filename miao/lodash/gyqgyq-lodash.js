@@ -1700,20 +1700,28 @@ var gyqgyq = function() {
   //   }
   //   return target
   // }
+  // merge({"a":[{"b":2},{"d":4}]},{"a":[{"c":3},{"e":5}]})
+  // 输出：{"a":[[{"b":2},{"d":4}],[{"c":3},{"e":5}]]}
+  // 期望：{"a":[{"b":2,"c":3},{"d":4,"e":5}]}
   function merge(object, ...args) {
     let res = {}
     for (let key in object) {
-      res[key] = [object[key]]
+      res[key] = object[key]
     }
     for (let i = 0; i < args.length; i++) {
       for (let key in args[i]) {
         if (key in res) {
-          res[key].push(args[i][key])
+          let item = res[key]
+          let aItem = args[i][key]
+          for (let j = 0; j < item.length; j++) {
+            item[j][gyqgyq.keys(aItem[j])[0]] = gyqgyq.values(aItem[j])[0]
+          }
         } else {
-          res[key] = [args[i][key]]
+          res[key] = args[i][key]
         }
       }
     }
+
     return res
   }
 
@@ -1850,8 +1858,6 @@ var gyqgyq = function() {
   function castArray(value) {
     if (Array.isArray(value)) {
       return value
-    } else if (value === undefined) {
-      return []
     } else {
       return [value]
     }
@@ -1909,7 +1915,7 @@ var gyqgyq = function() {
   }
 
   function isBoolean(value) {
-    return value instanceof Boolean
+    return typeof value === 'boolean'
   }
 
   function isBuffer(value) {
@@ -2276,6 +2282,9 @@ var gyqgyq = function() {
   function has(object, path) {
     try {
       let a = gyqgyq.toPath(path).reduce(item => object[item] ,object)
+      if (a === undefined) {
+        return false
+      }
       return true
     } catch(e) {
       return false
@@ -2351,7 +2360,7 @@ var gyqgyq = function() {
     let func = gyqgyq.iteratee(predicate)
     let res = {}
     for (let key in object) {
-      if (!func(object[key])) {
+      if (func(object[key])) {
         res[key] = object[key]
       }
     }
@@ -2458,12 +2467,12 @@ var gyqgyq = function() {
     }
     return string.toLowerCase()
       .split(' ')
-      .filter(it => it !== ' ' && it !==  '')
+      .filter(it => it !== ' ' && it !==  '' && it !== '　')
       .join('-')
   }
 
   function lowerCase(string = '') {
-    string = string.replace(/\-/g, '_')
+    string = string.replace(/\-/g, ' ')
     return gyqgyq.kebabCase(string)
   }
 
@@ -2503,7 +2512,7 @@ var gyqgyq = function() {
       res += chars
     }
     res = res.slice(0, len)
-    string += res
+    string = res + string
     return string
   }
 
@@ -2755,9 +2764,167 @@ var gyqgyq = function() {
   function stubTrue() {
     return true
   }
+  let parseJson = function () {
+    let i = 0
+    let str
+    return function parse(strInput) {
+      str = strInput
+      i = 0
+      return parseValue()
+    }
+    function parseValue() {
+      let c = str[i]
+      if (str[i] === '[') {
+        return parseArray()
+      } else if (c === '{') {
+        return parseObject()    
+      } else if (c === '"') {
+        return parseString()
+      } else if (c === 't') {
+        return parseTrue()
+      } else if (c === 'f') {
+        return parseFalse()
+      } else if (c === 'n') {
+        return parseNull()
+      } else {
+        return parseNumber()
+      }
+    }
 
+    function parseArray() {
+      i++
+      let res = []
+      let val
+      if (str[i] === ']') {
+        i++
+        return []
+      }
+      while (true) {
+        val = parseValue()
+        res.push(val)
+        if (str[i] === ',') {
+          i++
+          continue
+        } else if (str[i] === ']') {
+          i++
+          return res
+        }
+      }
+    }
+
+    function parseObject() {
+      i++
+      let res = {}
+      let key, val
+      if (str[i] === '}') {
+        return {}
+      }
+      while (true) {
+        key = parseValue()
+        i++
+        val = parseValue()
+        res[key] = val
+        if (str[i] === ',') {
+          i++
+          continue
+        } else if (str[i] === '}') {
+          i++
+          return res
+        }
+      }
+    }
+
+    function parseTrue() {
+      let token = str.slice(i, i + 4)
+      if (token === 'true') {
+        i = i + 4
+        return true
+      } else {
+        throw new SyntaxError('unexpected token at position ' + i)
+      }
+    }
+
+    function parseFalse() {
+      let token = str.slice(i, i + 5)
+      if (token === 'false') {
+        i = i + 5
+        return false
+      } else {
+        throw new SyntaxError('unexpected token at position ' + i)
+      }
+    }
+
+    function parseNull() {
+      let token = str.slice(i, i + 4)
+      if (token === 'null') {
+        i = i + 4
+        return null
+      } else {
+        throw new SyntaxError('unexpected token at position ' + i)
+      }
+    }
+
+    function parseNumberChar(c) {
+      if (c <= '9' && c >= '0') {
+        return true
+      }
+      if (c === '+' || c === '-' || c === '.' || c === 'e' || c === 'E') {
+        return true
+      }
+      return false
+    }
+
+    function parseNumber() {
+      let j = i
+      while (parseNumberChar(str[j])) {
+        j++
+      }
+      let res = str.slice(i, j)
+      i = j
+      return parseFloat(res)
+    }
+
+    function parseString() {
+      let j
+      for (j = i + 1;; j++) {
+        if (str[j] === '"') {
+          break
+        }
+      }
+      let res = str.slice(i + 1, j)
+      i = j + 1
+      return res
+    }
+  }()
+
+  let stringifyJson = function(val) {
+    if (Array.isArray(val)) {
+      return '[' + val.map(stringify).join(',') + ']'
+    } else if (val === null) {
+      return 'null'
+    } else if (typeof val === 'object') {
+      let res = '{'
+      for (let key in val) {
+        let v = val[key]
+        res += `"${key}"` + ':' + stringify(v) + ','
+      }
+      res = res.slice(0, -1) + '}'
+      return res
+    } else if (typeof val === 'boolean') {
+      if (val) {
+        return 'true'
+      } else {
+        return 'false'
+      }
+    } else if (typeof val === 'number') {
+      return val.toString()
+    }
+    
+  } 
   //-----------------啪-------------------
   return {
+    stringifyJson: stringifyJson,
+    parseJson: parseJson,
     stubTrue: stubTrue,
     stubString: stubString,
     stubObject: stubObject,
