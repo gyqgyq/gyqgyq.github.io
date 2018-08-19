@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>天猫购物车</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    section {
+      position: relative;
+      height: 5000px;
+    }
+    aside {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: fixed;
+      right: 20px;
+      top: 100px;
+      z-index: -1;
+    }
+    button {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: blue;
+      right: 600px;
+      top: 500px;
+      border-radius: 999px;
+      z-index: 1;
+      transition-property: right, top;
+      transition-duration: 0.7s;
+      transition-timing-function: linear, cubic-bezier(.17,.67,.44,1.37);
+    }
+  </style>
+</head>
+<body>
+
+  <section>
+    <button id="ball"></button>
+  </section>
+
+  <aside></aside>
+</body>
+<script>
+  addEventListener('mousedown', function f() {
+    let y = pageYOffset
+    let ball = document.getElementById('ball')
+    ball.style.right = '20px'
+    ball.style.top = y + 100 + 'px'
+  })
+</script>
+</html>

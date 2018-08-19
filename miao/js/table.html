@@ -1,0 +1,61 @@
+<script>
+  function makeTable(ary) {
+    let keys = Array.from(new Set([].concat(...ary.map(Object.keys))))
+    let table = document.createElement('table')
+    let tr1 = document.createElement('tr')
+    for (let val of keys) {
+      let text = document.createTextNode(val)
+      let td = document.createElement('th')
+      td.appendChild(text)
+      td.setAttribute('style', 'border: 1px solid black')
+      tr1.appendChild(td)
+    }
+    
+    table.appendChild(tr1)
+
+
+
+    for (let item of ary) {
+      let tr = document.createElement('tr')
+      for (let key of keys) {
+        let td = document.createElement('td')
+        td.setAttribute('style', 'border: 1px solid black')
+        let thText
+        if (key in item) {
+          let c = typeof item[key]
+          thText = document.createTextNode(item[key])
+          td.appendChild(thText)
+          td.setAttribute('class', c)
+        } else {
+          thText = document.createTextNode('')
+          td.appendChild(thText)
+          td.setAttribute('class', 'empty')
+        }
+        tr.append(td)
+      }
+      table.appendChild(tr)
+    }
+    document.body.appendChild(table)
+
+    let head = `
+    <style>
+      .number {
+        color: blue;
+      }
+      .string {
+        color: red;
+      }
+      .string::before {
+        content: '"'
+      }
+      .string::after {
+        content: '"'
+      }
+    </style>
+  `
+  document.head.innerHTML = head
+  table.setAttribute('style', 'text-align:right;')
+
+}
+
+</script>

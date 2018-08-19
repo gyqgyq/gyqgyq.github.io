@@ -1646,24 +1646,75 @@ var gyqgyq = function() {
     return object
   }
 
+  // function merge(object, ...args) {
+  //   let hasOwn = Object.prototype.hasOwnProperty
+  //   for (let i = 0; i < args.length; i++) {
+  //     for (let key in args[i]) {
+  //       if (hasOwn.call(args[i], key)) {
+  //         if (key in object) {
+  //           if (Array.isArray(object[key]) || typeof object[key] === 'object') {
+  //             object[key] = [gyqgyq.assign(...object[key]), gyqgyq.assign(...args[i][key])]
+  //           } else {
+  //             object[key] = args[i][key]
+  //           }
+  //         } else {
+  //           object[key] = args[i][key]
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return object
+  // }
+  function isPrimitive(val) {
+    if (val === null) {
+      return true
+    }
+    let type = typeof val
+    switch(type) {
+      case 'number':
+      case 'string':
+      case 'boolean':
+      case 'undefined':
+        return true
+    }
+    return false
+  }
+
+  // function merge(target, ...objs) {
+  //   for (let obj of objs) {
+  //     for (let key in obj) {
+  //       if (gyqgyq.isPrimitive(obj[key])) {
+  //         target[key] = obj[key]
+  //       } else {
+  //         if (key in target) {
+  //           target[key] = merge(target[key], obj[key])
+  //         } else {
+  //           if (Array.isArray(obj[key])) {
+  //             target[key] = merge([], obj[key])
+  //           } else {
+  //             target[key] = merge({}, obj[key])
+  //           }
+  //         }
+  //       }
+  //     } 
+  //   }
+  //   return target
+  // }
   function merge(object, ...args) {
-    let hasOwn = Object.prototype.hasOwnProperty
+    let res = {}
+    for (let key in object) {
+      res[key] = [object[key]]
+    }
     for (let i = 0; i < args.length; i++) {
       for (let key in args[i]) {
-        if (hasOwn.call(args[i], key)) {
-          if (key in object) {
-            if (Array.isArray(object[key]) || typeof object[key] === 'object') {
-              object[key] = [gyqgyq.assign(...object[key]), gyqgyq.assign(...args[i][key])]
-            } else {
-              object[key] = args[i][key]
-            }
-          } else {
-            object[key] = args[i][key]
-          }
+        if (key in res) {
+          res[key].push(args[i][key])
+        } else {
+          res[key] = [args[i][key]]
         }
       }
     }
-    return object
+    return res
   }
 
   function keys(object) {
@@ -1858,7 +1909,7 @@ var gyqgyq = function() {
   }
 
   function isBoolean(value) {
-    return value === true || value === false
+    return value instanceof Boolean
   }
 
   function isBuffer(value) {
@@ -1953,7 +2004,7 @@ var gyqgyq = function() {
   }
 
   function isTypedArray(value) {
-    return value.__proto__ = Uint8Array.prototype
+    return value.__proto__ === Uint8Array.prototype
   }
 
   function isUndefined(value) {
@@ -1969,11 +2020,11 @@ var gyqgyq = function() {
   }
 
   function lt(value, other) {
-    return value > other
+    return value < other
   }
 
   function lte(value, other) {
-    return value >= other
+    return value <= other
   }
 
   function toArray(value) {
@@ -2045,9 +2096,740 @@ var gyqgyq = function() {
     return [number, lower, upper].sort((a,b) => a - b)[1]
   }
 
-  
+  function assignIn(object, ...args) {
+    for (let i = 0; i < args.length; i++) {
+      for (let key in args[i]) {
+        object[key] = args[i][key]
+      }
+    }
+    return object
+  }
+
+  function at(object, paths) {
+    return paths.map(item => get(object, item))
+  }
+
+  function get(object, path, defaultValue = undefined) {
+    try {
+      return gyqgyq.toPath(path).reduce((res, item) => res[item], object)
+    } catch(e) {
+      return defaultValue
+    }
+  }
+
+  function toPath(value) {
+    return typeof value === 'string' ? value.match(/\w+/g) : value
+  }
+
+  function create(prototype, properties) {
+    for (let key in properties) {
+      prototype[key] = properties[key]
+    }
+    return prototype
+  }
+
+  function defaults(object, ...args) {
+    for (let obj of args) {
+      for (let key in obj) {
+        if (!(key in object)) {
+          object[key] = obj[key]
+        }
+      }
+    }
+    return object
+  }
+
+  function defaultsDeep(object, ...args) {
+    for (let obj of args) {
+      for (let key in obj) {
+        if (typeof obj[key] === 'object') {
+          defaultsDeep(object[key], obj[key])
+        } else if (!(key in object)) {
+          object[key] = obj[key]
+        }
+      }
+    }
+    return object
+  }
+
+  function toPairsIn(object) {
+    let res = []
+    for (let key in object) {
+      res.push([key, object[key]])
+    }
+    return res
+  }
+
+  function transform(object, iteratee = gyqgyq.identity, accumulator) {
+    if (Array.isArray(object)) {
+
+    }
+  }
+  //可以处环对象
+  // function cloneDeep(obj, res = {}, stack = []) {
+  //   for (let key in obj) {
+  //     if (typeof key === 'object') {
+  //       if (obj[key] in stack) {
+  //         return res
+  //       }
+  //       stack.push(obj[key])
+  //       res[key] = cloneDeep(obj[key], res)
+  //     } else {
+  //       res[key] = obj[key]
+  //     }
+  //   }
+  //   return res
+  // }
+  function cloneDeep(value) {
+    if (gyqgyq.isPrimitive(value)) {
+      return value
+    }
+    if (Array.isArray(value)) {
+      res = []
+      for (let i = 0; i < value.length; i++) {
+        if (typeof value[i] === 'object') {
+          res.push(cloneDeep(value[i]))
+        } else {
+          res.push(value[i])
+        }
+      }
+      return res
+    } else {
+      res = {}
+      for (let key in value) {
+        if (typeof key === 'object') {
+          res[key] = cloneDeep(obj[key])
+        } else {
+          res[key] = obj[key]
+        }
+      }
+    }
+  }
+
+  function findKey(object, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    for (let key in object) {
+      if (func(object[key])) {
+        return key
+      }
+    }
+    return undefined
+  }
+
+  function findLastKey(object, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    let ary = []
+    for (let key in object) {
+      ary.push(key)
+    }
+    for (let i = ary.length - 1; i >= 0; i--) {
+      if (func(object[ary[i]])) {
+        return ary[i]
+      }
+    }
+    return undefined
+  }
+
+  function forInRight(object, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let ary = []
+    for (let key in object) {
+      ary.push(key)
+    }
+    for (let i = ary.length - 1; i >= 0; i--) {
+      func(object[ary[i]], ary[i])
+    }
+  }
+
+  function functions(object) {
+    let res = []
+    for (let key in object) {
+      if (object.hasOwnProperty(key)) {
+        res.push(key)
+      }
+    }
+    return res
+  }
+
+  function constant(value) {
+    return function() {
+      return value
+    }
+  }
+
+  function times(n, iteratee = gyqgyq.identity) {
+    let res = []
+    for (let i = 0; i < n; i++) {
+      res.push(iteratee(i))
+    }
+    return res
+  }
+
+  function functionsIn(object) {
+    let res = []
+    for (let key in object) {
+      res.push(key)
+    }
+    return res
+  }
+
+  function has(object, path) {
+    try {
+      let a = gyqgyq.toPath(path).reduce(item => object[item] ,object)
+      return true
+    } catch(e) {
+      return false
+    }
+  }
+
+  function invert(object) {
+    let res = {}
+    for (var key in object) {
+      res[object[key]] = key 
+    }
+    return res
+  }
+
+  function invertBy(object, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let res = {}
+    for (var key in object) {
+      val = func(object[key])
+      if (val in res) {
+        res[val].push(key)
+      } else {
+        res[val] = [key]
+      }
+    } 
+    return res
+  }
+
+  function keysIn(object) {
+    let res = []
+    for (let key in object) {
+      res.push(key)
+    }
+    return res
+  }
+
+  function mapKeys(object, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let res = {}
+    for (let key in object) {
+      res[func(object[key], key)] = object[key]
+    }
+    return res
+  }
+
+  function mapValues(object, iteratee = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(iteratee)
+    let res = {}
+    for (let key in object) {
+      res[key] = func(object[key])
+    }
+    return res
+  }
+
+  function mergeWith(object, source, customizer) {
+    for (let key in source) {
+      object[key] = customizer(object[key], source[key])
+    }
+    return object
+  }
+
+  function omit(object, paths) {
+    let res = {}
+    for (let key in object) {
+      if (!paths.includes(key)) {
+        res[key] = object[key]
+      }
+    }
+    return res
+  }
+
+  function omitBy(object, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    let res = {}
+    for (let key in object) {
+      if (!func(object[key])) {
+        res[key] = object[key]
+      }
+    }
+    return res
+  }
+
+  function pick(object, paths) {
+    let res = {}
+    for (let key in object) {
+      if (paths.includes(key)) {
+        res[key] = object[key]
+      }
+    }
+    return res
+  }
+
+  function omitBy(object, predicate = gyqgyq.identity) {
+    let func = gyqgyq.iteratee(predicate)
+    let res = {}
+    for (let key in object) {
+      if (func(object[key])) {
+        res[key] = object[key]
+      }
+    }
+    return res
+  }
+
+  function result(object, path, defaultValue = undefined) {
+    let p = gyqgyq.toPath(path)
+    let o = object
+    for (let i = 0; i < p.length; i++) {
+      o = o[p[i]]
+      if (o === undefined) {
+        return typeof defaultValue === 'function' ? defaultValue() : defaultValue
+      }
+    }
+    return typeof o === 'function' ? o() : o
+  }
+
+  function update(object, path, updater) {
+    let p = gyqgyq.toPath(path)
+    let o = object
+    let i = 0
+    for (; i < p.length - 1; i++) {
+      o = o[p[i]]
+    }
+    o[p[i]] = updater(o[p[i]])
+    return o[p[i]]
+  }
+
+  function valuesIn(object) {
+    let res = []
+    for (let key in object) {
+      res.push(object[key])
+    }
+    return res
+  }
+
+  function camelCase(string = '') {
+    return string.match(/[a-zA-Z]/g).join('').toLowerCase()
+  }
+
+  function capitalize(string = '') {
+    return string.toLowerCase().replace(/^(.)/, (_, it) => it.toUpperCase())
+  }
+
+  function endsWith(string = '', target, position = string.length) {
+    return string[position - 1] === target
+  }
+
+  function escape(string = '') {
+    let dict = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&apos;',
+    }
+    let ary = string.split('')
+    for (let i = 0; i < ary.length; i++) {
+      if (ary[i] in dict) {
+        ary[i] = dict[ary[i]]
+      }
+    }
+    return ary.join('')
+  }
+
+  function escapeRegExp(string = '') {
+    let dict = ["^", "$", "", ".", "*", "+", "?", "(", ")", "[", "]", "{", "}", "|" ]
+    return string.split('').map(it => {
+      if (dict.includes(it)) {
+        return '\\' + it
+      } else {
+        return it
+      }
+    }).join('')
+  }
+
+  function kebabCase(string = '') {
+    if (string.includes('_')) {
+      string = string.replace(/\_/g, ' ')
+    } else {
+      string = string.replace(/([A-Z])/g, ' $1')
+    }
+    return string.toLowerCase()
+      .split(' ')
+      .filter(it => it !== ' ' && it !==  '')
+      .join('-')
+  }
+
+  function lowerCase(string = '') {
+    string = string.replace(/\-/g, '_')
+    return gyqgyq.kebabCase(string)
+  }
+
+  function lowerFirst(string = '') {
+    return string.replace(/^\w/, it => it.toLowerCase())
+  }
+
+  function pad(string = '', length = 0, chars = ' ') {
+    let len = string.length
+    if (length <= len) {
+      return string
+    }
+    let cLen = chars.length
+    let left = (((length - len) / 2) / cLen) | 0
+    for (let i = 0; i < left; i++) {
+      string = chars + string
+    }
+    while(string.length < length) {
+      string += chars
+    }
+    string = string.slice(0, length)
+    return string
+  }
+
+  function padEnd(string = '', length = 0, chars = ' ') {
+    while (string.length < length) {
+      string += chars
+    }
+    string = string.slice(0, length)
+    return string
+  }
+
+  function padStart(string = '', length = 0, chars = ' ') {
+    let len = length - string.length
+    let res = ''
+    while (res.length < len) {
+      res += chars
+    }
+    res = res.slice(0, len)
+    string += res
+    return string
+  }
+
+  function parseInt(string, radix = 10) {
+    if (radix === 0) {
+      radix = 10
+    }
+    let n = +string
+    let digit
+    let res = ''
+    while(n > 0) {
+      digit = n % radix
+      res = '' + digit + res
+      n = (n - digit) / radix
+    }
+    return +res   
+  }
+
+  function repeat(string, n = 1) {
+    let res = ''
+    for (let i = 0; i < n; i++) {
+      res += string
+    }
+    return res
+  }
+
+  function replace(string = '', pattern, replacement) {
+    return string.replace(new RegExp(`${pattern}`, 'g'), replacement)
+  }
+
+  function snakeCase(string = '') {
+    return gyqgyq.replace(lowerCase(string), ' ', '_')
+  }
+
+  function split(string = '', separator, limit) {
+    let item = string.split(separator)
+    item.length = limit
+    return item
+  }
+
+  function startCase(string = '') {
+    if (string.includes('_') || string.includes('-')) {
+      string = string.replace(/[\_\-]/g, ' ')
+    } else {
+      string = string.replace(/([A-Z])/g, ' $1')
+    }
+    return string
+      .split(' ')
+      .filter(it => it !== ' ' && it !==  '')
+      .map(it => {
+        let ary = it.split('')
+        ary[0] = ary[0].toUpperCase()
+        return ary.join('')
+      })
+      .join(' ')
+  }
+
+  function startsWith(string = '', target, position = 0) {
+    return string[position] === target
+  }
+
+  function toLower(string = '') {
+    return string.replace(/[A-Z]/g, it => it.toLowerCase())
+  }
+
+  function toUpper(string = '') {
+    return string.replace(/[a-z]/g, it => it.toUpperCase())
+  }
+
+  function trim(string = '', chars = ' ') {
+    let i, j
+    for (i = 0;; i++) {
+      if (!chars.includes(string[i])) {
+        break
+      }
+    }
+    for (j = string.length - 1;; j--) {
+      if (!chars.includes(string[j])) {
+        j++
+        break
+      }
+    }
+    return string.slice(i, j)
+  }
+
+  function trimEnd(string = '', chars = ' ') {
+    let i
+    for (i = string.length - 1;; i--) {
+      if (!chars.includes(string[i])) {
+        i++
+        break
+      }
+    }
+    return string.slice(0, i)
+  }
+
+  function trimStart(string = '', chars = ' ') {
+    let i
+    for (i = 0;; i++) {
+      if (!chars.includes(string[i])) {
+        break
+      }
+    }
+    return string.slice(i)
+  }
+
+  function unescape(string = '') {
+    let dict = {
+      '&amp;': '&',
+      '&lt;': '<',
+      '&gt;': '>',
+      '&quot;': '"',
+      '&#39;': "'",
+    }
+    return string.replace(/&\w+;/g, it => dict[it])
+  }
+
+  function upperCase(string = '') {
+    return startCase(string).toUpperCase()
+  }
+
+  function upperFirst(string = '') {
+    string = string.split('')
+    string[0] = string[0].toUpperCase()
+    return string.join('')
+  }
+
+  function words(string = '', pattern = /[a-zA-Z]+/g) {
+    return string.match(pattern)
+  }
+
+  function attempt(func, ...args) {
+    try {
+      return func(...args)
+    } catch(e) {
+      return e
+    }
+  }
+
+  function constant(value) {
+    return value
+  }
+
+  function defaultTo(value, defaultValue) {
+    if (value !== value || value === null || value === undefined) {
+      return defaultValue
+    } else {
+      return value
+    }
+  }
+
+  function method(path) {
+    path = gyqgyq.toPath(path)
+    return function (args) {
+      for (let p of path) {
+        args = args[p]
+      }
+      return args
+    }
+  }
+
+  function methodOf(object) {
+    return function (path) {
+      let obj = object
+      path = gyqgyq.toPath(path)
+      for (let p of path) {
+        obj = obj[p]
+      }
+      return obj
+    }
+  }
+
+  function noConflict() {
+    return gyqgyq
+  }
+
+  function noop() {
+    return undefined
+  }
+
+  function nthArg(n = 0) {
+    return function(...args) {
+      if (n < 0) {
+        n = args.length + n
+      }
+      return args[n]
+    }
+  }
+
+  function over(iteratees = gyqgyq.identity) {
+    return function (...args) {
+      let res = []
+      for (let func of iteratees) {
+        res.push(func(...args))
+      }
+      return res
+    }
+  }
+
+  function overEvery(ary = [gyqgyq.identity]) {
+    return function(val) {
+      for (let func of ary) {
+        if (!func(val)) {
+          return false
+        }
+      }
+      return true
+    }
+  }
+
+  function overSome(ary = [gyqgyq.identity]) {
+    return function(val) {
+      for (let func of ary) {
+        if (func(val)) {
+          return true
+        }
+      }
+      return false
+    }
+  }
+
+  function propertyOf(object) {
+    return function(path) {
+      let obj = object
+      path = gyqgyq.toPath(path)
+      for (let p of path) {
+        obj = obj[p]
+      }
+      return obj
+    }
+  }
+
+  function stubArray() {
+    return []
+  }
+
+  function stubFalse() {
+    return false
+  }
+
+  function stubObject() {
+    return {}
+  }
+
+  function stubString() {
+    return ''
+  }
+
+  function stubTrue() {
+    return true
+  }
+
   //-----------------啪-------------------
   return {
+    stubTrue: stubTrue,
+    stubString: stubString,
+    stubObject: stubObject,
+    stubFalse: stubFalse,
+    stubArray: stubArray,
+    propertyOf: propertyOf,
+    overSome: overSome,
+    overEvery: overEvery,
+    over: over,
+    nthArg: nthArg,
+    noop: noop,
+    noConflict: noConflict,
+    methodOf: methodOf,
+    method: method,
+    defaultTo: defaultTo,
+    constant: constant,
+    attempt: attempt,
+    words: words,
+    upperFirst: upperFirst,
+    upperCase: upperCase,
+    unescape: unescape,
+    trimStart: trimStart,
+    trimEnd: trimEnd,
+    trim: trim,
+    toLower: toLower,
+    startCase: startCase,
+    split: split,
+    snakeCase: snakeCase,
+    replace: replace,
+    repeat: repeat,
+    parseInt: parseInt,
+    padStart: padStart,
+    padEnd: padEnd,
+    pad: pad,
+    lowerFirst: lowerFirst,
+    lowerCase: lowerCase,
+    kebabCase: kebabCase,
+    escapeRegExp: escapeRegExp,
+    escape: escape,
+    endsWith: endsWith,
+    capitalize: capitalize,
+    camelCase: camelCase,
+    valuesIn: valuesIn,
+    update: update,
+    result: result,
+    omitBy: omitBy,
+    pick: pick,
+    omitBy: omitBy,
+    omit: omit,
+    mergeWith: mergeWith,
+    mapValues: mapValues,
+    mapKeys: mapKeys,
+    keysIn: keysIn,
+    invertBy: invertBy,
+    invert: invert,
+    has: has,
+    functionsIn: functionsIn,
+    constant: constant,
+    times: times,
+    functions: functions,
+    forInRight: forInRight,
+    findLastKey: findLastKey,
+    findKey: findKey,
+    isPrimitive: isPrimitive,
+    toPairsIn: toPairsIn,
+    defaultsDeep: defaultsDeep,
+    defaults: defaults,
+    create: create,
+    at: at,
+    get: get,
+    toPath: toPath,
+    assignIn: assignIn,
     clamp: clamp,
     subtract: subtract,
     round: round,
